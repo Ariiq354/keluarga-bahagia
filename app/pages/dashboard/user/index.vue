@@ -2,7 +2,7 @@
   import type { FormSubmitEvent } from "#ui/types";
   import {
     columns,
-    genderOption,
+    genderOptions,
     getInitialFormData,
     schema,
     type Schema,
@@ -14,8 +14,6 @@
   });
 
   const { data, status, refresh } = await useLazyFetch("/api/users");
-
-  const tableSelected = ref<ExtractObjectType<typeof data.value>[]>();
 
   const state = ref(getInitialFormData());
 
@@ -31,7 +29,7 @@
       modalOpen.value = false;
       await refresh();
     } catch (error: any) {
-      useToastError(String(error.statusCode), error.data.statusMessagex);
+      useToastError(String(error.statusCode), error.data.message);
     } finally {
       modalLoading.value = false;
     }
@@ -42,6 +40,7 @@
     modalOpen.value = true;
   }
 
+  const tableSelected = ref<ExtractObjectType<typeof data.value>[]>([]);
   async function clickDelete() {
     async function onDelete() {
       const idArray = tableSelected.value!.map((item) => item.id);
@@ -62,11 +61,8 @@
 
   async function clickUpdate(itemData: ExtractObjectType<typeof data.value>) {
     modalOpen.value = true;
-    state.value.id = itemData.id;
-    state.value.username = itemData.username;
+    state.value = itemData;
     state.value.password = "";
-    state.value.isActive = itemData.isActive;
-    state.value.gender = itemData.gender;
   }
 </script>
 
@@ -108,13 +104,22 @@
             />
           </UFormGroup>
 
+          <UFormGroup label="Nama Lengkap" name="namaLengkap">
+            <UInput v-model="state.namaLengkap" :disabled="modalLoading" />
+          </UFormGroup>
+
           <UFormGroup label="Jenis Kelamin" name="gender">
-            <USelect
+            <USelectMenu
               v-model="state.gender"
-              :options="genderOption"
-              :disabled="modalLoading"
+              :options="genderOptions"
               option-attribute="name"
+              value-attribute="value"
+              placeholder="Masukkan Jenis Kelamin Anda"
             />
+          </UFormGroup>
+
+          <UFormGroup label="No. Telepon" name="noTelepon">
+            <UInput v-model="state.noTelepon" :disabled="modalLoading" />
           </UFormGroup>
 
           <UFormGroup label="Status" name="isActive">
@@ -141,13 +146,7 @@
         </UForm>
       </div>
     </UModal>
-    <UCard
-      :ui="{
-        body: {
-          padding: 'sm:p-8',
-        },
-      }"
-    >
+    <UCard>
       <div
         class="mb-6 flex items-center justify-between gap-2 rounded-lg border border-gray-200 p-3 dark:border-gray-700"
       >
@@ -181,7 +180,6 @@
         </UButton>
       </div>
       <AppTable
-        ref="tableRef"
         v-model="tableSelected"
         label="Kelola User"
         :loading="status === 'pending'"
@@ -190,22 +188,36 @@
         @edit-click="(e) => clickUpdate(e)"
       >
         <template #isActive-data="{ row }">
-          <UBadge
-            size="xs"
-            :label="row.isActive ? 'Aktif' : 'Tidak Aktif'"
-            :color="row.isActive ? 'emerald' : 'orange'"
-            variant="solid"
-            class="rounded-full"
-          />
+          <div class="flex justify-center">
+            <UBadge
+              size="xs"
+              :label="row.isActive ? 'Aktif' : 'Tidak Aktif'"
+              :color="row.isActive ? 'emerald' : 'orange'"
+              variant="solid"
+              class="rounded-full"
+            />
+          </div>
+        </template>
+        <template #isActive-header="{ column }">
+          <div class="text-center">
+            {{ column.label }}
+          </div>
         </template>
         <template #gender-data="{ row }">
-          <UBadge
-            size="xs"
-            :label="row.gender == 'laki' ? 'Laki - Laki' : 'Perempuan'"
-            color="blue"
-            variant="solid"
-            class="rounded-full"
-          />
+          <div class="flex justify-center">
+            <UBadge
+              size="xs"
+              :label="row.gender == 'laki' ? 'Laki - Laki' : 'Perempuan'"
+              color="blue"
+              variant="solid"
+              class="rounded-full"
+            />
+          </div>
+        </template>
+        <template #gender-header="{ column }">
+          <div class="text-center">
+            {{ column.label }}
+          </div>
         </template>
       </AppTable>
     </UCard>

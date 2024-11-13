@@ -10,3 +10,10 @@
     <slot />
   </div>
 </template>
+
+<style>
+  html {
+    font-family: Poppins, sans-serif;
+    font-size: 14px;
+  }
+</style>

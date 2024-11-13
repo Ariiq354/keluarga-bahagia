@@ -18,7 +18,7 @@
       });
       await navigateTo("/dashboard");
     } catch (error: any) {
-      useToastError(String(error.statusCode), error.data.statusMessage);
+      useToastError(String(error.statusCode), error.data.message);
     } finally {
       isLoading.value = false;
     }
@@ -30,22 +30,28 @@
     <Title>Login</Title>
     <UCard class="w-full max-w-md">
       <div class="space-y-6">
-        <div class="text-center">
-          <div class="pointer-events-none mb-2">
-            <UIcon
-              name="i-heroicons-lock-closed"
-              class="h-8 w-8 flex-shrink-0 text-gray-900 dark:text-white"
-            />
-          </div>
-          <div class="text-2xl font-bold text-gray-900 dark:text-white">
+        <div class="flex flex-col items-center text-center">
+          <NuxtLink href="/">
+            <NuxtImg src="/logo.webp" width="150" height="150" alt="logo ppg" />
+          </NuxtLink>
+          <div class="mt-4 text-2xl font-bold text-gray-900 dark:text-white">
             Selamat Datang
+          </div>
+          <div class="mt-1 text-gray-500 dark:text-gray-400">
+            Belum punya akun?
+            <NuxtLink
+              no-prefetch
+              to="/register"
+              class="text-primary font-medium"
+            >
+              Daftar.
+            </NuxtLink>
           </div>
         </div>
         <UForm
           :schema="loginSchema"
           :state="state"
           class="w-full space-y-6"
-          :validate-on="['submit']"
           @submit="onSubmit"
         >
           <UFormGroup label="Username" name="username">

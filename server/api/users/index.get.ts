@@ -1,5 +1,5 @@
 export default defineEventHandler(async (event) => {
-  protectFunction(event);
+  adminFunction(event);
 
   const res = await getAllUser();
 
@@ -7,6 +7,9 @@ export default defineEventHandler(async (event) => {
     return {
       id: item.id,
       username: item.username,
+      noTelepon: item.noTelepon,
+      namaLengkap: item.namaLengkap,
+      gender: item.gender,
       isActive: item.isActive,
     };
   });

@@ -32,7 +32,7 @@
     ];
   });
 
-  const numberedData = computed(() => {
+  const numberedData = computed((): DataItem[] => {
     if (data) {
       return data.map((item, index) => ({
         rownumber: index + 1,
@@ -56,9 +56,7 @@
     const sortDirection = sortRef.value.direction;
 
     return [...numberedData.value].sort((a, b) => {
-      // @ts-expect-error sortcolumn
       const aValue = a[sortColumn];
-      // @ts-expect-error sortcolumn
       const bValue = b[sortColumn];
       if (sortDirection === "desc") {
         return aValue > bValue ? 1 : aValue < bValue ? -1 : 0;
@@ -137,32 +135,30 @@
         <slot :name="name" v-bind="slotData ?? {}" />
       </template>
       <template #actions-data="{ row }">
-        <UButton
-          icon="i-heroicons-pencil-16-solid"
-          size="2xs"
-          variant="outline"
-          :ui="{ rounded: 'rounded-full' }"
-          square
-          @click.stop="emit('editClick', removeRowNumber(row))"
-        />
+        <div class="flex justify-center">
+          <UButton
+            icon="i-heroicons-pencil-16-solid"
+            size="2xs"
+            variant="outline"
+            :ui="{ rounded: 'rounded-full' }"
+            square
+            aria-label="Edit item"
+            @click.stop="emit('editClick', removeRowNumber(row))"
+          />
+        </div>
+      </template>
+      <template #actions-header="{ column }">
+        <div class="text-center">{{ column.label }}</div>
       </template>
     </UTable>
-    <slot name="additional-content" />
+    <div class="overflow-x-auto">
+      <slot name="additional-content" />
+    </div>
     <div class="flex justify-end px-3 py-3.5">
       <UPagination
         v-model="page"
         :page-count="pageCount"
         :total="data ? data.length : 0"
-        :ui="{
-          wrapper: 'flex items-center gap-1',
-          base: 'w-8 h-8 justify-center',
-          rounded: '!rounded-full',
-          default: {
-            activeButton: {
-              variant: 'outline',
-            },
-          },
-        }"
       />
     </div>
   </div>

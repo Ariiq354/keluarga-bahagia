@@ -1,7 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  onMounted(() => {
+    defineTopbarTitle("Dashboard");
+  });
+</script>
 
 <template>
-  <main>
-    <div>Ini dashboard</div>
-  </main>
+  <main>ini dahsboard</main>
 </template>

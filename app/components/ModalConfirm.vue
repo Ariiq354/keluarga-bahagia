@@ -13,7 +13,7 @@
       await props.function();
       emit("success");
     } catch (error: any) {
-      useToastError(String(error.statusCode), error.data.statusMessage);
+      useToastError(String(error.statusCode), error.data.message);
     } finally {
       loading.value = false;
     }

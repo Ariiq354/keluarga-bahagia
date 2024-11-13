@@ -1,20 +1,21 @@
 import { hash } from "@node-rs/argon2";
 import { z } from "zod";
-import { generateIdFromEntropySize } from "~~/server/utils/lucia";
 
-const userSchema = z.object({
-  id: z.string().optional(),
+const bodySchema = z.object({
+  id: z.number().optional(),
   username: z.string(),
   password: z.string(),
-  gender: z.string(),
+  noTelepon: z.string(),
+  gender: z.enum(["laki", "perempuan"]),
+  namaLengkap: z.string(),
   isActive: z.boolean(),
 });
 
 export default defineEventHandler(async (event) => {
-  protectFunction(event);
+  adminFunction(event);
 
   const formData = await readValidatedBody(event, (body) =>
-    userSchema.parse(body)
+    bodySchema.parse(body)
   );
 
   const exist = await getUserByUsername(formData.username);
@@ -22,7 +23,7 @@ export default defineEventHandler(async (event) => {
     if (exist && exist.id !== formData.id) {
       throw createError({
         statusCode: 400,
-        statusMessage: "Username sudah ada",
+        message: "Username sudah ada",
       });
     }
 
@@ -30,7 +31,6 @@ export default defineEventHandler(async (event) => {
       id: formData.id,
       username: formData.username,
       isActive: formData.isActive,
-      gender: formData.gender,
     };
 
     await updateUser(formData.id, itemData);
@@ -38,12 +38,11 @@ export default defineEventHandler(async (event) => {
     if (exist) {
       throw createError({
         statusCode: 400,
-        statusMessage: "Username sudah ada",
+        message: "Username sudah ada",
       });
     }
     const newData = {
       ...formData,
-      id: generateIdFromEntropySize(10),
       password: await hash(formData.password),
     };
     await createUser(newData);

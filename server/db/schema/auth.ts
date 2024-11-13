@@ -1,26 +1,66 @@
 import { int, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { timestamp } from "./common";
-import type { InferInsertModel, InferSelectModel } from "drizzle-orm";
+import {
+  relations,
+  type InferInsertModel,
+  type InferSelectModel,
+} from "drizzle-orm";
 
 export const userTable = sqliteTable("user", {
-  id: text().primaryKey(),
+  id: int().primaryKey({ autoIncrement: true }),
   username: text().notNull().unique(),
+  namaLengkap: text().notNull(),
+  noTelepon: text().notNull(),
   password: text().notNull(),
+  gender: text({ enum: ["laki", "perempuan"] }).notNull(),
   isActive: int({ mode: "boolean" }).notNull().default(false),
-  role: int().notNull().default(0),
+  isAvailable: int({ mode: "boolean" }).notNull().default(true),
+  role: text({ enum: ["admin", "user"] })
+    .notNull()
+    .default("user"),
+  ...timestamp,
+});
+
+export const userDtlTable = sqliteTable("user_dtl", {
+  id: int().primaryKey({ autoIncrement: true }),
+  userId: int()
+    .notNull()
+    .references(() => userTable.id, { onDelete: "cascade" }),
+  statusKawin: text().notNull(),
+  tanggalLahir: text().notNull(),
+  alamat: text().notNull(),
+  namaAyah: text().notNull(),
+  suku: text().notNull(),
+  pendidikan: text().notNull(),
+  pekerjaan: text().notNull(),
+  tinggi: int().notNull(),
+  berat: int().notNull(),
+  hobi: text().notNull(),
+  kriteria: text().notNull(),
+  deskripsi: text().notNull().default(""),
   ...timestamp,
 });
 
 export const sessionTable = sqliteTable("session", {
   id: text().primaryKey(),
-  userId: text()
+  userId: int()
     .notNull()
-    .references(() => userTable.id),
+    .references(() => userTable.id, { onDelete: "cascade" }),
   expiresAt: int({ mode: "timestamp" }).notNull(),
 });
 
+export const userRelations = relations(userTable, ({ one }) => ({
+  detail: one(userDtlTable, {
+    fields: [userTable.id],
+    references: [userDtlTable.userId],
+  }),
+}));
+
 export type User = InferSelectModel<typeof userTable>;
 export type NewUser = InferInsertModel<typeof userTable>;
+
+export type UserDtl = InferSelectModel<typeof userDtlTable>;
+export type NewUserDtl = InferInsertModel<typeof userDtlTable>;
 
 export type UserLucia = Omit<User, "createdAt" | "updatedAt" | "password">;
 

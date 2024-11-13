@@ -22,7 +22,7 @@ function generateSessionToken(): string {
   return token;
 }
 
-export async function createSession(userId: string): Promise<Session> {
+export async function createSession(userId: number): Promise<Session> {
   const token = generateSessionToken();
   const sessionId = encodeHexLowerCase(sha256(new TextEncoder().encode(token)));
   const session = {
@@ -104,11 +104,6 @@ function safeURL(url: URL | string): URL | null {
   } catch {
     return null;
   }
-}
-
-export function generateIdFromEntropySize(size: number): string {
-  const buffer = crypto.getRandomValues(new Uint8Array(size));
-  return encodeBase32LowerCaseNoPadding(buffer);
 }
 
 export type SessionValidationResult =

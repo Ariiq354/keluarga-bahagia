@@ -1,4 +1,8 @@
 export function json2Csv(data: { [key: string]: unknown }[]) {
+  if (data.length < 1) {
+    return;
+  }
+
   const headers = Object.keys(data[0]!).toString();
 
   const main = data.map((item) => {

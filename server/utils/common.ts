@@ -7,3 +7,13 @@ export function protectFunction(event: H3Event) {
     });
   }
 }
+
+export function adminFunction(event: H3Event) {
+  protectFunction(event);
+
+  if (event.context.user?.role !== "admin") {
+    throw createError({
+      statusCode: 403,
+    });
+  }
+}

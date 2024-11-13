@@ -18,5 +18,12 @@ export default defineNuxtConfig({
     databaseAuthToken: process.env.DATABASE_AUTH_TOKEN,
   },
 
-  ignorePrefix: "_",
+  // ignorePrefix: "_",
+
+  routeRules: {
+    "/": { prerender: true },
+    "/contact": { prerender: true },
+    "/product": { prerender: true },
+    "/about": { prerender: true },
+  },
 });
