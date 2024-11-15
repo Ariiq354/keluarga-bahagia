@@ -7,12 +7,19 @@
 
   type DataItem = { [key: string]: any };
 
-  const { data, columns, label, loading } = defineProps<{
+  const {
+    data,
+    columns,
+    label,
+    loading,
+    action = true,
+  } = defineProps<{
     data: DataItem[] | undefined;
     columns: ColumnType[];
     label?: string;
     loading?: boolean;
     selectable?: boolean;
+    action?: boolean;
   }>();
 
   const emit = defineEmits(["editClick"]);
@@ -25,10 +32,14 @@
         sortable: true,
       },
       ...columns,
-      {
-        key: "actions",
-        label: "Aksi",
-      },
+      ...(action
+        ? [
+            {
+              key: "actions",
+              label: "Aksi",
+            },
+          ]
+        : []),
     ];
   });
 

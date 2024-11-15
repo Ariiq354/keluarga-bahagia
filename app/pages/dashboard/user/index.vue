@@ -7,15 +7,15 @@
     schema,
     type Schema,
   } from "./_constants";
-  import { json2Csv } from "~/utils";
 
   onMounted(() => {
     defineTopbarTitle("User");
   });
 
   const { data, status, refresh } = await useLazyFetch("/api/users");
-
   const state = ref(getInitialFormData());
+
+  const userDetail = ref();
 
   const modalOpen = ref(false);
   const modalLoading = ref(false);
@@ -41,10 +41,10 @@
   }
 
   const tableSelected = ref<ExtractObjectType<typeof data.value>[]>([]);
-  async function clickDelete() {
+  function clickDelete() {
     async function onDelete() {
       const idArray = tableSelected.value!.map((item) => item.id);
-      await $fetch("/api/users", {
+      await $fetch("/api/taaruf", {
         method: "DELETE",
         body: {
           id: idArray,
@@ -59,9 +59,11 @@
     openConfirmModal(onDelete);
   }
 
-  async function clickUpdate(itemData: ExtractObjectType<typeof data.value>) {
+  function clickUpdate(itemData: ExtractObjectType<typeof data.value>) {
     modalOpen.value = true;
-    state.value = itemData;
+    const { detail, ...rest } = itemData;
+    userDetail.value = detail;
+    state.value = rest;
     state.value.password = "";
   }
 </script>
@@ -69,116 +71,96 @@
 <template>
   <main>
     <Title>User</Title>
-    <UModal v-model="modalOpen" prevent-close>
-      <div class="px-4 py-5">
-        <div class="mb-4 flex items-center justify-between">
-          <h3
-            class="text-base font-semibold leading-6 text-gray-900 dark:text-white"
-          >
-            {{ state.id ? "Edit" : "Tambah" }} User
-          </h3>
-          <UButton
-            color="gray"
-            variant="ghost"
-            icon="i-heroicons-x-mark-20-solid"
-            class="-my-1 rounded-full"
-            :disabled="status === 'pending'"
-            @click="modalOpen = false"
-          />
-        </div>
-        <UForm
-          :schema="schema"
-          :state="state"
-          class="space-y-4"
-          @submit="onSubmit"
-        >
-          <UFormGroup label="Username" name="username">
-            <UInput v-model="state.username" :disabled="modalLoading" />
-          </UFormGroup>
-
-          <UFormGroup v-if="!state.id" label="Password" name="password">
-            <UInput
-              v-model="state.password"
-              type="password"
-              :disabled="modalLoading"
-            />
-          </UFormGroup>
-
-          <UFormGroup label="Nama Lengkap" name="namaLengkap">
-            <UInput v-model="state.namaLengkap" :disabled="modalLoading" />
-          </UFormGroup>
-
-          <UFormGroup label="Jenis Kelamin" name="gender">
-            <USelectMenu
-              v-model="state.gender"
-              :options="genderOptions"
-              option-attribute="name"
-              value-attribute="value"
-              placeholder="Masukkan Jenis Kelamin Anda"
-            />
-          </UFormGroup>
-
-          <UFormGroup label="No. Telepon" name="noTelepon">
-            <UInput v-model="state.noTelepon" :disabled="modalLoading" />
-          </UFormGroup>
-
-          <UFormGroup label="Status" name="isActive">
-            <UToggle v-model="state.isActive" :disabled="modalLoading" />
-          </UFormGroup>
-
-          <div class="flex w-full justify-end gap-2">
-            <UButton
-              icon="i-heroicons-x-mark-16-solid"
-              variant="ghost"
-              :disabled="modalLoading"
-              @click="modalOpen = false"
-            >
-              Batal
-            </UButton>
-            <UButton
-              type="submit"
-              icon="i-heroicons-check-16-solid"
-              :loading="modalLoading"
-            >
-              Simpan
-            </UButton>
-          </div>
-        </UForm>
-      </div>
-    </UModal>
-    <UCard>
-      <div
-        class="mb-6 flex items-center justify-between gap-2 rounded-lg border border-gray-200 p-3 dark:border-gray-700"
+    <AppModal
+      v-model="modalOpen"
+      :title="state.id ? 'Edit User' : 'Tambah User'"
+      :pending="status === 'pending'"
+    >
+      <UForm
+        :schema="schema"
+        :state="state"
+        class="space-y-4"
+        @submit="onSubmit"
       >
-        <div class="flex gap-2">
+        <UFormGroup label="Username" name="username">
+          <UInput v-model="state.username" :disabled="modalLoading" />
+        </UFormGroup>
+
+        <UFormGroup v-if="!state.id" label="Password" name="password">
+          <UInput
+            v-model="state.password"
+            type="password"
+            :disabled="modalLoading"
+          />
+        </UFormGroup>
+
+        <UFormGroup label="Nama Lengkap" name="namaLengkap">
+          <UInput v-model="state.namaLengkap" :disabled="modalLoading" />
+        </UFormGroup>
+
+        <UFormGroup label="Jenis Kelamin" name="gender">
+          <USelectMenu
+            v-model="state.gender"
+            :options="genderOptions"
+            option-attribute="name"
+            value-attribute="value"
+            placeholder="Masukkan Jenis Kelamin Anda"
+          />
+        </UFormGroup>
+
+        <UFormGroup label="No. Telepon" name="noTelepon">
+          <UInput v-model="state.noTelepon" :disabled="modalLoading" />
+        </UFormGroup>
+
+        <UFormGroup label="Status" name="isActive">
+          <UToggle v-model="state.isActive" :disabled="modalLoading" />
+        </UFormGroup>
+
+        <hr />
+
+        <div>
+          Detail User
+          <table v-if="userDetail" class="mt-2 w-full text-sm">
+            <tbody>
+              <tr
+                v-for="(item, index) in Object.entries(userDetail)"
+                :key="index"
+              >
+                <td class="font-bold capitalize">
+                  {{ camelToCamelCase(item[0]) }}
+                </td>
+                <td class="text-right">{{ item[1] }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="flex w-full justify-end gap-2">
           <UButton
-            icon="i-heroicons-plus"
-            variant="soft"
-            class="gap-2 text-xs text-black md:text-base dark:text-white"
-            @click="clickAdd"
+            icon="i-heroicons-x-mark-16-solid"
+            variant="ghost"
+            :disabled="modalLoading"
+            @click="modalOpen = false"
           >
-            Tambah
+            Batal
           </UButton>
           <UButton
-            icon="i-heroicons-trash"
-            variant="soft"
-            class="gap-2 text-xs text-black disabled:opacity-50 md:text-base dark:text-white"
-            :disabled="tableSelected ? tableSelected.length === 0 : true"
-            @click="clickDelete"
+            type="submit"
+            icon="i-heroicons-check-16-solid"
+            :loading="modalLoading"
           >
-            Hapus
+            Simpan
           </UButton>
         </div>
-        <UButton
-          icon="i-heroicons-arrow-up-tray"
-          variant="soft"
-          class="gap-2 text-xs text-black disabled:opacity-50 md:text-base dark:text-white"
-          :disabled="!(data && data.length > 0)"
-          @click="json2Csv(data!)"
-        >
-          Ekspor
-        </UButton>
-      </div>
+      </UForm>
+    </AppModal>
+    <UCard>
+      <CrudCard
+        :data="data"
+        :add-function="clickAdd"
+        :delete-function="clickDelete"
+        :delete-disabled="tableSelected ? tableSelected.length === 0 : true"
+      />
       <AppTable
         v-model="tableSelected"
         label="Kelola User"

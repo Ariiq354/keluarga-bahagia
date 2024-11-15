@@ -1,6 +1,7 @@
 import { drizzle } from "drizzle-orm/libsql";
 import * as auth from "./schema/auth";
 import * as taaruf from "./schema/taaruf";
+import * as selectoption from "./schema/selectoption";
 
 const config = useRuntimeConfig();
 
@@ -12,6 +13,7 @@ export const db = drizzle({
   schema: {
     ...auth,
     ...taaruf,
+    ...selectoption,
   },
   casing: "snake_case",
 });

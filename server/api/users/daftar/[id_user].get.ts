@@ -7,7 +7,10 @@ export default defineEventHandler(async (event) => {
 
   if (res) {
     return {
-      alamat: res.alamat,
+      provinsi: res.provinsi,
+      kota: res.kota,
+      kecamatan: res.kecamatan,
+      kelurahan: res.kelurahan,
       berat: res.berat,
       deskripsi: res.deskripsi,
       hobi: res.hobi,
@@ -15,6 +18,7 @@ export default defineEventHandler(async (event) => {
       namaAyah: res.namaAyah,
       pekerjaan: res.pekerjaan,
       pendidikan: res.pendidikan,
+      jurusan: res.jurusan,
       statusKawin: res.statusKawin,
       suku: res.suku,
       tanggalLahir: res.tanggalLahir,

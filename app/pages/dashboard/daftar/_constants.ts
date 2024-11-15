@@ -3,16 +3,21 @@ import { z } from "zod";
 export const schema = z.object({
   statusKawin: z.string(),
   tanggalLahir: z.string(),
-  alamat: z.string(),
+  provinsi: z.string(),
+  kelurahan: z.string(),
+  kota: z.string(),
+  kecamatan: z.string(),
   namaAyah: z.string(),
   suku: z.string(),
   pendidikan: z.string(),
   pekerjaan: z.string(),
+  jurusan: z.string(),
   tinggi: z.number(),
   berat: z.number(),
   hobi: z.string(),
   kriteria: z.string(),
   deskripsi: z.string(),
+  foto: z.string(),
 });
 
 export const statusKawinOptions = ["Belum Pernah Menikah", "Janda / Duda"];
@@ -33,8 +38,12 @@ export type Schema = z.output<typeof schema>;
 export const getInitialFormData = (): Partial<Schema> => ({
   statusKawin: undefined,
   tanggalLahir: undefined,
-  alamat: undefined,
+  kota: undefined,
+  kecamatan: undefined,
+  kelurahan: undefined,
+  provinsi: undefined,
   namaAyah: undefined,
+  jurusan: undefined,
   suku: undefined,
   pendidikan: undefined,
   pekerjaan: undefined,
@@ -43,4 +52,5 @@ export const getInitialFormData = (): Partial<Schema> => ({
   hobi: undefined,
   kriteria: undefined,
   deskripsi: undefined,
+  foto: undefined,
 });

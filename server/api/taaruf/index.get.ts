@@ -8,6 +8,7 @@ export default defineEventHandler(async (event) => {
       id: item.id,
       pemohonId: item.pemohonId,
       tujuanId: item.tujuanId,
+      status: item.statusPersetujuan,
       namaLengkapPemohon: item.userPemohon.namaLengkap,
       namaLengkapTujuan: item.userTujuan.namaLengkap,
       tanggal: item.createdAt.slice(0, 10),

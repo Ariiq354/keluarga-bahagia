@@ -35,4 +35,10 @@ export function getCurrentDate() {
   return `${year}-${month}-${day}`;
 }
 
+export function camelToCamelCase(str: string) {
+  return str
+    .replace(/([a-z])([A-Z])/g, "$1 $2")
+    .replace(/^./, (firstChar) => firstChar.toUpperCase());
+}
+
 export type ExtractObjectType<T> = T extends (infer U)[] ? U : never;

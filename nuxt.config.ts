@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     "@nuxt/fonts",
     "nuxt-security",
     "@nuxt/eslint",
+    "@nuxtjs/cloudinary",
   ],
   future: {
     compatibilityVersion: 4,
@@ -19,6 +20,18 @@ export default defineNuxtConfig({
   },
 
   // ignorePrefix: "_",
+
+  security: {
+    headers: {
+      contentSecurityPolicy: {
+        "img-src": [
+          `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload/`,
+          "'self'",
+          "data:",
+        ],
+      },
+    },
+  },
 
   routeRules: {
     "/": { prerender: true },

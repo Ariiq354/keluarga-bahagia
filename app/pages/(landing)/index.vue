@@ -33,7 +33,7 @@
 
 <template>
   <main class="font-sans">
-    <Title>Keluarga Bahagia | DEV</Title>
+    <Title>Keluarga Bahagia</Title>
     <div class="relative h-[90vh]">
       <div
         aria-hidden="true"

@@ -19,6 +19,11 @@
                 link: "/dashboard/user",
                 icon: "i-heroicons-user",
               },
+              {
+                label: "Pengajuan Taaruf",
+                link: "/dashboard/list-taaruf",
+                icon: "i-heroicons-users",
+              },
             ],
           },
         ]
@@ -30,6 +35,11 @@
           label: "Pencarian Member",
           link: "/dashboard/member",
           icon: "i-heroicons-user",
+        },
+        {
+          label: "Pengajuan Taaruf",
+          link: "/dashboard/pengajuan",
+          icon: "i-heroicons-heart",
         },
       ],
     },
@@ -50,7 +60,7 @@
         </span>
       </div>
     </div>
-    <template v-if="user?.isActive !== false">
+    <template v-if="user ? user.isActive !== false : false">
       <div v-for="(firstItem, firstIndex) in sidebarItems" :key="firstIndex">
         <h1 class="text-primary px-8 py-4 text-sm font-bold uppercase">
           {{ firstItem.title }}

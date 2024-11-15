@@ -3,28 +3,13 @@
 
   const sidebarState = useSidebarToggle();
 
-  const route = useRoute();
-
-  if (user.value?.isActive === false && !route.fullPath.includes("daftar")) {
-    await navigateTo("/dashboard/daftar");
-  }
-
-  const adminPath = ["/dashboard", "/dashboard/user"];
-
-  if (
-    user.value?.role !== "admin" &&
-    adminPath.some((item) => route.fullPath === item)
-  ) {
-    await navigateTo("/dashboard/member");
-  }
-
   async function logout() {
     try {
       await $fetch("/api/auth/logout", {
         method: "POST",
       });
-      user.value = null;
       await navigateTo("/");
+      user.value = null;
     } catch (error: any) {
       useToastError(String(error.statusCode), error.data.message);
     }

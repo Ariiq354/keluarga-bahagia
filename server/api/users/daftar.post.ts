@@ -3,16 +3,21 @@ import { z } from "zod";
 const bodySchema = z.object({
   statusKawin: z.string(),
   tanggalLahir: z.string(),
-  alamat: z.string(),
+  provinsi: z.string(),
+  kota: z.string(),
+  kecamatan: z.string(),
+  kelurahan: z.string(),
   namaAyah: z.string(),
   suku: z.string(),
   pendidikan: z.string(),
   pekerjaan: z.string(),
   tinggi: z.number(),
+  jurusan: z.string(),
   berat: z.number(),
   hobi: z.string(),
   kriteria: z.string(),
   deskripsi: z.string(),
+  foto: z.string(),
 });
 
 export default defineEventHandler(async (event) => {

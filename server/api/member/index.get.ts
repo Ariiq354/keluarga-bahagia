@@ -15,7 +15,10 @@ export default defineEventHandler(async (event) => {
       namaLengkap: item.namaLengkap,
 
       detail: {
-        alamat: item.detail.alamat,
+        provinsi: item.detail.provinsi,
+        kota: item.detail.kota,
+        kecamatan: item.detail.kecamatan,
+        kelurahan: item.detail.kelurahan,
         berat: item.detail.berat,
         deskripsi: item.detail.deskripsi,
         hobi: item.detail.hobi,
@@ -23,6 +26,7 @@ export default defineEventHandler(async (event) => {
         namaAyah: item.detail.namaAyah,
         pekerjaan: item.detail.pekerjaan,
         pendidikan: item.detail.pendidikan,
+        jurusan: item.detail.jurusan,
         statusKawin: item.detail.statusKawin,
         suku: item.detail.suku,
         tanggalLahir: item.detail.tanggalLahir,

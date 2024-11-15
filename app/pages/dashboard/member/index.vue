@@ -1,7 +1,11 @@
 <script setup lang="ts">
-  const { data } = useLazyFetch("/api/member");
+  onMounted(() => {
+    defineTopbarTitle("Pencarian member");
+  });
+  const user = useUser();
 
-  defineTopbarTitle("Pencarian member");
+  const { data } = useLazyFetch("/api/member");
+  const { data: dataTaaruf } = useLazyFetch(`/api/taaruf/${user.value?.id}`);
 
   const modalState = ref<ExtractObjectType<typeof data.value>>();
   const modalOpen = ref(false);
@@ -9,6 +13,26 @@
   function handleClick(id: number) {
     modalOpen.value = true;
     modalState.value = data.value?.find((item) => item.id === id);
+  }
+
+  const isLoading = ref(false);
+  async function handleSubmit(id: number) {
+    isLoading.value = true;
+    try {
+      await $fetch("/api/taaruf", {
+        method: "POST",
+        body: {
+          pemohonId: user.value?.id,
+          tujuanId: id,
+        },
+      });
+      modalOpen.value = false;
+      useToastSuccess("Permohonan Berhasil", "Proses akan segera diurus admin");
+    } catch (error: any) {
+      useToastError(String(error.statusCode), error.data.message);
+    } finally {
+      isLoading.value = false;
+    }
   }
 </script>
 
@@ -39,7 +63,7 @@
             <div
               class="flex aspect-square w-32 items-center justify-center bg-gray-300"
             >
-              <UIcon name="i-heroicons-photo" />
+              <NuxtImg :src="modalState?.detail.foto" />
             </div>
             <div class="flex flex-col justify-center">
               <h1 class="text-lg font-bold">{{ modalState?.namaLengkap }}</h1>
@@ -128,13 +152,18 @@
               illum possimus saepe, et mollitia, molestias labore qui!
             </p>
           </div>
-          <UButton
-            variant="soft"
-            class="mt-12 w-fit"
-            @click="modalOpen = false"
-          >
-            Tutup
-          </UButton>
+          <div class="mt-12 flex w-full justify-end gap-2">
+            <UButton variant="soft" @click="modalOpen = false"> Tutup </UButton>
+            <UButton
+              :disabled="
+                isLoading ||
+                dataTaaruf?.some((item) => item.tujuanId === modalState?.id)
+              "
+              @click="handleSubmit(modalState!.id)"
+            >
+              Ajukan Taaruf
+            </UButton>
+          </div>
         </div>
       </div>
     </UModal>
@@ -145,7 +174,7 @@
             <div
               class="flex aspect-square w-32 items-center justify-center bg-gray-300 dark:bg-gray-700"
             >
-              <UIcon name="i-heroicons-photo" />
+              <NuxtImg :src="item.detail.foto" />
             </div>
             <div class="flex flex-col justify-center">
               <h1 class="text-lg font-bold">{{ item.namaLengkap }}</h1>
