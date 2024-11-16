@@ -16,7 +16,7 @@
   const provinsiId = ref();
   const kotaId = ref();
   const kecamatanId = ref();
-  const { data: dataProvinsi } = useFetch<any>(
+  const { data: dataProvinsi } = useLazyFetch<any>(
     "https://alamat.thecloudalert.com/api/provinsi/get"
   );
 
@@ -50,10 +50,11 @@
     }
   );
 
-  const { data, refresh } = useFetch(`/api/users/daftar/${user.value?.id}`);
-  const { data: dataSuku } = useFetch(`/api/suku`);
-  const { data: dataPekerjaan } = useFetch(`/api/pekerjaan`);
-  const { data: dataJurusan } = useFetch(`/api/jurusan`);
+  const { data, refresh } = useLazyFetch(`/api/users/daftar/${user.value?.id}`);
+  const { data: dataSuku } = useLazyFetch(`/api/suku`);
+  const { data: dataPekerjaan } = useLazyFetch(`/api/pekerjaan`);
+  const { data: dataJurusan } = useLazyFetch(`/api/jurusan`);
+  const { data: dataPendidikan } = useLazyFetch(`/api/pendidikan`);
   const state = ref(getInitialFormData());
   if (data.value) {
     state.value = data.value;
@@ -148,17 +149,18 @@
               v-model="state.suku"
               :options="dataSuku"
               :disabled="isLoading"
+              option-attribute="name"
+              value-attribute="name"
               searchable
             />
           </UFormGroup>
           <UFormGroup label="Pendidikan Terakhir" name="pendidikan">
-            <UInput v-model="state.pendidikan" :disabled="isLoading" />
-          </UFormGroup>
-          <UFormGroup label="Pekerjaan" name="pekerjaan">
             <USelectMenu
-              v-model="state.pekerjaan"
-              :options="dataPekerjaan"
+              v-model="state.pendidikan"
+              :options="dataPendidikan"
               :disabled="isLoading"
+              option-attribute="name"
+              value-attribute="name"
               searchable
             />
           </UFormGroup>
@@ -167,6 +169,18 @@
               v-model="state.jurusan"
               :options="dataJurusan"
               :disabled="isLoading"
+              option-attribute="name"
+              value-attribute="name"
+              searchable
+            />
+          </UFormGroup>
+          <UFormGroup label="Pekerjaan" name="pekerjaan">
+            <USelectMenu
+              v-model="state.pekerjaan"
+              :options="dataPekerjaan"
+              :disabled="isLoading"
+              option-attribute="name"
+              value-attribute="name"
               searchable
             />
           </UFormGroup>
@@ -189,7 +203,7 @@
           <UFormGroup label="Provinsi" name="provinsi">
             <USelectMenu
               v-model="state.provinsi"
-              :options="dataProvinsi.result"
+              :options="dataProvinsi ? dataProvinsi.result : []"
               :disabled="isLoading"
               option-attribute="text"
               value-attribute="id"
@@ -200,7 +214,7 @@
           <UFormGroup label="Kabupaten / Kota" name="kota">
             <USelectMenu
               v-model="state.kota"
-              :options="dataKota ? dataKota.result : undefined"
+              :options="dataKota ? dataKota.result : []"
               :disabled="isLoading"
               option-attribute="text"
               value-attribute="id"
@@ -211,7 +225,7 @@
           <UFormGroup label="Kecamatan" name="kecamatan">
             <USelectMenu
               v-model="state.kecamatan"
-              :options="dataKecamatan ? dataKecamatan.result : undefined"
+              :options="dataKecamatan ? dataKecamatan.result : []"
               :disabled="isLoading"
               option-attribute="text"
               value-attribute="id"
@@ -222,7 +236,7 @@
           <UFormGroup label="Kelurahan / Desa" name="kelurahan">
             <USelectMenu
               v-model="state.kelurahan"
-              :options="dataKelurahan ? dataKelurahan.result : undefined"
+              :options="dataKelurahan ? dataKelurahan.result : []"
               :disabled="isLoading"
               option-attribute="text"
               value-attribute="id"

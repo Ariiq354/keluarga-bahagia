@@ -24,6 +24,28 @@
                 link: "/dashboard/list-taaruf",
                 icon: "i-heroicons-users",
               },
+              {
+                label: "Opsi Form",
+                icon: "i-heroicons-adjustments-horizontal",
+                children: [
+                  {
+                    label: "Jurusan",
+                    link: "/dashboard/jurusan",
+                  },
+                  {
+                    label: "Pekerjaan",
+                    link: "/dashboard/pekerjaan",
+                  },
+                  {
+                    label: "Pendidikan",
+                    link: "/dashboard/pendidikan",
+                  },
+                  {
+                    label: "Suku",
+                    link: "/dashboard/suku",
+                  },
+                ],
+              },
             ],
           },
         ]

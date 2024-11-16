@@ -1,10 +1,13 @@
 export default defineEventHandler(async (event) => {
-  adminFunction(event);
+  protectFunction(event);
 
   const res = await getAllJurusan();
 
   const data = res.map((item) => {
-    return item.name;
+    return {
+      id: item.id,
+      name: item.name,
+    };
   });
 
   return data;
