@@ -20,7 +20,11 @@ export const schema = z.object({
   foto: z.string(),
 });
 
-export const statusKawinOptions = ["Belum Pernah Menikah", "Janda / Duda"];
+export const statusKawinOptions = [
+  "Belum Pernah Menikah",
+  "Janda / Duda",
+  "Sudah Menikah",
+];
 
 export const genderOptions = [
   {
