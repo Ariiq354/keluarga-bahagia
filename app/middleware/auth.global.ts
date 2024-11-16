@@ -10,7 +10,12 @@ export default defineNuxtRouteMiddleware(async (to) => {
   if (!data && currentRoute.includes("/dashboard")) {
     return navigateTo("/login");
   }
-  if (data && data.isActive === false && currentRoute !== "/dashboard/daftar") {
+  if (
+    data &&
+    data.isActive === false &&
+    currentRoute !== "/dashboard/daftar" &&
+    currentRoute.includes("/dashboard")
+  ) {
     return navigateTo("/dashboard/daftar");
   }
 
