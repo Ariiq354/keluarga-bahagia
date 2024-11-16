@@ -25,6 +25,7 @@ export default defineNuxtConfig({
 
   security: {
     headers: {
+      crossOriginEmbedderPolicy: "credentialless",
       contentSecurityPolicy: {
         "img-src": ["'self'", "data:", "https://res.cloudinary.com"],
       },
@@ -36,12 +37,5 @@ export default defineNuxtConfig({
     "/contact": { prerender: true },
     "/product": { prerender: true },
     "/about": { prerender: true },
-    "/dashboard/daftar": {
-      security: {
-        headers: {
-          crossOriginEmbedderPolicy: "unsafe-none",
-        },
-      },
-    },
   },
 });
