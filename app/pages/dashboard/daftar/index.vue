@@ -66,7 +66,20 @@
     try {
       await $fetch("/api/users/daftar", {
         method: "POST",
-        body: event.data,
+        body: {
+          ...event.data,
+          provinsi: dataProvinsi.value.find(
+            (item: any) => item.id === event.data.provinsi
+          ).name,
+          kota: dataKota.value.find((item: any) => item.id === event.data.kota)
+            .name,
+          kecamatan: dataKecamatan.value.find(
+            (item: any) => item.id === event.data.kecamatan
+          ).name,
+          kelurahan: dataKelurahan.value.find(
+            (item: any) => item.id === event.data.kelurahan
+          ).name,
+        },
       });
 
       useToastSuccess(
@@ -166,7 +179,7 @@
               :options="dataProvinsi ? dataProvinsi.result : []"
               :disabled="isLoading"
               option-attribute="text"
-              value-attribute="text"
+              value-attribute="id"
               searchable
               @change="provinsiId = state.provinsi"
             />
@@ -177,7 +190,7 @@
               :options="dataKota ? dataKota.result : []"
               :disabled="isLoading"
               option-attribute="text"
-              value-attribute="text"
+              value-attribute="id"
               searchable
               @change="kotaId = state.kota"
             />
@@ -188,7 +201,7 @@
               :options="dataKecamatan ? dataKecamatan.result : []"
               :disabled="isLoading"
               option-attribute="text"
-              value-attribute="text"
+              value-attribute="id"
               searchable
               @change="kecamatanId = state.kecamatan"
             />
@@ -199,7 +212,7 @@
               :options="dataKelurahan ? dataKelurahan.result : []"
               :disabled="isLoading"
               option-attribute="text"
-              value-attribute="text"
+              value-attribute="id"
               searchable
             />
           </UFormGroup>
