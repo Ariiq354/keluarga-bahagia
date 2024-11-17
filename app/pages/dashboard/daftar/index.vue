@@ -68,17 +68,18 @@
         method: "POST",
         body: {
           ...event.data,
-          provinsi: dataProvinsi.value.find(
+          provinsi: dataProvinsi.value.result.find(
             (item: any) => item.id === event.data.provinsi
-          ).name,
-          kota: dataKota.value.find((item: any) => item.id === event.data.kota)
-            .name,
-          kecamatan: dataKecamatan.value.find(
+          ).text,
+          kota: dataKota.value.result.find(
+            (item: any) => item.id === event.data.kota
+          ).text,
+          kecamatan: dataKecamatan.value.result.find(
             (item: any) => item.id === event.data.kecamatan
-          ).name,
-          kelurahan: dataKelurahan.value.find(
+          ).text,
+          kelurahan: dataKelurahan.value.result.find(
             (item: any) => item.id === event.data.kelurahan
-          ).name,
+          ).text,
         },
       });
 
@@ -88,11 +89,16 @@
       );
       await refresh();
     } catch (error: any) {
-      useToastError(String(error.statusCode), error.data.message);
+      // useToastError(String(error.statusCode), error.data.message);
+      console.log("checktest", error);
     } finally {
       isLoading.value = false;
     }
   }
+
+  onMounted(() => {
+    console.log("checktest");
+  });
 </script>
 
 <template>
@@ -114,6 +120,7 @@
         :state="state"
         class="space-y-4"
         @submit="onSubmit"
+        @error="(err) => console.log(err)"
       >
         <h1 class="font-bold">Data Diri</h1>
         <UFormGroup label="Upload Foto diri" name="foto">
