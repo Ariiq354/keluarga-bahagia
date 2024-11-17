@@ -138,7 +138,10 @@
               <tr>
                 <td class="font-bold">Alamat:</td>
                 <td class="text-primary text-right">
-                  {{ modalState?.detail.alamat }}
+                  {{ modalState?.detail.provinsi }} /
+                  {{ modalState?.detail.kota }} /
+                  {{ modalState?.detail.kecamatan }} /
+                  {{ modalState?.detail.kelurahan }}
                 </td>
               </tr>
             </tbody>

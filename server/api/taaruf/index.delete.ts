@@ -1,8 +1,12 @@
 import { z } from "zod";
 
-const bodySchema = z.object({
-  id: z.array(z.number()),
-});
+const bodySchema = z
+  .object({
+    id: z.number(),
+    pemohonId: z.number(),
+    tujuanId: z.number(),
+  })
+  .array();
 
 export default defineEventHandler(async (event) => {
   protectFunction(event);
@@ -11,7 +15,15 @@ export default defineEventHandler(async (event) => {
     bodySchema.parse(body)
   );
 
-  await deleteTaaruf(formData.id);
+  for (const item of formData) {
+    await updateUser(item.pemohonId, {
+      isAvailable: true,
+    });
+    await updateUser(item.tujuanId, {
+      isAvailable: true,
+    });
+    await deleteTaaruf([item.id]);
+  }
 
   return;
 });

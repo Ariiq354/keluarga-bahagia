@@ -144,6 +144,65 @@
           <UFormGroup label="Nama Ayah" name="namaAyah">
             <UInput v-model="state.namaAyah" :disabled="isLoading" />
           </UFormGroup>
+          <div class="grid grid-cols-2 gap-4">
+            <UFormGroup label="Anak Ke" name="anakKe">
+              <UInput
+                v-model="state.anakKe"
+                type="number"
+                :disabled="isLoading"
+              />
+            </UFormGroup>
+            <UFormGroup label="Dari Bersaudara" name="dariBersaudara">
+              <UInput
+                v-model="state.dariBersaudara"
+                type="number"
+                :disabled="isLoading"
+              />
+            </UFormGroup>
+          </div>
+          <UFormGroup label="Provinsi" name="provinsi">
+            <USelectMenu
+              v-model="state.provinsi"
+              :options="dataProvinsi ? dataProvinsi.result : []"
+              :disabled="isLoading"
+              option-attribute="text"
+              value-attribute="text"
+              searchable
+              @change="provinsiId = state.provinsi"
+            />
+          </UFormGroup>
+          <UFormGroup label="Kabupaten / Kota" name="kota">
+            <USelectMenu
+              v-model="state.kota"
+              :options="dataKota ? dataKota.result : []"
+              :disabled="isLoading"
+              option-attribute="text"
+              value-attribute="text"
+              searchable
+              @change="kotaId = state.kota"
+            />
+          </UFormGroup>
+          <UFormGroup label="Kecamatan" name="kecamatan">
+            <USelectMenu
+              v-model="state.kecamatan"
+              :options="dataKecamatan ? dataKecamatan.result : []"
+              :disabled="isLoading"
+              option-attribute="text"
+              value-attribute="text"
+              searchable
+              @change="kecamatanId = state.kecamatan"
+            />
+          </UFormGroup>
+          <UFormGroup label="Kelurahan / Desa" name="kelurahan">
+            <USelectMenu
+              v-model="state.kelurahan"
+              :options="dataKelurahan ? dataKelurahan.result : []"
+              :disabled="isLoading"
+              option-attribute="text"
+              value-attribute="text"
+              searchable
+            />
+          </UFormGroup>
           <UFormGroup label="Suku" name="suku">
             <USelectMenu
               v-model="state.suku"
@@ -200,48 +259,8 @@
           <UFormGroup label="Deskripsi Singkat Diri Anda" name="deskripsi">
             <UInput v-model="state.deskripsi" :disabled="isLoading" />
           </UFormGroup>
-          <UFormGroup label="Provinsi" name="provinsi">
-            <USelectMenu
-              v-model="state.provinsi"
-              :options="dataProvinsi ? dataProvinsi.result : []"
-              :disabled="isLoading"
-              option-attribute="text"
-              value-attribute="id"
-              searchable
-              @change="provinsiId = state.provinsi"
-            />
-          </UFormGroup>
-          <UFormGroup label="Kabupaten / Kota" name="kota">
-            <USelectMenu
-              v-model="state.kota"
-              :options="dataKota ? dataKota.result : []"
-              :disabled="isLoading"
-              option-attribute="text"
-              value-attribute="id"
-              searchable
-              @change="kotaId = state.kota"
-            />
-          </UFormGroup>
-          <UFormGroup label="Kecamatan" name="kecamatan">
-            <USelectMenu
-              v-model="state.kecamatan"
-              :options="dataKecamatan ? dataKecamatan.result : []"
-              :disabled="isLoading"
-              option-attribute="text"
-              value-attribute="id"
-              searchable
-              @change="kecamatanId = state.kecamatan"
-            />
-          </UFormGroup>
-          <UFormGroup label="Kelurahan / Desa" name="kelurahan">
-            <USelectMenu
-              v-model="state.kelurahan"
-              :options="dataKelurahan ? dataKelurahan.result : []"
-              :disabled="isLoading"
-              option-attribute="text"
-              value-attribute="id"
-              searchable
-            />
+          <UFormGroup label="Alamat Instagram" name="instagram">
+            <UInput v-model="state.instagram" :disabled="isLoading" />
           </UFormGroup>
           <UFormGroup label="Kriteria Pasangan" name="kriteria">
             <UTextarea

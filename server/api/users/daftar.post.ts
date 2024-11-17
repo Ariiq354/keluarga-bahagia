@@ -17,6 +17,9 @@ const bodySchema = z.object({
   hobi: z.string(),
   kriteria: z.string(),
   deskripsi: z.string(),
+  anakKe: z.number(),
+  dariBersaudara: z.number(),
+  instagram: z.string(),
   foto: z.string(),
 });
 

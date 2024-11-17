@@ -36,7 +36,13 @@
   const tableSelected = ref<ExtractObjectType<typeof data.value>[]>([]);
   function clickDelete() {
     async function onDelete() {
-      const idArray = tableSelected.value!.map((item) => item.id);
+      const idArray = tableSelected.value!.map((item) => {
+        return {
+          id: item.id,
+          pemohonId: item.id,
+          tujuanId: item.tujuanId,
+        };
+      });
       await $fetch("/api/taaruf", {
         method: "DELETE",
         body: {

@@ -8,6 +8,8 @@ export const schema = z.object({
   kota: z.string(),
   kecamatan: z.string(),
   namaAyah: z.string(),
+  anakKe: z.number(),
+  dariBersaudara: z.number(),
   suku: z.string(),
   pendidikan: z.string(),
   pekerjaan: z.string(),
@@ -18,6 +20,7 @@ export const schema = z.object({
   kriteria: z.string(),
   deskripsi: z.string(),
   foto: z.string(),
+  instagram: z.string(),
 });
 
 export const statusKawinOptions = [
@@ -47,6 +50,8 @@ export const getInitialFormData = (): Partial<Schema> => ({
   kelurahan: undefined,
   provinsi: undefined,
   namaAyah: undefined,
+  anakKe: undefined,
+  dariBersaudara: undefined,
   jurusan: undefined,
   suku: undefined,
   pendidikan: undefined,
@@ -57,4 +62,5 @@ export const getInitialFormData = (): Partial<Schema> => ({
   kriteria: undefined,
   deskripsi: undefined,
   foto: undefined,
+  instagram: undefined,
 });
