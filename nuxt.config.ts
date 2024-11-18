@@ -21,6 +21,15 @@ export default defineNuxtConfig({
 
   $production: {
     ignorePrefix: "_",
+    routeRules: {
+      "/dashboard/daftar": {
+        security: {
+          headers: {
+            crossOriginEmbedderPolicy: false,
+          },
+        },
+      },
+    },
   },
 
   security: {
@@ -36,12 +45,5 @@ export default defineNuxtConfig({
     "/contact": { prerender: true },
     "/product": { prerender: true },
     "/about": { prerender: true },
-    "/dashboard/daftar": {
-      security: {
-        headers: {
-          crossOriginOpenerPolicy: false,
-        },
-      },
-    },
   },
 });
