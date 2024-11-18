@@ -25,7 +25,7 @@ export default defineNuxtConfig({
 
   security: {
     headers: {
-      crossOriginEmbedderPolicy: "credentialless",
+      crossOriginEmbedderPolicy: false,
       contentSecurityPolicy: {
         "img-src": ["'self'", "data:", "https://res.cloudinary.com"],
       },
