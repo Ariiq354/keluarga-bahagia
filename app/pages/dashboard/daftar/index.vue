@@ -85,20 +85,15 @@
 
       useToastSuccess(
         "Pendaftaran Berhasil",
-        "Silahkan menunggu aktivasi akun anda"
+        "Selamat datang di Keluarga Bahagia"
       );
-      await refresh();
+      await navigateTo("/dashboard/member");
     } catch (error: any) {
-      // useToastError(String(error.statusCode), error.data.message);
-      console.log("checktest", error);
+      useToastError(String(error.statusCode), error.data.message);
     } finally {
       isLoading.value = false;
     }
   }
-
-  onMounted(() => {
-    console.log("checktest");
-  });
 </script>
 
 <template>
@@ -120,7 +115,6 @@
         :state="state"
         class="space-y-4"
         @submit="onSubmit"
-        @error="(err) => console.log(err)"
       >
         <h1 class="font-bold">Data Diri</h1>
         <UFormGroup label="Upload Foto diri" name="foto">

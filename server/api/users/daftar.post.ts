@@ -37,5 +37,9 @@ export default defineEventHandler(async (event) => {
 
   await createUserDetail(itemData);
 
+  await updateUser(event.context.user!.id, {
+    isActive: true,
+  });
+
   return;
 });
