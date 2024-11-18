@@ -149,10 +149,7 @@
           <div class="mt-12 text-purple-900 dark:text-purple-200">
             <h1 class="font-bold">Kriteria Pasangan</h1>
             <p class="mt-2 text-sm">
-              {{ modalState?.detail.kriteria }} Lorem ipsum dolor, sit amet
-              consectetur adipisicing elit. Iusto molestiae tenetur autem nulla
-              consectetur vel ea temporibus, rerum eaque voluptate hic deleniti
-              illum possimus saepe, et mollitia, molestias labore qui!
+              {{ modalState?.detail.kriteria }}
             </p>
           </div>
           <div class="mt-12 flex w-full justify-end gap-2">
