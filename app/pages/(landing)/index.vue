@@ -175,7 +175,7 @@
         <h1
           class="my-4 w-full border-b-2 py-4 text-center text-4xl font-semibold"
         >
-          Daftar Event
+          Daftar Bootcamp
         </h1>
         <UCarousel
           v-slot="{ item }"
