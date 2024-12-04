@@ -21,6 +21,7 @@ const bodySchema = z.object({
   dariBersaudara: z.number(),
   instagram: z.string(),
   foto: z.string(),
+  gender: z.enum(["laki", "perempuan"]),
 });
 
 export default defineEventHandler(async (event) => {

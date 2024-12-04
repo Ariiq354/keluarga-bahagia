@@ -21,6 +21,7 @@ export const schema = z.object({
   deskripsi: z.string(),
   foto: z.string(),
   instagram: z.string(),
+  gender: z.enum(["laki", "perempuan"]),
 });
 
 export const resetSchema = z.object({
@@ -68,6 +69,7 @@ export const getInitialFormData = (): Partial<Schema> => ({
   deskripsi: undefined,
   foto: undefined,
   instagram: undefined,
+  gender: undefined,
 });
 
 export const getInitialResetData = (): Partial<ResetSchema> => ({

@@ -148,11 +148,12 @@
             <UInput :model-value="user?.namaLengkap" disabled />
           </UFormGroup>
           <UFormGroup label="Jenis Kelamin">
-            <UInput
-              :model-value="
-                genderOptions.find((item) => item.value === user?.gender)?.name
-              "
-              disabled
+            <USelectMenu
+              v-model="state.gender"
+              :disabled="isLoading"
+              :options="genderOptions"
+              option-attribute="name"
+              value-attribute="value"
             />
           </UFormGroup>
           <UFormGroup label="No. Telepon">
