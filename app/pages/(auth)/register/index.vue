@@ -84,6 +84,9 @@
               placeholder="Masukkan no. telepon"
             />
           </UFormGroup>
+          <UFormGroup label="Email" name="email">
+            <UInput v-model="state.email" placeholder="Masukkan email anda" />
+          </UFormGroup>
           <UFormGroup label="Jenis Kelamin" name="gender">
             <USelectMenu
               v-model="state.gender"

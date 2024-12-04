@@ -6,6 +6,7 @@ export const registerSchema = z.object({
   namaLengkap: z.string(),
   noTelepon: z.string(),
   gender: z.string(),
+  email: z.string(),
 });
 
 export const genderOptions = [
@@ -27,4 +28,5 @@ export const getInitialFormData = (): Partial<Schema> => ({
   namaLengkap: undefined,
   noTelepon: undefined,
   gender: undefined,
+  email: undefined,
 });

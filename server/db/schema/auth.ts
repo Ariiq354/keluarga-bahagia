@@ -13,6 +13,7 @@ export const userTable = sqliteTable("user", {
   noTelepon: text().notNull(),
   password: text().notNull(),
   gender: text({ enum: ["laki", "perempuan"] }).notNull(),
+  email: text().notNull(),
   isActive: int({ mode: "boolean" }).notNull().default(false),
   isAvailable: int({ mode: "boolean" }).notNull().default(true),
   role: text({ enum: ["admin", "user"] })

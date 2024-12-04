@@ -7,6 +7,7 @@ const bodySchema = z
     password: z.string().min(8),
     noTelepon: z.string(),
     gender: z.enum(["laki", "perempuan"]),
+    email: z.string(),
     namaLengkap: z.string(),
   })
   .strict();
