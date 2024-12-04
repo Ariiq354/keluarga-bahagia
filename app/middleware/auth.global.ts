@@ -2,6 +2,7 @@ import type { UserLucia } from "~~/server/db/schema/auth";
 
 export default defineNuxtRouteMiddleware(async (to) => {
   const user = useUser();
+  // @ts-ignore
   const data: UserLucia = await useRequestFetch()("/api/auth/session");
   if (data) {
     user.value = data;
@@ -13,14 +14,9 @@ export default defineNuxtRouteMiddleware(async (to) => {
   if (
     data &&
     data.isActive === false &&
-    currentRoute !== "/dashboard/daftar" &&
-    currentRoute.includes("/dashboard")
+    currentRoute === "/dashboard/member" || currentRoute === '/dashboard/pengajuan'
   ) {
     return navigateTo("/dashboard/daftar");
-  }
-
-  if (data && data.isActive === true && currentRoute === "/dashboard/daftar") {
-    return navigateTo("/dashboard");
   }
 
   if (

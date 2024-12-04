@@ -13,10 +13,7 @@
     </div>
     <div class="container mt-12 grid grid-cols-2 gap-12">
       <p class="flex items-center">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minima
-        molestiae laborum cupiditate, in velit repellendus similique obcaecati
-        corporis illum blanditiis nihil beatae deserunt incidunt aperiam, dolor
-        rerum facere repudiandae nostrum.
+        Platform website Keluarga Bahagia adalah sebuah situs web yang dirancang khusus untuk Pendidikan Pranikah dan memperkuat ikatan keluarga. Platform ini juga dirancang menjadi platform pencarian jodoh terdepan di Indonesia yang memfasilitasi terciptanya keluarga-keluarga berkualitas, berdaya saing, dan berwawasan luas, serta berkontribusi dalam mewujudkan Indonesia Emas 2045. Platform ini hadir sebagai solusi modern untuk mempertuemukan individu yang memiliki visi dan nilai-nilai yang sejalan dalam membangun keluarga harmonis. Kami berkomitmen membantu membantu anda memahami esensi pernikahan sebagai ibadah dan separuh agama yang sempurna, keuntungan menyiapkan diri menjadi calon pasangan yang baik adalah mendapatkan calon pasangan yang baik, karena keluarga adalah fondasi yang penting dalam kehidupan kita yang memberikan dukungan, cinta, dan makna dalam perjalanan kita melalui hidup.
       </p>
       <div class="flex items-center justify-center">
         <div

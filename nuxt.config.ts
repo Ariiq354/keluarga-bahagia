@@ -19,21 +19,22 @@ export default defineNuxtConfig({
     databaseAuthToken: process.env.DATABASE_AUTH_TOKEN,
   },
 
+  $development: {
+    security: {
+      removeLoggers: false,
+    },
+  },
+
   $production: {
     ignorePrefix: "_",
-    routeRules: {
-      "/dashboard/daftar": {
-        security: {
-          headers: {
-            crossOriginEmbedderPolicy: false,
-          },
-        },
-      },
-    },
   },
 
   security: {
     headers: {
+      permissionsPolicy: {
+        camera: false,
+      },
+      crossOriginEmbedderPolicy: false,
       contentSecurityPolicy: {
         "img-src": ["'self'", "data:", "https://res.cloudinary.com"],
       },

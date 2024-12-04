@@ -25,21 +25,25 @@
     "@nuxtjs/cloudinary": "^4.0.0",
     "@oslojs/crypto": "^1.0.1",
     "@oslojs/encoding": "^1.1.0",
-    "drizzle-orm": "^0.36.3",
-    "nuxt": "^3.14.159",
-    "nuxt-security": "^2.1.1",
+    "drizzle-orm": "^0.37.0",
+    "nuxt": "^3.14.1592",
+    "nuxt-security": "^2.1.5",
     "vue": "^3.5.13",
-    "vue-router": "^4.4.5",
+    "vue-router": "^4.5.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@nuxt/eslint": "^0.7.0",
-    "drizzle-kit": "^0.28.1",
-    "eslint": "^9.15.0",
-    "prettier": "^3.3.3",
-    "prettier-plugin-tailwindcss": "^0.6.8",
-    "tailwindcss": "^3.4.15",
-    "typescript": "^5.6.3"
+    "@nuxt/eslint": "^0.7.2",
+    "drizzle-kit": "^0.29.1",
+    "prettier": "^3.4.2",
+    "prettier-plugin-tailwindcss": "^0.6.9",
+    "tailwindcss": "^3.4.16",
+    "typescript": "^5.7.2"
   },
-  "packageManager": "pnpm@9.13.0"
+  "packageManager": "pnpm@9.14.4",
+  "pnpm": {
+    "overrides": {
+      "unimport": "~3.13"
+    }
+  }
 }

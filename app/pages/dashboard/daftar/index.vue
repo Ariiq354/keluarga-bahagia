@@ -3,8 +3,11 @@
   import {
     genderOptions,
     getInitialFormData,
+    getInitialResetData,
+    resetSchema,
     schema,
     statusKawinOptions,
+    type ResetSchema,
     type Schema,
   } from "./_constants";
 
@@ -50,12 +53,13 @@
     }
   );
 
-  const { data, refresh } = useLazyFetch(`/api/users/daftar/${user.value?.id}`);
+  const { data } = useLazyFetch(`/api/users/daftar/${user.value?.id}`);
   const { data: dataSuku } = useLazyFetch(`/api/suku`);
   const { data: dataPekerjaan } = useLazyFetch(`/api/pekerjaan`);
   const { data: dataJurusan } = useLazyFetch(`/api/jurusan`);
   const { data: dataPendidikan } = useLazyFetch(`/api/pendidikan`);
   const state = ref(getInitialFormData());
+  const resetState = ref(getInitialResetData());
   if (data.value) {
     state.value = data.value;
   }
@@ -84,10 +88,28 @@
       });
 
       useToastSuccess(
-        "Pendaftaran Berhasil",
+        "Pengisian Data Diri Berhasil",
         "Selamat datang di Keluarga Bahagia"
       );
-      await navigateTo("/dashboard/member");
+    } catch (error: any) {
+      useToastError(String(error.statusCode), error.data.message);
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  async function onSubmitReset(event: FormSubmitEvent<ResetSchema>) {
+    isLoading.value = true;
+    try {
+      await $fetch("/api/auth/reset", {
+        method: "POST",
+        body: event.data,
+      });
+
+      useToastSuccess(
+        "Reset Password Berhasil",
+        "Password anda adalah " + event.data.password
+      );
     } catch (error: any) {
       useToastError(String(error.statusCode), error.data.message);
     } finally {
@@ -100,11 +122,7 @@
   <main>
     <Title>Daftar Diri</Title>
     <UCard>
-      <div v-if="data" class="flex items-center gap-4">
-        <UIcon name="i-heroicons-information-circle" size="30" /> Silahkan
-        tunggu akun anda teraktivasi
-      </div>
-      <div v-else class="flex items-center gap-4">
+      <div v-if="!data" class="flex items-center gap-4">
         <UIcon name="i-heroicons-information-circle" size="30" /> Lengkapi data
         diri anda sebelum memulai
       </div>
@@ -284,6 +302,33 @@
             />
           </UFormGroup>
         </div>
+
+        <div class="flex w-full justify-end gap-2">
+          <UButton
+            type="submit"
+            icon="i-heroicons-check-16-solid"
+            :loading="isLoading"
+          >
+            Simpan
+          </UButton>
+        </div>
+      </UForm>
+    </UCard>
+    <UCard class="mt-4">
+      <UForm
+        :schema="resetSchema"
+        :state="resetState"
+        class="space-y-4"
+        @submit="onSubmitReset"
+      >
+        <h1 class="font-bold">Reset Password</h1>
+        <UFormGroup label="Password Baru" name="password">
+          <UInput
+            v-model="resetState.password"
+            type="password"
+            :disabled="isLoading"
+          />
+        </UFormGroup>
 
         <div class="flex w-full justify-end gap-2">
           <UButton

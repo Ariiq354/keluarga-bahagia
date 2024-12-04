@@ -6,5 +6,6 @@ export default withNuxt({
   rules: {
     "@typescript-eslint/no-explicit-any": "off",
     "vue/html-self-closing": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
   },
 });

@@ -23,6 +23,10 @@ export const schema = z.object({
   instagram: z.string(),
 });
 
+export const resetSchema = z.object({
+  password: z.string().min(8),
+});
+
 export const statusKawinOptions = [
   "Belum Pernah Menikah",
   "Janda / Duda",
@@ -41,6 +45,7 @@ export const genderOptions = [
 ];
 
 export type Schema = z.output<typeof schema>;
+export type ResetSchema = z.output<typeof resetSchema>;
 
 export const getInitialFormData = (): Partial<Schema> => ({
   statusKawin: undefined,
@@ -63,4 +68,8 @@ export const getInitialFormData = (): Partial<Schema> => ({
   deskripsi: undefined,
   foto: undefined,
   instagram: undefined,
+});
+
+export const getInitialResetData = (): Partial<ResetSchema> => ({
+  password: undefined,
 });

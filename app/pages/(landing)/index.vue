@@ -96,9 +96,9 @@
                 </g>
               </svg>
             </div>
-            <h1 class="mb-2 text-center text-2xl font-bold">Event</h1>
+            <h1 class="mb-2 text-center text-2xl font-bold">Bootcamp</h1>
             <p class="text-center">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, a.
+              Program ini bertujuan untuk memberikan bekal pengetahuan & keterampilan yang di perlukan dalam membangun kehidupan rumah tangga yang bahagia  & harmonis.
             </p>
           </div>
           <div class="rounded-lg bg-eastern-blue-100 p-12">
@@ -122,48 +122,8 @@
             </div>
             <h1 class="mb-2 text-center text-2xl font-bold">Jodoh</h1>
             <p class="text-center">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, a.
+              Banyak yang percaya bahwa jodoh adalah cerminan dari diri kita sendiri, jodoh adalah sebuah perjalanan yan penuh dengan kejutan & pembelajaran.
             </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="h-[90vh] bg-eastern-blue-100">
-      <div class="container grid h-full grid-cols-2 gap-12">
-        <div
-          class="flex h-full w-full items-center justify-center rounded p-12"
-        >
-          <div
-            class="rounded-lg bg-gray-900/5 p-2 ring-1 ring-inset ring-green-900/10"
-          >
-            <NuxtImg class="rounded-sm" src="/gambarSeminar.webp" alt="" />
-          </div>
-        </div>
-        <div class="flex h-full w-full flex-col justify-center gap-12">
-          <h1 class="text-6xl font-bold">Seminar Pranikah</h1>
-          <ul class="flex list-disc flex-col gap-4 text-xl">
-            <li>
-              Membantu Anda memahami esensi pernikahan sebagai ibadah dan
-              separuh agama yang sempurna
-            </li>
-            <li>
-              Mempersiapkan Anda untuk membangun rumah tangga yang kokoh dan
-              bahagia
-            </li>
-            <li>
-              Memberikan bekal ilmu dan keterampilan praktis untuk menghadapi
-              berbagai tantangan dalam pernikahan
-            </li>
-            <li>Memperkuat komitmen dan komunikasi dengan pasangan</li>
-          </ul>
-          <div class="flex flex-col gap-4">
-            <div class="flex items-center gap-2">
-              - [ Rino Amri, SE, M.Pd, chc] Konsultan Jelajah Diri
-            </div>
-            <div class="flex items-center gap-2">
-              <div />
-              - [ Andri setiawan ] Guru Besar ponpes Dahlan ikhsan
-            </div>
           </div>
         </div>
       </div>
@@ -228,7 +188,46 @@
         <UButton class="w-fit" variant="soft">Lihat Semua Event</UButton>
       </div>
     </div>
-
+    <div class="h-[90vh] bg-eastern-blue-100">
+      <div class="container grid h-full grid-cols-2 gap-12">
+        <div
+          class="flex h-full w-full items-center justify-center rounded p-12"
+        >
+          <div
+            class="rounded-lg bg-gray-900/5 p-2 ring-1 ring-inset ring-green-900/10"
+          >
+            <NuxtImg class="rounded-sm" src="/gambarSeminar.webp" alt="" />
+          </div>
+        </div>
+        <div class="flex h-full w-full flex-col justify-center gap-12">
+          <h1 class="text-6xl font-bold">Seminar Pranikah</h1>
+          <ul class="flex list-disc flex-col gap-4 text-xl">
+            <li>
+              Membantu Anda memahami esensi pernikahan sebagai ibadah dan
+              separuh agama yang sempurna
+            </li>
+            <li>
+              Mempersiapkan Anda untuk membangun rumah tangga yang kokoh dan
+              bahagia
+            </li>
+            <li>
+              Memberikan bekal ilmu dan keterampilan praktis untuk menghadapi
+              berbagai tantangan dalam pernikahan
+            </li>
+            <li>Memperkuat komitmen dan komunikasi dengan pasangan</li>
+          </ul>
+          <div class="flex flex-col gap-4">
+            <div class="flex items-center gap-2">
+              - [ Rino Amri, SE, M.Pd, chc] Konsultan Jelajah Diri
+            </div>
+            <div class="flex items-center gap-2">
+              <div />
+              - [ Andri setiawan ] Guru Besar ponpes Dahlan ikhsan
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="w-full bg-eastern-blue-700 px-12 py-12 text-eastern-blue-100">
       <p class="container w-2/3 text-center text-2xl leading-loose">
         "Menikah adalah perjalanan yang indah, namun membutuhkan persiapan yang
