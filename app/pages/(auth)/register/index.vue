@@ -87,15 +87,6 @@
           <UFormGroup label="Email" name="email">
             <UInput v-model="state.email" placeholder="Masukkan email anda" />
           </UFormGroup>
-          <UFormGroup label="Jenis Kelamin" name="gender">
-            <USelectMenu
-              v-model="state.gender"
-              :options="genderOptions"
-              option-attribute="name"
-              value-attribute="value"
-              placeholder="Masukkan Jenis Kelamin Anda"
-            />
-          </UFormGroup>
 
           <UButton
             class="flex w-full justify-center"

@@ -6,7 +6,6 @@ const bodySchema = z
     username: z.string(),
     password: z.string().min(8),
     noTelepon: z.string(),
-    gender: z.enum(["laki", "perempuan"]),
     email: z.string(),
     namaLengkap: z.string(),
   })
