@@ -10,6 +10,8 @@
 
   const isLoading = ref(false);
   async function onSubmit(event: FormSubmitEvent<Schema>) {
+    console.log(event.data);
+
     isLoading.value = true;
     try {
       await $fetch("/api/auth/login", {

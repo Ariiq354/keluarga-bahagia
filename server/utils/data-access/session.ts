@@ -27,10 +27,10 @@ export async function getUserSessionById(
         username: userTable.username,
         role: userTable.role,
         noTelepon: userTable.noTelepon,
-        gender: userTable.gender,
         namaLengkap: userTable.namaLengkap,
         isActive: userTable.isActive,
         isAvailable: userTable.isAvailable,
+        email: userTable.email,
       },
       session: sessionTable,
     })

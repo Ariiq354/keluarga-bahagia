@@ -31,7 +31,7 @@ export default defineEventHandler(async (event) => {
       username: item.username,
       noTelepon: item.noTelepon,
       namaLengkap: item.namaLengkap,
-      gender: item.gender,
+      email: item.email,
       isActive: item.isActive,
 
       detail,

@@ -6,8 +6,8 @@ const bodySchema = z.object({
   username: z.string(),
   password: z.string(),
   noTelepon: z.string(),
-  gender: z.enum(["laki", "perempuan"]),
   namaLengkap: z.string(),
+  email: z.string(),
   isActive: z.boolean(),
 });
 
