@@ -54,7 +54,7 @@
       title: "Main",
       items: [
         {
-          label: "Pencarian Member",
+          label: "Pencarian Pasangan",
           link: "/dashboard/member",
           icon: "i-heroicons-user",
         },

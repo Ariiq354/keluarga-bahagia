@@ -2,7 +2,6 @@
   import type { FormSubmitEvent } from "#ui/types";
   import {
     type Schema,
-    genderOptions,
     getInitialFormData,
     registerSchema,
   } from "./_constants";

@@ -2,9 +2,10 @@ export default defineEventHandler(async (event) => {
   protectFunction(event);
 
   const res = await getAllMember();
+  const user = await getUserByUsername(event.context.user!.username);
 
   const filterRes = res.filter(
-    (item) => item.gender !== event.context.user?.gender && item.detail
+    (item) => item.detail.gender !== user?.detail.gender && item.detail
   );
 
   const data = filterRes.map((item) => {

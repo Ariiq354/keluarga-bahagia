@@ -19,6 +19,13 @@ export async function getAllUser() {
 export async function getUserByUsername(username: string) {
   return await db.query.userTable.findFirst({
     where: eq(userTable.username, username),
+    with: {
+      detail: {
+        columns: {
+          gender: true,
+        },
+      },
+    },
   });
 }
 

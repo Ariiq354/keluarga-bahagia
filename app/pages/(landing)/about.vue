@@ -39,14 +39,14 @@
     <h1 class="mb-12 text-center text-4xl font-bold">Diajarkan Praktisi</h1>
     <div class="container grid grid-cols-4 gap-12">
       <div
-        v-for="(_, index) in Array(8)"
+        v-for="(_, index) in Array(2)"
         :key="index"
         class="rounded-lg bg-white p-4 shadow-lg"
       >
         <div
-          class="mb-6 flex aspect-square w-full items-center justify-center rounded bg-gray-300"
+          class="mb-6 flex aspect-square w-full items-start justify-center overflow-hidden rounded bg-gray-300"
         >
-          <UIcon name="i-heroicons-photo" />
+          <NuxtImg :src="`coach${index + 1}.webp`" />
         </div>
         <h1 class="mb-2 text-xl">John Doe</h1>
         <p class="text-black/60">Project Manager</p>
