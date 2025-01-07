@@ -98,7 +98,9 @@
             </div>
             <h1 class="mb-2 text-center text-2xl font-bold">Bootcamp</h1>
             <p class="text-center">
-              Program ini bertujuan untuk memberikan bekal pengetahuan & keterampilan yang di perlukan dalam membangun kehidupan rumah tangga yang bahagia  & harmonis.
+              Program ini bertujuan untuk memberikan bekal pengetahuan &
+              keterampilan yang di perlukan dalam membangun kehidupan rumah
+              tangga yang bahagia & harmonis.
             </p>
           </div>
           <div class="rounded-lg bg-eastern-blue-100 p-12">
@@ -122,15 +124,17 @@
             </div>
             <h1 class="mb-2 text-center text-2xl font-bold">Jodoh</h1>
             <p class="text-center">
-              Banyak yang percaya bahwa jodoh adalah cerminan dari diri kita sendiri, jodoh adalah sebuah perjalanan yan penuh dengan kejutan & pembelajaran.
+              Banyak yang percaya bahwa jodoh adalah cerminan dari diri kita
+              sendiri, jodoh adalah sebuah perjalanan yan penuh dengan kejutan &
+              pembelajaran.
             </p>
           </div>
         </div>
       </div>
     </div>
-    <div class="bg-eastern-blue-700 py-12 text-white">
+    <div class="py-12 text-white">
       <div
-        class="container flex flex-col items-center justify-center gap-4 px-20 py-8"
+        class="container flex flex-col items-center justify-center gap-4 rounded-xl bg-eastern-blue-900 px-20 py-8 shadow-2xl"
       >
         <h1
           class="my-4 w-full border-b-2 py-4 text-center text-4xl font-semibold"
@@ -138,7 +142,7 @@
           Daftar Bootcamp
         </h1>
         <UCarousel
-          v-slot="{ item }"
+          v-slot="{ item, index }"
           :items="carouselItem"
           arrows
           class="w-full"
@@ -160,32 +164,36 @@
           <UCard
             :ui="{
               body: {
-                padding: 'sm:p-6',
+                padding: 'sm:p-1',
               },
             }"
             class="mx-2 w-full rounded-lg bg-eastern-blue-100 text-black"
           >
             <div class="flex flex-col items-center justify-center gap-4 p-2">
-              <div
-                class="bg-primary flex aspect-square h-auto w-full items-center justify-center rounded-lg p-4"
+              <NuxtImg :src="item.image" alt="produk" class="rounded-md" />
+              <UButton
+                class="bg-primary flex w-full justify-center py-2"
+                :to="`/product/${index}`"
               >
-                <NuxtImg :src="item.image" alt="produk" />
-              </div>
-              <h1 class="text-lg font-bold">lorem ipsum</h1>
-              <div class="flex w-full justify-between gap-4">
+                Klik Untuk Pesan Event ini
+              </UButton>
+              <h1 class="text-lg font-bold">
+                Rahasia Keluarga Bahagia: Keluarga, Anak
+              </h1>
+              <div class="mb-2 flex w-full justify-between gap-4 text-sm">
                 <div class="flex flex-col gap-2">
-                  <h1 class="font-serif text-sm font-semibold">Waktu</h1>
-                  <p class="text-xs">30 Juni 2024</p>
+                  <h1 class="text-primary font-serif font-light">Waktu</h1>
+                  <p class="font-bold">30 Juni 2024</p>
                 </div>
                 <div class="flex flex-col gap-2">
-                  <h1 class="font-serif text-sm font-semibold">Tempat</h1>
-                  <p class="text-xs">Bogor</p>
+                  <h1 class="text-primary font-serif font-light">Tempat</h1>
+                  <p class="font-bold">Bogor</p>
                 </div>
               </div>
             </div>
           </UCard>
         </UCarousel>
-        <UButton class="w-fit" variant="soft">Lihat Semua Event</UButton>
+        <UButton class="w-fit" to="/product">Lihat Semua Event</UButton>
       </div>
     </div>
     <div class="h-[90vh] bg-eastern-blue-100">
