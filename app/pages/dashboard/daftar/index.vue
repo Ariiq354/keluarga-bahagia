@@ -120,7 +120,6 @@
 
 <template>
   <main>
-    {{ state }}
     <Title>Daftar Diri</Title>
     <UCard>
       <div v-if="!data" class="flex items-center gap-4">
