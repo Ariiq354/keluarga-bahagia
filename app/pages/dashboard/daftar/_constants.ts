@@ -21,7 +21,7 @@ export const schema = z.object({
   deskripsi: z.string(),
   foto: z.string(),
   instagram: z.string(),
-  gender: z.enum(["laki", "perempuan"]),
+  gender: z.string(),
 });
 
 export const resetSchema = z.object({

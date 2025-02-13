@@ -120,6 +120,7 @@
 
 <template>
   <main>
+    {{ state }}
     <Title>Daftar Diri</Title>
     <UCard>
       <div v-if="!data" class="flex items-center gap-4">
@@ -147,7 +148,7 @@
           <UFormGroup label="Nama Lengkap">
             <UInput :model-value="user?.namaLengkap" disabled />
           </UFormGroup>
-          <UFormGroup label="Jenis Kelamin">
+          <UFormGroup label="Jenis Kelamin" name="gender">
             <USelectMenu
               v-model="state.gender"
               :disabled="isLoading"
