@@ -85,7 +85,9 @@
         </div>
       </div>
     </div>
-    <div class="py-12 text-white">
+    <div
+      class="bg-blue-200 bg-gradient-to-b from-white to-[#DEEEED] py-24 text-white"
+    >
       <div
         class="container flex flex-col items-center justify-center gap-4 rounded-xl bg-eastern-blue-900 px-20 py-8 shadow-2xl"
       >
