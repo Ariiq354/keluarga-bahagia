@@ -63,7 +63,7 @@
         <h1 class="mb-12 text-4xl font-bold">Kami Menyediakan Beberapa Jasa</h1>
         <div class="flex gap-12">
           <div
-            class="flex h-[25rem] w-[25rem] flex-col justify-end rounded-2xl bg-[url('/square2.webp')] bg-[length:42rem] bg-[center_calc(50%+50px)] p-12 shadow-xl"
+            class="flex h-[25rem] w-[25rem] flex-col justify-end rounded-2xl bg-[url('/square1.webp')] bg-[length:42rem] bg-[center_calc(50%+50px)] p-12 shadow-xl"
           >
             <h1 class="mb-2 text-center text-2xl font-bold">Bootcamp</h1>
             <p class="text-center">
@@ -73,7 +73,7 @@
             </p>
           </div>
           <div
-            class="bg[top:20px] flex h-[25rem] w-[25rem] flex-col justify-end rounded-2xl bg-[url('/square1.webp')] bg-[length:42rem] bg-[center_calc(50%+50px)] p-12 shadow-xl"
+            class="flex h-[25rem] w-[25rem] flex-col justify-end rounded-2xl bg-[url('/square2.webp')] bg-[length:42rem] bg-[center_calc(50%+50px)] p-12 shadow-xl"
           >
             <h1 class="mb-2 text-center text-2xl font-bold">Jodoh</h1>
             <p class="text-center">
