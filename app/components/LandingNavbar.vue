@@ -1,11 +1,13 @@
 <template>
   <header class="sticky top-0 z-30 w-full border-b-2 bg-white py-4 font-sans">
     <div class="container flex items-center justify-between">
-      <div class="flex items-center gap-4 text-2xl font-bold tracking-wider">
+      <div
+        class="flex items-center gap-4 text-xl font-bold tracking-wider text-black md:text-2xl"
+      >
         <NuxtImg src="/logo.webp" alt="logo" class="h-14" />
-        KELUARGA BAHAGIA
+        <p class="text-eastern-blue-700">KELUARGA BAHAGIA</p>
       </div>
-      <nav class="flex gap-12 text-lg">
+      <nav class="hidden gap-12 text-lg font-semibold md:flex">
         <NuxtLink
           href="/"
           class="transition-all duration-300 hover:-translate-y-1 hover:opacity-70"
@@ -31,7 +33,13 @@
           Kontak
         </NuxtLink>
       </nav>
-      <UButton to="/login" class="text-white">Daftar</UButton>
+      <UButton to="/login" class="hidden text-white md:block">Daftar</UButton>
     </div>
   </header>
 </template>
+
+<style scoped>
+  .router-link-active {
+    color: #33606b;
+  }
+</style>

@@ -34,19 +34,25 @@
 <template>
   <main class="font-sans">
     <Title>Keluarga Bahagia</Title>
-    <div class="relative h-screen bg-[url('/header1.webp')] bg-cover">
-      <div class="container relative z-20 grid h-full grid-cols-2">
+    <div
+      class="relative bg-[url('/headermobile1.webp')] bg-cover bg-[center_calc(50%-50px)] md:h-screen md:bg-[url('/header1.webp')] md:bg-center"
+    >
+      <div class="container relative z-20 h-full md:grid md:grid-cols-2">
         <div class="flex h-full w-full flex-col justify-center gap-8 p-16">
-          <h1 class="text text-6xl font-bold text-black">
+          <h1
+            class="text-center text-4xl font-bold text-black md:text-left md:text-6xl"
+          >
             Temukan Rahasia
             <span class="text-eastern-blue-500">Keluarga </span>Bahagia
           </h1>
-          <p class="text-xl font-semibold text-eastern-blue-700">
+          <p
+            class="mt-[30rem] text-center text-xl font-semibold text-eastern-blue-700 md:mt-0 md:text-left"
+          >
             Bergabunglah dengan seminar kami dan jelajahi buku-buku unggulan
             kami untuk mempelajari cara menciptakan keluarga yang kuat dan penuh
             kasih sayang.
           </p>
-          <div class="flex gap-4">
+          <div class="flex justify-center gap-4 md:justify-normal">
             <UButton class="shadow-lg" href="/about">Learn More</UButton>
             <UButton variant="soft" class="shadow-lg" href="/login">
               Sign Up
@@ -60,8 +66,10 @@
       <div
         class="container flex h-full flex-col items-center justify-center gap-12 py-12"
       >
-        <h1 class="mb-12 text-4xl font-bold">Kami Menyediakan Beberapa Jasa</h1>
-        <div class="flex gap-12">
+        <h1 class="text-center text-4xl font-bold md:mb-12 md:text-left">
+          Kami Menyediakan Beberapa Jasa
+        </h1>
+        <div class="flex flex-col gap-12 md:flex-row">
           <div
             class="flex h-[25rem] w-[25rem] flex-col justify-end rounded-2xl bg-[url('/square1.webp')] bg-[length:42rem] bg-[center_calc(50%+50px)] p-12 shadow-xl"
           >
@@ -86,13 +94,13 @@
       </div>
     </div>
     <div
-      class="bg-blue-200 bg-gradient-to-b from-white to-[#DEEEED] py-24 text-white"
+      class="bg-[url('/headerbg.webp')] bg-cover bg-center p-4 py-24 text-eastern-blue-700"
     >
       <div
-        class="container flex flex-col items-center justify-center gap-4 rounded-xl bg-eastern-blue-900 px-20 py-8 shadow-2xl"
+        class="gradit container flex flex-col items-center justify-center gap-4 rounded-xl bg-eastern-blue-200 px-20 py-8 shadow-2xl"
       >
         <h1
-          class="my-4 w-full border-b-2 py-4 text-center text-4xl font-semibold"
+          class="mb-4 w-full border-b-2 py-4 text-center text-4xl font-semibold"
         >
           Daftar Bootcamp
         </h1>
@@ -102,7 +110,7 @@
           arrows
           class="w-full"
           :ui="{
-            item: 'basis-1/4 snap-start',
+            item: 'md:basis-1/4 basis-full snap-start',
             container: 'rounded-lg',
           }"
           :prev-button="{
@@ -122,7 +130,7 @@
                 padding: 'sm:p-1',
               },
             }"
-            class="mx-2 w-full rounded-lg bg-eastern-blue-100 text-black"
+            class="mx-2 w-full rounded-lg bg-eastern-blue-50 text-black"
           >
             <div class="flex flex-col items-center justify-center gap-4 p-2">
               <NuxtImg :src="item.image" alt="produk" class="rounded-md" />
@@ -151,11 +159,17 @@
         <UButton class="w-fit" to="/product">Lihat Semua Event</UButton>
       </div>
     </div>
-    <div class="h-screen bg-[url('/header2.webp')] bg-cover">
+    <div
+      class="bg-[url('/headermobile2.webp')] bg-cover bg-[center_calc(-100px)] md:h-screen md:bg-[url('/header2.webp')] md:bg-center"
+    >
       <div class="container flex h-full justify-end">
-        <div class="flex h-full w-[50%] flex-col justify-center gap-12">
-          <h1 class="text-6xl font-bold">Seminar Pranikah</h1>
-          <ul class="flex list-disc flex-col gap-4 text-xl">
+        <div class="flex h-full flex-col gap-12 md:w-[50%] md:justify-center">
+          <h1 class="text-center text-5xl font-bold md:text-left md:text-6xl">
+            Seminar Pranikah
+          </h1>
+          <ul
+            class="mt-[30rem] flex list-disc flex-col gap-4 p-4 text-xl md:mt-0 md:p-0"
+          >
             <li>
               Membantu Anda memahami esensi pernikahan sebagai ibadah dan
               separuh agama yang sempurna
@@ -170,20 +184,21 @@
             </li>
             <li>Memperkuat komitmen dan komunikasi dengan pasangan</li>
           </ul>
-          <div class="flex flex-col gap-4">
+          <div class="mb-12 flex flex-col gap-4 md:mb-0">
             <div class="flex items-center gap-2">
               - [ Rino Amri, SE, M.Pd, chc] Konsultan Jelajah Diri
             </div>
             <div class="flex items-center gap-2">
-              <div />
               - [ Andri setiawan ] Guru Besar ponpes Dahlan ikhsan
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="w-full bg-eastern-blue-700 px-12 py-12 text-eastern-blue-100">
-      <p class="container w-2/3 text-center text-2xl leading-loose">
+    <div
+      class="w-full bg-eastern-blue-200 py-12 text-eastern-blue-700 md:px-12"
+    >
+      <p class="container text-center text-2xl leading-loose md:w-2/3">
         "Menikah adalah perjalanan yang indah, namun membutuhkan persiapan yang
         matang. Bangunlah fondasi pernikahan yang kokoh dan bahagia. Jangan ragu
         untuk mendaftar dan persiapkan diri Anda untuk menyambut masa depan yang
