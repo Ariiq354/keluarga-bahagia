@@ -16,7 +16,7 @@
         method: "POST",
         body: event.data,
       });
-      await navigateTo("/dashboard");
+      await navigateTo("/");
     } catch (error: any) {
       useToastError(String(error.statusCode), error.data.message);
     } finally {

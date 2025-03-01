@@ -2,33 +2,6 @@
   definePageMeta({
     layout: "landing",
   });
-
-  const carouselItem = [
-    {
-      image: "/1.webp",
-      title: "lorem ipsum",
-      waktu: "30 Juni 2024",
-      tempat: "bogor",
-    },
-    {
-      image: "/2.webp",
-      title: "lorem ipsum",
-      waktu: "30 Juni 2024",
-      tempat: "bogor",
-    },
-    {
-      image: "/3.webp",
-      title: "lorem ipsum",
-      waktu: "30 Juni 2024",
-      tempat: "bogor",
-    },
-    {
-      image: "/4.webp",
-      title: "lorem ipsum",
-      waktu: "30 Juni 2024",
-      tempat: "bogor",
-    },
-  ];
 </script>
 
 <template>
@@ -91,72 +64,6 @@
             </p>
           </div>
         </div>
-      </div>
-    </div>
-    <div
-      class="bg-[url('/headerbg.webp')] bg-cover bg-center p-4 py-24 text-eastern-blue-700"
-    >
-      <div
-        class="gradit container flex flex-col items-center justify-center gap-4 rounded-xl bg-eastern-blue-200 px-20 py-8 shadow-2xl"
-      >
-        <h1
-          class="mb-4 w-full border-b-2 py-4 text-center text-4xl font-semibold"
-        >
-          Daftar Bootcamp
-        </h1>
-        <UCarousel
-          v-slot="{ item, index }"
-          :items="carouselItem"
-          arrows
-          class="w-full"
-          :ui="{
-            item: 'md:basis-1/4 basis-full snap-start',
-            container: 'rounded-lg',
-          }"
-          :prev-button="{
-            color: 'gray',
-            icon: 'i-heroicons-arrow-left-20-solid',
-            class: '-start-12',
-          }"
-          :next-button="{
-            color: 'gray',
-            icon: 'i-heroicons-arrow-right-20-solid',
-            class: '-end-12',
-          }"
-        >
-          <UCard
-            :ui="{
-              body: {
-                padding: 'sm:p-1',
-              },
-            }"
-            class="mx-2 w-full rounded-lg bg-eastern-blue-50 text-black"
-          >
-            <div class="flex flex-col items-center justify-center gap-4 p-2">
-              <NuxtImg :src="item.image" alt="produk" class="rounded-md" />
-              <UButton
-                class="bg-primary flex w-full justify-center py-2"
-                :to="`/product/${index}`"
-              >
-                Klik Untuk Pesan Event ini
-              </UButton>
-              <h1 class="text-lg font-bold">
-                Rahasia Keluarga Bahagia: Keluarga, Anak
-              </h1>
-              <div class="mb-2 flex w-full justify-between gap-4 text-sm">
-                <div class="flex flex-col gap-2">
-                  <h1 class="text-primary font-serif font-light">Waktu</h1>
-                  <p class="font-bold">30 Juni 2024</p>
-                </div>
-                <div class="flex flex-col gap-2">
-                  <h1 class="text-primary font-serif font-light">Tempat</h1>
-                  <p class="font-bold">Bogor</p>
-                </div>
-              </div>
-            </div>
-          </UCard>
-        </UCarousel>
-        <UButton class="w-fit" to="/product">Lihat Semua Event</UButton>
       </div>
     </div>
     <div
