@@ -4,9 +4,9 @@ export default defineEventHandler(async (event) => {
   const res = await getAllMember();
   const user = await getUserByUsername(event.context.user!.username);
 
-  const filterRes = res.filter(
-    (item) => item.detail.gender !== user?.detail.gender && item.detail
-  );
+  const filterRes = user?.detail
+    ? res.filter((item) => item.detail.gender !== user.detail.gender)
+    : res;
 
   const data = filterRes.map((item) => {
     return {
@@ -33,6 +33,7 @@ export default defineEventHandler(async (event) => {
         tanggalLahir: item.detail.tanggalLahir,
         tinggi: item.detail.tinggi,
         foto: item.detail.foto,
+        kodeUser: item.detail.kodeUser,
       },
     };
   });

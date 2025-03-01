@@ -6,9 +6,15 @@ export default defineNuxtRouteMiddleware(async (to) => {
     user.value = data;
   }
   const currentRoute = to.fullPath;
+
   if (!data && currentRoute.includes("/dashboard")) {
     return navigateTo("/login");
   }
+
+  if (data && (currentRoute === "/login" || currentRoute === "register")) {
+    return navigateTo("/dashboard");
+  }
+
   if (
     data &&
     data.isActive === false &&

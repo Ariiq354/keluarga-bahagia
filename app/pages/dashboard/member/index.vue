@@ -171,10 +171,17 @@
       <UCard v-for="(item, index) in data" :key="index">
         <div class="flex flex-col">
           <div class="flex gap-4">
-            <div
-              class="flex aspect-square w-32 items-center justify-center bg-gray-300 dark:bg-gray-700"
-            >
-              <NuxtImg :src="item.detail.foto" />
+            <div>
+              <div
+                class="flex aspect-square w-32 items-center justify-center overflow-hidden bg-gray-300 dark:bg-gray-700"
+              >
+                <NuxtImg :src="item.detail.foto" />
+              </div>
+              <p
+                class="mt-4 rounded-md bg-eastern-blue-100 p-2 text-center text-lg font-bold shadow-lg"
+              >
+                {{ item.detail.kodeUser }}
+              </p>
             </div>
             <div class="flex flex-col justify-center">
               <h1 class="text-lg font-bold">{{ item.namaLengkap }}</h1>

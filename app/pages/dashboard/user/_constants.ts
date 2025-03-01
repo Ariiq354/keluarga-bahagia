@@ -4,7 +4,10 @@ export const columns = [
   {
     key: "namaLengkap",
     label: "Nama Lengkap",
-    sortable: true,
+  },
+  {
+    key: "detail.kodeUser",
+    label: "Kode",
   },
   {
     key: "gender",

@@ -89,11 +89,18 @@
     <div class="text-primary flex items-center justify-center pb-8 pt-10">
       <div class="flex items-center gap-2 text-2xl tracking-widest">
         <NuxtImg src="/logo.webp" width="50" alt="logo" />
-        <span class="font-bold">
-          KELUARGA <br />
+        <!-- prettier-ignore -->
+        <NuxtLink to="/" class="font-bold">
+          KELUARGA <br>
           BAHAGIA
-        </span>
+        </NuxtLink>
       </div>
+    </div>
+    <div
+      class="mx-auto flex aspect-square w-40 items-center justify-center overflow-hidden rounded-full bg-gray-400"
+    >
+      <NuxtImg v-if="user?.foto" :src="user.foto" alt="User Image" />
+      <p v-else>User Image</p>
     </div>
     <div v-for="(firstItem, firstIndex) in sidebarItems" :key="firstIndex">
       <h1 class="text-primary px-8 py-4 text-sm font-bold uppercase">

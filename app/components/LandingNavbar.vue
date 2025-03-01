@@ -1,3 +1,7 @@
+<script lang="ts" setup>
+  const user = useUser();
+</script>
+
 <template>
   <header class="sticky top-0 z-30 w-full border-b-2 bg-white py-4 font-sans">
     <div class="container flex items-center justify-between">
@@ -33,7 +37,12 @@
           Kontak
         </NuxtLink>
       </nav>
-      <UButton to="/login" class="hidden text-white md:block">Daftar</UButton>
+      <UButton v-if="!user" to="/login" class="hidden text-white md:block"
+        >Daftar</UButton
+      >
+      <UButton v-else to="/dashboard" class="hidden text-white md:block"
+        >Dashboard</UButton
+      >
     </div>
   </header>
 </template>

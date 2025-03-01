@@ -6,6 +6,7 @@ import {
   type UserLucia,
   userTable,
   type NewSession,
+  userDtlTable,
 } from "~~/server/db/schema/auth";
 
 interface userSession {
@@ -31,11 +32,13 @@ export async function getUserSessionById(
         isActive: userTable.isActive,
         isAvailable: userTable.isAvailable,
         email: userTable.email,
+        foto: userDtlTable.foto,
       },
       session: sessionTable,
     })
     .from(sessionTable)
     .innerJoin(userTable, eq(sessionTable.userId, userTable.id))
+    .leftJoin(userDtlTable, eq(userTable.id, userDtlTable.userId))
     .where(eq(sessionTable.id, sessionId));
 }
 

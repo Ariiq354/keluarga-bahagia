@@ -23,6 +23,7 @@ export default defineEventHandler(async (event) => {
       suku: res.suku,
       tanggalLahir: res.tanggalLahir,
       tinggi: res.tinggi,
+      kodeUser: res.kodeUser,
     };
   }
 

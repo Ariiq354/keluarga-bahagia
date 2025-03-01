@@ -23,6 +23,7 @@ export const userTable = sqliteTable("user", {
 
 export const userDtlTable = sqliteTable("user_dtl", {
   id: int().primaryKey({ autoIncrement: true }),
+  kodeUser: text().notNull(),
   userId: int()
     .notNull()
     .references(() => userTable.id, { onDelete: "cascade" }),
@@ -71,7 +72,9 @@ export type NewUser = InferInsertModel<typeof userTable>;
 export type UserDtl = InferSelectModel<typeof userDtlTable>;
 export type NewUserDtl = InferInsertModel<typeof userDtlTable>;
 
-export type UserLucia = Omit<User, "createdAt" | "updatedAt" | "password">;
+export type UserLucia = Omit<User, "createdAt" | "updatedAt" | "password"> & {
+  foto: string | null;
+};
 
 export type Session = InferSelectModel<typeof sessionTable>;
 export type NewSession = InferInsertModel<typeof sessionTable>;

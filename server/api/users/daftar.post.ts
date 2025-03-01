@@ -34,6 +34,7 @@ export default defineEventHandler(async (event) => {
   const itemData = {
     ...parseRes,
     userId: event.context.user!.id,
+    kodeUser: await getRandomUserCode(),
   };
 
   await createUserDetail(itemData);

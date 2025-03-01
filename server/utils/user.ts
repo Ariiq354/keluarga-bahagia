@@ -54,3 +54,15 @@ export async function updateUserDetail(id: number, data: Partial<NewUserDtl>) {
 export async function deleteUser(id: number[]) {
   return await db.delete(userTable).where(inArray(userTable.id, id));
 }
+
+export async function getRandomUserCode(): Promise<string> {
+  const number = Math.floor(Math.random() * 0x10000)
+    .toString(16)
+    .padStart(4, "0");
+
+  const exist = await db.query.userDtlTable.findFirst({
+    where: eq(userDtlTable.kodeUser, number),
+  });
+
+  return exist ? await getRandomUserCode() : number;
+}

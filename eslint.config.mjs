@@ -5,7 +5,6 @@ export default withNuxt({
   files: ["**/*.ts", "**/*.tsx", "**/*.vue"],
   rules: {
     "@typescript-eslint/no-explicit-any": "off",
-    "vue/html-self-closing": "off",
-    "@typescript-eslint/ban-ts-comment": "off",
+    "vue/no-multiple-template-root": "off",
   },
 });
