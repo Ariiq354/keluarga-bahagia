@@ -5,12 +5,13 @@
 </script>
 
 <template>
+  <Title>Keluarga Bahagia</Title>
   <main class="font-sans">
-    <Title>Keluarga Bahagia</Title>
-    <div
-      class="relative bg-[url('/headermobile1.webp')] bg-cover bg-[center_calc(50%-50px)] md:h-screen md:bg-[url('/header1.webp')] md:bg-center"
-    >
-      <div class="container relative z-20 h-full md:grid md:grid-cols-2">
+    <!-- Section 1 -->
+    <div class="h-screen bg-[url('/landingbg1.webp')] bg-cover">
+      <div
+        class="container grid h-full items-center justify-center md:grid-cols-2"
+      >
         <div class="flex h-full w-full flex-col justify-center gap-8 p-16">
           <h1
             class="text-center text-4xl font-bold text-black md:text-left md:text-6xl"
@@ -18,8 +19,9 @@
             Temukan Rahasia
             <span class="text-eastern-blue-500">Keluarga </span>Bahagia
           </h1>
+          <NuxtImg src="/landingimg1.webp" class="block w-full md:hidden" />
           <p
-            class="mt-[30rem] text-center text-xl font-semibold text-eastern-blue-700 md:mt-0 md:text-left"
+            class="text-center text-xl font-semibold text-eastern-blue-700 md:mt-0 md:text-left"
           >
             Bergabunglah dengan seminar kami dan jelajahi buku-buku unggulan
             kami untuk mempelajari cara menciptakan keluarga yang kuat dan penuh
@@ -32,10 +34,12 @@
             </UButton>
           </div>
         </div>
+        <NuxtImg src="/landingimg1.webp" class="hidden w-full md:block" />
       </div>
     </div>
 
-    <div class="w-full bg-white">
+    <!-- Section 2 -->
+    <div class="w-full bg-white pb-12">
       <div
         class="container flex h-full flex-col items-center justify-center gap-12 py-12"
       >
@@ -66,17 +70,18 @@
         </div>
       </div>
     </div>
-    <div
-      class="bg-[url('/headermobile2.webp')] bg-cover bg-[center_calc(-100px)] md:h-screen md:bg-[url('/header2.webp')] md:bg-center"
-    >
-      <div class="container flex h-full justify-end">
-        <div class="flex h-full flex-col gap-12 md:w-[50%] md:justify-center">
+
+    <!-- Section 3 -->
+    <div class="bg-[url('/landingbg2.webp')] bg-cover py-12">
+      <div
+        class="container grid h-full items-center justify-center md:grid-cols-2"
+      >
+        <NuxtImg src="/landingimg2.webp" class="w-full" />
+        <div class="flex h-full flex-col justify-center gap-12">
           <h1 class="text-center text-5xl font-bold md:text-left md:text-6xl">
             Seminar Pranikah
           </h1>
-          <ul
-            class="mt-[30rem] flex list-disc flex-col gap-4 p-4 text-xl md:mt-0 md:p-0"
-          >
+          <ul class="flex list-disc flex-col gap-4 p-4 text-xl">
             <li>
               Membantu Anda memahami esensi pernikahan sebagai ibadah dan
               separuh agama yang sempurna

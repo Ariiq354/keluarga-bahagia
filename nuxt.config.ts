@@ -19,6 +19,15 @@ export default defineNuxtConfig({
     databaseAuthToken: process.env.DATABASE_AUTH_TOKEN,
   },
 
+  tailwindcss: {
+    config: {
+      content: [
+        "./app/pages/**/*.{vue,js,ts}",
+        "./app/components/**/*.{vue,js,ts}",
+      ],
+    },
+  },
+
   $development: {
     security: {
       removeLoggers: false,

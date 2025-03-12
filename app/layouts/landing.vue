@@ -7,9 +7,7 @@
 </script>
 
 <template>
-  <div class="grainy">
-    <LandingNavbar />
-    <slot />
-    <LandingFooter />
-  </div>
+  <LandingNavbar />
+  <slot />
+  <LandingFooter />
 </template>
