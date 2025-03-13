@@ -21,14 +21,14 @@
             jodoh terdepan di Indonesia yang memfasilitasi terciptanya
             keluarga-keluarga berkualitas, berdaya saing, dan berwawasan luas,
             serta berkontribusi dalam mewujudkan Indonesia Emas 2045. Platform
-            ini hadir sebagai solusi modern untuk mempertuemukan individu yang
+            ini hadir sebagai solusi modern untuk mempertemukan individu yang
             memiliki visi dan nilai-nilai yang sejalan dalam membangun keluarga
-            harmonis. Kami berkomitmen membantu membantu anda memahami esensi
-            pernikahan sebagai ibadah dan separuh agama yang sempurna,
-            keuntungan menyiapkan diri menjadi calon pasangan yang baik adalah
-            mendapatkan calon pasangan yang baik, karena keluarga adalah fondasi
-            yang penting dalam kehidupan kita yang memberikan dukungan, cinta,
-            dan makna dalam perjalanan kita melalui hidup.
+            harmonis. Kami berkomitmen membantu anda memahami esensi pernikahan
+            sebagai ibadah dan separuh agama yang sempurna, keuntungan
+            menyiapkan diri menjadi calon pasangan yang baik adalah mendapatkan
+            calon pasangan yang baik, karena keluarga adalah fondasi yang
+            penting dalam kehidupan kita yang memberikan dukungan, cinta, dan
+            makna dalam perjalanan kita melalui hidup.
           </p>
         </div>
       </div>
