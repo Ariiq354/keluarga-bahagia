@@ -13,25 +13,11 @@ export default defineNuxtConfig({
   future: {
     compatibilityVersion: 4,
   },
+  css: ["~/assets/css/main.css"],
 
   runtimeConfig: {
     databaseUrl: process.env.DATABASE_URL,
     databaseAuthToken: process.env.DATABASE_AUTH_TOKEN,
-  },
-
-  tailwindcss: {
-    config: {
-      content: [
-        "./app/pages/**/*.{vue,js,ts}",
-        "./app/components/**/*.{vue,js,ts}",
-      ],
-    },
-  },
-
-  $development: {
-    security: {
-      removeLoggers: false,
-    },
   },
 
   $production: {
