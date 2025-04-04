@@ -1,19 +1,19 @@
-import { z } from "zod";
+import * as v from "valibot";
 
-export const registerSchema = z.object({
-  username: z.string(),
-  password: z.string().min(8, "Harus terdiri dari setidaknya 8 karakter."),
-  namaLengkap: z.string(),
-  noTelepon: z.string(),
-  email: z.string(),
+export const registerSchema = v.object({
+  username: v.pipe(v.string(), v.minLength(1, "Required")),
+  password: v.pipe(v.string(), v.minLength(1, "Required")),
+  namaLengkap: v.pipe(v.string(), v.minLength(1, "Required")),
+  noTelepon: v.pipe(v.string(), v.minLength(1, "Required")),
+  email: v.pipe(v.string(), v.minLength(1, "Required")),
 });
 
-export type Schema = z.output<typeof registerSchema>;
+export type Schema = v.InferOutput<typeof registerSchema>;
 
-export const getInitialFormData = (): Partial<Schema> => ({
-  username: undefined,
-  password: undefined,
-  namaLengkap: undefined,
-  noTelepon: undefined,
-  email: undefined,
+export const getInitialFormData = (): Schema => ({
+  username: "",
+  password: "",
+  namaLengkap: "",
+  noTelepon: "",
+  email: "",
 });

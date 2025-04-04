@@ -1,33 +1,46 @@
 import { hash } from "@node-rs/argon2";
-import { z } from "zod";
+import * as v from "valibot";
 
-const bodySchema = z
-  .object({
-    username: z.string(),
-    password: z.string().min(8),
-    noTelepon: z.string(),
-    email: z.string(),
-    namaLengkap: z.string(),
-  })
-  .strict();
+const bodySchema = v.object({
+  username: v.string(),
+  password: v.pipe(v.string(), v.minLength(8)),
+  noTelepon: v.string(),
+  email: v.string(),
+  namaLengkap: v.string(),
+});
 
-export default defineEventHandler(async (event) => {
-  const formData = await readBody(event);
+export default defineValidatedEventHandler({ bodySchema }, async (event) => {
+  const { body } = event.context.validated;
 
-  const parseRes = bodySchema.parse(formData);
-  const exist = await getUserByUsername(parseRes.username);
-  if (exist) {
+  const [err1, user] = await tryCatch(getUserByUsername(body.username));
+  if (err1) {
+    console.error("GETUSER_FAILED", err1);
+    throw createError("Internal Server Error");
+  }
+
+  if (user) {
     throw createError({
       statusCode: 400,
       message: "Username sudah ada",
     });
   }
+
+  const [err2, newPassword] = await tryCatch(hash(body.password));
+  if (err2) {
+    console.error("HASH_FAILED", err2);
+    throw createError("Internal Server Error");
+  }
+
   const itemData = {
-    ...parseRes,
-    password: await hash(parseRes.password),
+    ...body,
+    password: newPassword,
   };
 
-  await createUser(itemData);
+  const [err3] = await tryCatch(createUser(itemData));
+  if (err3) {
+    console.error("CREATEUSER_FAILED", err3);
+    throw createError("Internal Server Error");
+  }
 
   return;
 });

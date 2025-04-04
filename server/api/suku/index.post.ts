@@ -1,21 +1,26 @@
-import { z } from "zod";
+import * as v from "valibot";
 
-const bodySchema = z.object({
-  id: z.number().optional(),
-  name: z.string(),
+const bodySchema = v.object({
+  id: v.optional(v.number()),
+  name: v.string(),
 });
 
-export default defineEventHandler(async (event) => {
+export default defineValidatedEventHandler({ bodySchema }, async (event) => {
   adminFunction(event);
+  const { body } = event.context.validated;
 
-  const formData = await readValidatedBody(event, (body) =>
-    bodySchema.parse(body)
-  );
-
-  if (formData.id) {
-    await updateSuku(formData.id, formData);
+  if (body.id) {
+    const [err] = await tryCatch(updateSuku(body.id, body));
+    if (err) {
+      console.error("UPDATESUKU_FAILED", err);
+      throw createError("Internal Server Error");
+    }
   } else {
-    await createSuku(formData);
+    const [err] = await tryCatch(createSuku(body));
+    if (err) {
+      console.error("CREATESUKU_FAILED", err);
+      throw createError("Internal Server Error");
+    }
   }
 
   return;

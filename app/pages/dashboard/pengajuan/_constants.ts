@@ -1,19 +1,18 @@
 export const columns = [
   {
-    key: "namaLengkapPemohon",
-    label: "Nama Lengkap Pemohon",
+    accessorKey: "namaLengkapPemohon",
+    header: "Nama Lengkap Pemohon",
   },
   {
-    key: "namaLengkapTujuan",
-    label: "Nama Lengkap Tujuan",
-    sortable: true,
+    accessorKey: "namaLengkapTujuan",
+    header: "Nama Lengkap Tujuan",
   },
   {
-    key: "tanggal",
-    label: "Tanggal Permintaan",
+    accessorKey: "tanggal",
+    header: "Tanggal Permintaan",
   },
   {
-    key: "status",
-    label: "Status",
+    accessorKey: "status",
+    header: "Status",
   },
 ];

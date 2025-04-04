@@ -1,21 +1,20 @@
-import { z } from "zod";
+import * as v from "valibot";
 
 export const columns = [
   {
-    key: "name",
-    label: "Nama Suku",
-    sortable: true,
+    accessorKey: "name",
+    header: "Nama Suku",
   },
 ];
 
-export const schema = z.object({
-  id: z.number().optional(),
-  name: z.string(),
+export const schema = v.object({
+  id: v.optional(v.number()),
+  name: v.pipe(v.string(), v.minLength(1, "Required")),
 });
 
-export type Schema = z.output<typeof schema>;
+export type Schema = v.InferOutput<typeof schema>;
 
-export const getInitialFormData = (): Partial<Schema> => ({
+export const getInitialFormData = (): Schema => ({
   id: undefined,
-  name: undefined,
+  name: "",
 });

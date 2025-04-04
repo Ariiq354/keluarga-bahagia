@@ -1,47 +1,60 @@
-import { z } from "zod";
+import * as v from "valibot";
 
-const bodySchema = z.object({
-  statusKawin: z.string(),
-  tanggalLahir: z.string(),
-  provinsi: z.string(),
-  kota: z.string(),
-  kecamatan: z.string(),
-  kelurahan: z.string(),
-  namaAyah: z.string(),
-  suku: z.string(),
-  pendidikan: z.string(),
-  pekerjaan: z.string(),
-  tinggi: z.number(),
-  jurusan: z.string(),
-  berat: z.number(),
-  hobi: z.string(),
-  kriteria: z.string(),
-  deskripsi: z.string(),
-  anakKe: z.number(),
-  dariBersaudara: z.number(),
-  instagram: z.string(),
-  foto: z.string(),
-  gender: z.enum(["laki", "perempuan"]),
+const bodySchema = v.object({
+  statusKawin: v.string(),
+  tanggalLahir: v.string(),
+  provinsi: v.string(),
+  kota: v.string(),
+  kecamatan: v.string(),
+  kelurahan: v.string(),
+  namaAyah: v.string(),
+  suku: v.string(),
+  pendidikan: v.string(),
+  pekerjaan: v.string(),
+  tinggi: v.number(),
+  jurusan: v.string(),
+  berat: v.number(),
+  hobi: v.string(),
+  kriteria: v.string(),
+  deskripsi: v.string(),
+  anakKe: v.number(),
+  dariBersaudara: v.number(),
+  instagram: v.string(),
+  foto: v.string(),
+  gender: v.picklist(["laki", "perempuan"]),
 });
 
-export default defineEventHandler(async (event) => {
+export default defineValidatedEventHandler({ bodySchema }, async (event) => {
   protectFunction(event);
+  const { body } = event.context.validated;
 
-  const parseRes = await readValidatedBody(event, (body) =>
-    bodySchema.parse(body)
-  );
+  const [err1, kode] = await tryCatch(getRandomUserCode());
+  if (err1) {
+    console.error("GETKODE_FAILED", err1);
+    throw createError("Internal Server Error");
+  }
 
   const itemData = {
-    ...parseRes,
+    ...body,
     userId: event.context.user!.id,
-    kodeUser: await getRandomUserCode(),
+    kodeUser: kode,
   };
 
-  await createUserDetail(itemData);
+  const [err2] = await tryCatch(createUserDetail(itemData));
+  if (err2) {
+    console.error("CREATEUSERDETAIL_FAILED", err2);
+    throw createError("Internal Server Error");
+  }
 
-  await updateUser(event.context.user!.id, {
-    isActive: true,
-  });
+  const [err3] = await tryCatch(
+    updateUser(event.context.user!.id, {
+      isActive: true,
+    })
+  );
+  if (err3) {
+    console.error("UPDATEUSER_FAILED", err3);
+    throw createError("Internal Server Error");
+  }
 
   return;
 });

@@ -1,9 +1,13 @@
 export default defineEventHandler(async (event) => {
   protectFunction(event);
 
-  const res = await getAllSuku();
+  const [err, suku] = await tryCatch(getAllSuku());
+  if (err) {
+    console.error("GETSUKU_FAILED", err);
+    throw createError("Internal Server Error");
+  }
 
-  const data = res.map((item) => {
+  const data = suku.map((item) => {
     return {
       id: item.id,
       name: item.name,

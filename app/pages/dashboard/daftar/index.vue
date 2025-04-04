@@ -119,8 +119,8 @@
 </script>
 
 <template>
+  <Title>Daftar Diri</Title>
   <main>
-    <Title>Daftar Diri</Title>
     <UCard>
       <div v-if="!data" class="flex items-center gap-4">
         <UIcon name="i-heroicons-information-circle" size="30" /> Lengkapi data
@@ -135,173 +135,173 @@
         @submit="onSubmit"
       >
         <h1 class="font-bold">Data Diri</h1>
-        <UFormGroup label="Upload Foto diri" name="foto">
+        <UFormField label="Upload Foto diri" name="foto">
           <ImageUpload
             :disabled="false"
             :url="state.foto ? state.foto : ''"
             @change="(url) => (state.foto = url)"
             @remove="() => (state.foto = '')"
           />
-        </UFormGroup>
+        </UFormField>
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <UFormGroup label="Nama Lengkap">
+          <UFormField label="Nama Lengkap">
             <UInput :model-value="user?.namaLengkap" disabled />
-          </UFormGroup>
-          <UFormGroup label="Jenis Kelamin" name="gender">
+          </UFormField>
+          <UFormField label="Jenis Kelamin" name="gender">
             <USelectMenu
               v-model="state.gender"
               :disabled="isLoading"
-              :options="genderOptions"
-              option-attribute="name"
-              value-attribute="value"
+              :items="genderOptions"
+              label-key="name"
+              value-key="value"
             />
-          </UFormGroup>
-          <UFormGroup label="No. Telepon">
+          </UFormField>
+          <UFormField label="No. Telepon">
             <UInput :model-value="user?.noTelepon" disabled />
-          </UFormGroup>
-          <UFormGroup label="Status Kawin" name="statusKawin">
+          </UFormField>
+          <UFormField label="Status Kawin" name="statusKawin">
             <USelectMenu
               v-model="state.statusKawin"
-              :options="statusKawinOptions"
+              :items="statusKawinOptions"
               :disabled="isLoading"
             />
-          </UFormGroup>
-          <UFormGroup label="Tanggal Lahir" name="tanggalLahir">
+          </UFormField>
+          <UFormField label="Tanggal Lahir" name="tanggalLahir">
             <UInput
               v-model="state.tanggalLahir"
               type="date"
               :disabled="isLoading"
             />
-          </UFormGroup>
+          </UFormField>
 
-          <UFormGroup label="Nama Ayah" name="namaAyah">
+          <UFormField label="Nama Ayah" name="namaAyah">
             <UInput v-model="state.namaAyah" :disabled="isLoading" />
-          </UFormGroup>
+          </UFormField>
           <div class="grid grid-cols-2 gap-4">
-            <UFormGroup label="Anak Ke" name="anakKe">
+            <UFormField label="Anak Ke" name="anakKe">
               <UInput
                 v-model="state.anakKe"
                 type="number"
                 :disabled="isLoading"
               />
-            </UFormGroup>
-            <UFormGroup label="Dari Bersaudara" name="dariBersaudara">
+            </UFormField>
+            <UFormField label="Dari Bersaudara" name="dariBersaudara">
               <UInput
                 v-model="state.dariBersaudara"
                 type="number"
                 :disabled="isLoading"
               />
-            </UFormGroup>
+            </UFormField>
           </div>
-          <UFormGroup label="Provinsi" name="provinsi">
+          <UFormField label="Provinsi" name="provinsi">
             <USelectMenu
               v-model="state.provinsi"
-              :options="dataProvinsi ? dataProvinsi.result : []"
+              :items="dataProvinsi ? dataProvinsi.result : []"
               :disabled="isLoading"
-              option-attribute="text"
-              value-attribute="id"
+              label-key="text"
+              value-key="id"
               searchable
               @change="provinsiId = state.provinsi"
             />
-          </UFormGroup>
-          <UFormGroup label="Kabupaten / Kota" name="kota">
+          </UFormField>
+          <UFormField label="Kabupaten / Kota" name="kota">
             <USelectMenu
               v-model="state.kota"
-              :options="dataKota ? dataKota.result : []"
+              :items="dataKota ? dataKota.result : []"
               :disabled="isLoading"
-              option-attribute="text"
-              value-attribute="id"
+              label-key="text"
+              value-key="id"
               searchable
               @change="kotaId = state.kota"
             />
-          </UFormGroup>
-          <UFormGroup label="Kecamatan" name="kecamatan">
+          </UFormField>
+          <UFormField label="Kecamatan" name="kecamatan">
             <USelectMenu
               v-model="state.kecamatan"
-              :options="dataKecamatan ? dataKecamatan.result : []"
+              :items="dataKecamatan ? dataKecamatan.result : []"
               :disabled="isLoading"
-              option-attribute="text"
-              value-attribute="id"
+              label-key="text"
+              value-key="id"
               searchable
               @change="kecamatanId = state.kecamatan"
             />
-          </UFormGroup>
-          <UFormGroup label="Kelurahan / Desa" name="kelurahan">
+          </UFormField>
+          <UFormField label="Kelurahan / Desa" name="kelurahan">
             <USelectMenu
               v-model="state.kelurahan"
-              :options="dataKelurahan ? dataKelurahan.result : []"
+              :items="dataKelurahan ? dataKelurahan.result : []"
               :disabled="isLoading"
-              option-attribute="text"
-              value-attribute="id"
+              label-key="text"
+              value-key="id"
               searchable
             />
-          </UFormGroup>
-          <UFormGroup label="Suku" name="suku">
+          </UFormField>
+          <UFormField label="Suku" name="suku">
             <USelectMenu
               v-model="state.suku"
-              :options="dataSuku"
+              :items="dataSuku"
               :disabled="isLoading"
-              option-attribute="name"
-              value-attribute="name"
+              label-key="name"
+              value-key="name"
               searchable
             />
-          </UFormGroup>
-          <UFormGroup label="Pendidikan Terakhir" name="pendidikan">
+          </UFormField>
+          <UFormField label="Pendidikan Terakhir" name="pendidikan">
             <USelectMenu
               v-model="state.pendidikan"
-              :options="dataPendidikan"
+              :items="dataPendidikan"
               :disabled="isLoading"
-              option-attribute="name"
-              value-attribute="name"
+              label-key="name"
+              value-key="name"
               searchable
             />
-          </UFormGroup>
-          <UFormGroup label="Jurusan" name="jurusan">
+          </UFormField>
+          <UFormField label="Jurusan" name="jurusan">
             <USelectMenu
               v-model="state.jurusan"
-              :options="dataJurusan"
+              :items="dataJurusan"
               :disabled="isLoading"
-              option-attribute="name"
-              value-attribute="name"
+              label-key="name"
+              value-key="name"
               searchable
             />
-          </UFormGroup>
-          <UFormGroup label="Pekerjaan" name="pekerjaan">
+          </UFormField>
+          <UFormField label="Pekerjaan" name="pekerjaan">
             <USelectMenu
               v-model="state.pekerjaan"
-              :options="dataPekerjaan"
+              :items="dataPekerjaan"
               :disabled="isLoading"
-              option-attribute="name"
-              value-attribute="name"
+              label-key="name"
+              value-key="name"
               searchable
             />
-          </UFormGroup>
-          <UFormGroup label="Tinggi Badan" name="tinggi">
+          </UFormField>
+          <UFormField label="Tinggi Badan" name="tinggi">
             <UInput
               v-model="state.tinggi"
               type="number"
               :disabled="isLoading"
             />
-          </UFormGroup>
-          <UFormGroup label="Berat Badan" name="berat">
+          </UFormField>
+          <UFormField label="Berat Badan" name="berat">
             <UInput v-model="state.berat" type="number" :disabled="isLoading" />
-          </UFormGroup>
-          <UFormGroup label="Hobi" name="hobi">
+          </UFormField>
+          <UFormField label="Hobi" name="hobi">
             <UInput v-model="state.hobi" :disabled="isLoading" />
-          </UFormGroup>
-          <UFormGroup label="Deskripsi Singkat Diri Anda" name="deskripsi">
+          </UFormField>
+          <UFormField label="Deskripsi Singkat Diri Anda" name="deskripsi">
             <UInput v-model="state.deskripsi" :disabled="isLoading" />
-          </UFormGroup>
-          <UFormGroup label="Alamat Instagram" name="instagram">
+          </UFormField>
+          <UFormField label="Alamat Instagram" name="instagram">
             <UInput v-model="state.instagram" :disabled="isLoading" />
-          </UFormGroup>
-          <UFormGroup label="Kriteria Pasangan" name="kriteria">
+          </UFormField>
+          <UFormField label="Kriteria Pasangan" name="kriteria">
             <UTextarea
               v-model="state.kriteria"
               :rows="5"
               :disabled="isLoading"
             />
-          </UFormGroup>
+          </UFormField>
         </div>
 
         <div class="flex w-full justify-end gap-2">
@@ -323,13 +323,13 @@
         @submit="onSubmitReset"
       >
         <h1 class="font-bold">Reset Password</h1>
-        <UFormGroup label="Password Baru" name="password">
+        <UFormField label="Password Baru" name="password">
           <UInput
             v-model="resetState.password"
             type="password"
             :disabled="isLoading"
           />
-        </UFormGroup>
+        </UFormField>
 
         <div class="flex w-full justify-end gap-2">
           <UButton

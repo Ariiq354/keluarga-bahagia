@@ -26,8 +26,8 @@
 </script>
 
 <template>
+  <Title>Login</Title>
   <main class="flex w-full items-center justify-center">
-    <Title>Login</Title>
     <UCard class="w-full max-w-md">
       <div class="space-y-6">
         <div class="flex flex-col items-center text-center">
@@ -54,22 +54,20 @@
           class="w-full space-y-6"
           @submit="onSubmit"
         >
-          <UFormGroup label="Username" name="username">
+          <UFormField label="Username" name="username">
             <UInput
               v-model="state.username"
-              :leading="true"
               placeholder="Masukkan nama pengguna"
             />
-          </UFormGroup>
+          </UFormField>
 
-          <UFormGroup label="Password" name="password">
+          <UFormField label="Password" name="password">
             <UInput
               v-model="state.password"
-              :leading="true"
               type="password"
               placeholder="Masukkan kata sandi"
             />
-          </UFormGroup>
+          </UFormField>
 
           <UCheckbox v-model="state.rememberMe" label="Ingat saya" />
 

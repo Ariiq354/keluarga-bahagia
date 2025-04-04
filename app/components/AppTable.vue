@@ -1,179 +1,156 @@
 <script setup lang="ts">
+  import {
+    getPaginationRowModel,
+    type Row,
+    type Table,
+  } from "@tanstack/vue-table";
+  import type { TableColumn, TableRow } from "@nuxt/ui";
+
+  const UCheckbox = resolveComponent("UCheckbox");
+  const table = useTemplateRef("table");
+
+  const emit = defineEmits(["editClick"]);
+  const {
+    data,
+    action = true,
+    select = true,
+    columns,
+  } = defineProps<{
+    data: any[] | undefined;
+    columns: TableColumn<any>[];
+    label?: string;
+    loading?: boolean;
+    action?: boolean;
+    select?: boolean;
+  }>();
   defineSlots<{
     [key: string]: (props: any) => any;
   }>();
 
-  type ColumnType = {
-    key: string;
-    label: string;
-    sortable?: boolean;
-  };
-
-  type DataItem = { [key: string]: any };
-
-  const {
-    data,
-    columns,
-    label,
-    loading,
-    action = true,
-  } = defineProps<{
-    data: DataItem[] | undefined;
-    columns: ColumnType[];
-    label?: string;
-    loading?: boolean;
-    selectable?: boolean;
-    action?: boolean;
-  }>();
-
-  const emit = defineEmits(["editClick"]);
-
-  const numberedColumn = computed(() => {
+  const newColumns = computed(() => {
     return [
+      ...(select
+        ? [
+            {
+              id: "select",
+              header: ({ table }: { table: Table<any> }) =>
+                h(UCheckbox, {
+                  modelValue: table.getIsSomePageRowsSelected()
+                    ? "indeterminate"
+                    : table.getIsAllPageRowsSelected(),
+                  "onUpdate:modelValue": (value: boolean | "indeterminate") =>
+                    table.toggleAllPageRowsSelected(!!value),
+                  ariaLabel: "Select all",
+                }),
+              cell: ({ row }: { row: Row<any> }) =>
+                h(UCheckbox, {
+                  modelValue: row.getIsSelected(),
+                  "onUpdate:modelValue": (value: boolean | "indeterminate") =>
+                    row.toggleSelected(!!value),
+                  ariaLabel: "Select row",
+                }),
+            },
+          ]
+        : []),
       {
-        key: "rownumber",
-        label: "No.",
-        sortable: true,
+        header: "No.",
+        cell: (info: any) => info.row.index + 1,
       },
       ...columns,
       ...(action
         ? [
             {
-              key: "actions",
-              label: "Aksi",
+              header: "Aksi",
+              accessorKey: "actions",
             },
           ]
         : []),
     ];
   });
 
-  const numberedData = computed((): DataItem[] => {
-    if (data) {
-      return data.map((item, index) => ({
-        rownumber: index + 1,
-        ...item,
-      }));
-    }
+  const globalFilter = ref("");
+  const pagination = ref({
+    pageIndex: 0,
+    pageSize: 10,
+  });
+  const selectedRow = defineModel<unknown[]>();
+  const rowSelection = ref<Record<string, boolean>>({});
 
-    return [];
+  watch([rowSelection], async () => {
+    await nextTick();
+    selectedRow.value = table.value?.tableApi
+      .getSelectedRowModel()
+      .rows.map((row) => row.original);
   });
 
-  const sortRef = ref<{
-    column: string;
-    direction: "asc" | "desc";
-  }>();
-
-  const sortedData = computed(() => {
-    if (!sortRef.value) {
-      return numberedData.value;
-    }
-    const sortColumn = sortRef.value.column;
-    const sortDirection = sortRef.value.direction;
-
-    return [...numberedData.value].sort((a, b) => {
-      const aValue = a[sortColumn];
-      const bValue = b[sortColumn];
-      if (sortDirection === "desc") {
-        return aValue > bValue ? 1 : aValue < bValue ? -1 : 0;
-      } else {
-        return aValue < bValue ? 1 : aValue > bValue ? -1 : 0;
-      }
-    });
-  });
-
-  const query = ref("");
-
-  const filteredRows = computed(() => {
-    if (!query.value) {
-      return sortedData.value;
-    }
-
-    return sortedData.value.filter((person) => {
-      return Object.values(person).some((value) => {
-        return String(value).toLowerCase().includes(query.value.toLowerCase());
-      });
-    });
-  });
-
-  const page = ref(1);
-  const pageCount = 10;
-
-  const pagedRows = computed(() => {
-    return filteredRows.value?.slice(
-      (page.value - 1) * pageCount,
-      page.value * pageCount
-    );
-  });
-
-  const selected = defineModel<DataItem[]>();
-
-  function select(row: (typeof pagedRows.value)[number]) {
-    if (selected.value) {
-      const index = selected.value?.findIndex(
-        (item) => item.rownumber === row.rownumber
-      );
-      if (index === -1) {
-        selected.value?.push(row);
-      } else {
-        selected.value?.splice(index, 1);
-      }
-    }
+  function onSelect(row: TableRow<any>) {
+    row.toggleSelected(!row.getIsSelected());
   }
-  function removeRowNumber(obj: (typeof numberedData.value)[number]) {
-    const { rownumber, ...rest } = obj;
-    return rest;
-  }
+  const handleSelect = select ? onSelect : undefined;
 </script>
 
 <template>
-  <div>
-    <div
-      class="flex flex-col justify-between gap-2 border-b border-gray-200 px-4 py-3 md:flex-row md:items-center dark:border-gray-700"
-    >
-      <h1>{{ label }}</h1>
-      <UInput
-        v-model="query"
-        icon="i-heroicons-magnifying-glass"
-        placeholder="Search..."
-      />
+  <div class="w-full space-y-4 pb-4">
+    <div class="flex w-full flex-1 flex-col">
+      <div
+        class="flex justify-end border-b border-(--ui-border-accented) py-3.5"
+      >
+        <UInput
+          v-model="globalFilter"
+          class="max-w-xs"
+          leading-icon="i-heroicons-magnifying-glass"
+          placeholder="Filter..."
+        />
+      </div>
+
+      <UTable
+        id="myTable"
+        ref="table"
+        v-model:pagination="pagination"
+        v-model:global-filter="globalFilter"
+        v-model:row-selection="rowSelection"
+        :data="data"
+        :columns="newColumns"
+        :loading="loading"
+        :pagination-options="{
+          getPaginationRowModel: getPaginationRowModel(),
+        }"
+        @select="handleSelect"
+      >
+        <template v-for="(_, name) in $slots" :key="name" #[name]="slotData">
+          <slot :name="name" v-bind="slotData ?? {}" />
+        </template>
+        <template #actions-header="{ column }">
+          <div class="text-center">{{ column.columnDef.header }}</div>
+        </template>
+        <template #actions-cell="{ row }">
+          <div class="flex justify-center">
+            <UButton
+              icon="i-heroicons-pencil-16-solid"
+              size="xs"
+              variant="outline"
+              :ui="{ base: 'rounded-full' }"
+              square
+              aria-label="Edit item"
+              @click="emit('editClick', row.original)"
+            />
+          </div>
+        </template>
+      </UTable>
     </div>
-    <UTable
-      v-model="selected"
-      v-model:sort="sortRef"
-      :rows="pagedRows"
-      :columns="numberedColumn"
-      :loading="loading"
-      sort-mode="manual"
-      @select="select"
-    >
-      <template v-for="(_, name) in $slots" :key="name" #[name]="slotData">
-        <slot :name="name" v-bind="slotData ?? {}" />
-      </template>
-      <template #actions-data="{ row }">
-        <div class="flex justify-center">
-          <UButton
-            icon="i-heroicons-pencil-16-solid"
-            size="2xs"
-            variant="outline"
-            :ui="{ rounded: 'rounded-full' }"
-            square
-            aria-label="Edit item"
-            @click.stop="emit('editClick', removeRowNumber(row))"
-          />
-        </div>
-      </template>
-      <template #actions-header="{ column }">
-        <div class="text-center">{{ column.label }}</div>
-      </template>
-    </UTable>
-    <div class="overflow-x-auto">
-      <slot name="additional-content" />
-    </div>
-    <div class="flex justify-end px-3 py-3.5">
+
+    <div class="flex justify-center border-t border-(--ui-border) pt-4">
       <UPagination
-        v-model="page"
-        :page-count="pageCount"
-        :total="data ? data.length : 0"
+        :default-page="
+          (table?.tableApi?.getState().pagination.pageIndex || 0) + 1
+        "
+        :items-per-page="table?.tableApi?.getState().pagination.pageSize"
+        :total="
+          table?.tableApi?.getFilteredRowModel().rows.length! > 0
+            ? table?.tableApi?.getFilteredRowModel().rows.length
+            : data?.length
+        "
+        @update:page="(p) => table?.tableApi?.setPageIndex(p - 1)"
       />
     </div>
   </div>

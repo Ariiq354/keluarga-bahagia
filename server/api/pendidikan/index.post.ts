@@ -1,21 +1,26 @@
-import { z } from "zod";
+import * as v from "valibot";
 
-const bodySchema = z.object({
-  id: z.number().optional(),
-  name: z.string(),
+const bodySchema = v.object({
+  id: v.optional(v.number()),
+  name: v.string(),
 });
 
-export default defineEventHandler(async (event) => {
+export default defineValidatedEventHandler({ bodySchema }, async (event) => {
   adminFunction(event);
+  const { body } = event.context.validated;
 
-  const formData = await readValidatedBody(event, (body) =>
-    bodySchema.parse(body)
-  );
-
-  if (formData.id) {
-    await updatePendidikan(formData.id, formData);
+  if (body.id) {
+    const [err] = await tryCatch(updatePendidikan(body.id, body));
+    if (err) {
+      console.error("UPDATEPENDIDIKAN_FAILED", err);
+      throw createError("Internal Server Error");
+    }
   } else {
-    await createPendidikan(formData);
+    const [err] = await tryCatch(createPendidikan(body));
+    if (err) {
+      console.error("CREATEPENDIDIKAN_FAILED", err);
+      throw createError("Internal Server Error");
+    }
   }
 
   return;

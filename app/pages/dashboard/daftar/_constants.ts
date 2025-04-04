@@ -1,31 +1,31 @@
-import { z } from "zod";
+import * as v from "valibot";
 
-export const schema = z.object({
-  statusKawin: z.string(),
-  tanggalLahir: z.string(),
-  provinsi: z.string(),
-  kelurahan: z.string(),
-  kota: z.string(),
-  kecamatan: z.string(),
-  namaAyah: z.string(),
-  anakKe: z.number(),
-  dariBersaudara: z.number(),
-  suku: z.string(),
-  pendidikan: z.string(),
-  pekerjaan: z.string(),
-  jurusan: z.string(),
-  tinggi: z.number(),
-  berat: z.number(),
-  hobi: z.string(),
-  kriteria: z.string(),
-  deskripsi: z.string(),
-  foto: z.string(),
-  instagram: z.string(),
-  gender: z.string(),
+export const schema = v.object({
+  statusKawin: v.pipe(v.string(), v.minLength(1, "Required")),
+  tanggalLahir: v.pipe(v.string(), v.minLength(1, "Required")),
+  provinsi: v.pipe(v.string(), v.minLength(1, "Required")),
+  kelurahan: v.pipe(v.string(), v.minLength(1, "Required")),
+  kota: v.pipe(v.string(), v.minLength(1, "Required")),
+  kecamatan: v.pipe(v.string(), v.minLength(1, "Required")),
+  namaAyah: v.pipe(v.string(), v.minLength(1, "Required")),
+  anakKe: v.number(),
+  dariBersaudara: v.number(),
+  suku: v.pipe(v.string(), v.minLength(1, "Required")),
+  pendidikan: v.pipe(v.string(), v.minLength(1, "Required")),
+  pekerjaan: v.pipe(v.string(), v.minLength(1, "Required")),
+  jurusan: v.pipe(v.string(), v.minLength(1, "Required")),
+  tinggi: v.number(),
+  berat: v.number(),
+  hobi: v.pipe(v.string(), v.minLength(1, "Required")),
+  kriteria: v.pipe(v.string(), v.minLength(1, "Required")),
+  deskripsi: v.pipe(v.string(), v.minLength(1, "Required")),
+  foto: v.pipe(v.string(), v.minLength(1, "Required")),
+  instagram: v.pipe(v.string(), v.minLength(1, "Required")),
+  gender: v.pipe(v.string(), v.minLength(1, "Required")),
 });
 
-export const resetSchema = z.object({
-  password: z.string().min(8),
+export const resetSchema = v.object({
+  password: v.pipe(v.string(), v.minLength(1, "Required")),
 });
 
 export const statusKawinOptions = [
@@ -45,33 +45,33 @@ export const genderOptions = [
   },
 ];
 
-export type Schema = z.output<typeof schema>;
-export type ResetSchema = z.output<typeof resetSchema>;
+export type Schema = v.InferOutput<typeof schema>;
+export type ResetSchema = v.InferOutput<typeof resetSchema>;
 
-export const getInitialFormData = (): Partial<Schema> => ({
-  statusKawin: undefined,
-  tanggalLahir: undefined,
-  kota: undefined,
-  kecamatan: undefined,
-  kelurahan: undefined,
-  provinsi: undefined,
-  namaAyah: undefined,
-  anakKe: undefined,
-  dariBersaudara: undefined,
-  jurusan: undefined,
-  suku: undefined,
-  pendidikan: undefined,
-  pekerjaan: undefined,
-  tinggi: undefined,
-  berat: undefined,
-  hobi: undefined,
-  kriteria: undefined,
-  deskripsi: undefined,
-  foto: undefined,
-  instagram: undefined,
-  gender: undefined,
+export const getInitialFormData = (): Schema => ({
+  statusKawin: "",
+  tanggalLahir: "",
+  kota: "",
+  kecamatan: "",
+  kelurahan: "",
+  provinsi: "",
+  namaAyah: "",
+  anakKe: 0,
+  dariBersaudara: 0,
+  jurusan: "",
+  suku: "",
+  pendidikan: "",
+  pekerjaan: "",
+  tinggi: 0,
+  berat: 0,
+  hobi: "",
+  kriteria: "",
+  deskripsi: "",
+  foto: "",
+  instagram: "",
+  gender: "",
 });
 
-export const getInitialResetData = (): Partial<ResetSchema> => ({
-  password: undefined,
+export const getInitialResetData = (): ResetSchema => ({
+  password: "",
 });

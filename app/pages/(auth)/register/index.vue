@@ -31,8 +31,8 @@
 </script>
 
 <template>
+  <Title>Daftar Akun</Title>
   <div class="flex w-full items-center justify-center">
-    <Title>Daftar Akun</Title>
     <UCard class="w-full max-w-md">
       <div class="space-y-6">
         <div class="flex flex-col items-center text-center">
@@ -55,37 +55,37 @@
           class="w-full space-y-6"
           @submit="onSubmit"
         >
-          <UFormGroup label="Username" name="username">
+          <UFormField label="Username" name="username">
             <UInput
               v-model="state.username"
               placeholder="Masukkan nama pengguna"
             />
-          </UFormGroup>
+          </UFormField>
 
-          <UFormGroup label="Password" name="password">
+          <UFormField label="Password" name="password">
             <UInput
               v-model="state.password"
               type="password"
               placeholder="Masukkan kata sandi"
             />
-          </UFormGroup>
+          </UFormField>
 
-          <UFormGroup label="Nama Lengkap" name="namaLengkap">
+          <UFormField label="Nama Lengkap" name="namaLengkap">
             <UInput
               v-model="state.namaLengkap"
               placeholder="Masukkan nama lengkap"
             />
-          </UFormGroup>
+          </UFormField>
 
-          <UFormGroup label="No. Telepon" name="noTelepon">
+          <UFormField label="No. Telepon" name="noTelepon">
             <UInput
               v-model="state.noTelepon"
               placeholder="Masukkan no. telepon"
             />
-          </UFormGroup>
-          <UFormGroup label="Email" name="email">
+          </UFormField>
+          <UFormField label="Email" name="email">
             <UInput v-model="state.email" placeholder="Masukkan email anda" />
-          </UFormGroup>
+          </UFormField>
 
           <UButton
             class="flex w-full justify-center"

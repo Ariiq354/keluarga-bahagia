@@ -66,46 +66,44 @@
 </script>
 
 <template>
+  <Title>Pengajuan Taaruf</Title>
   <main>
-    <Title>Pengajuan Taaruf</Title>
-    <AppModal
-      v-model="modalOpen"
-      title="Edit Status"
-      :pending="status === 'pending'"
-    >
-      <UForm
-        :schema="schema"
-        :state="state"
-        class="space-y-4"
-        @submit="onSubmit"
-      >
-        <UFormGroup label="Status Taaruf" name="statusPersetujuan">
-          <USelectMenu
-            v-model="state.statusPersetujuan"
-            :options="statusOptions"
-            placeholder="Pilih Status Taaruf"
-          />
-        </UFormGroup>
+    <UModal v-model:open="modalOpen" title="Edit Status">
+      <template #body>
+        <UForm
+          :schema="schema"
+          :state="state"
+          class="space-y-4"
+          @submit="onSubmit"
+        >
+          <UFormField label="Status Taaruf" name="statusPersetujuan">
+            <USelectMenu
+              v-model="state.statusPersetujuan"
+              :items="statusOptions"
+              placeholder="Pilih Status Taaruf"
+            />
+          </UFormField>
 
-        <div class="flex w-full justify-end gap-2">
-          <UButton
-            icon="i-heroicons-x-mark-16-solid"
-            variant="ghost"
-            :disabled="modalLoading"
-            @click="modalOpen = false"
-          >
-            Batal
-          </UButton>
-          <UButton
-            type="submit"
-            icon="i-heroicons-check-16-solid"
-            :loading="modalLoading"
-          >
-            Simpan
-          </UButton>
-        </div>
-      </UForm>
-    </AppModal>
+          <div class="flex w-full justify-end gap-2">
+            <UButton
+              icon="i-heroicons-x-mark-16-solid"
+              variant="ghost"
+              :disabled="modalLoading"
+              @click="modalOpen = false"
+            >
+              Batal
+            </UButton>
+            <UButton
+              type="submit"
+              icon="i-heroicons-check-16-solid"
+              :loading="modalLoading"
+            >
+              Simpan
+            </UButton>
+          </div>
+        </UForm>
+      </template>
+    </UModal>
     <UCard>
       <CrudCard
         :data="data"
@@ -115,13 +113,11 @@
       />
       <AppTable
         v-model="tableSelected"
-        label="Daftar Taaruf"
         :loading="status === 'pending'"
         :data="data"
         :columns="columns"
         @edit-click="clickUpdate"
-      >
-      </AppTable>
+      />
     </UCard>
   </main>
 </template>

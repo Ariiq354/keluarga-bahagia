@@ -1,26 +1,28 @@
 import { hash } from "@node-rs/argon2";
-import { z } from "zod";
+import * as v from "valibot";
 
-const bodySchema = z.object({
-  id: z.number().optional(),
-  username: z.string(),
-  password: z.string(),
-  noTelepon: z.string(),
-  namaLengkap: z.string(),
-  email: z.string(),
-  isActive: z.boolean(),
+const bodySchema = v.object({
+  id: v.optional(v.number()),
+  username: v.string(),
+  password: v.string(),
+  noTelepon: v.string(),
+  namaLengkap: v.string(),
+  email: v.string(),
+  isActive: v.boolean(),
 });
 
-export default defineEventHandler(async (event) => {
+export default defineValidatedEventHandler({ bodySchema }, async (event) => {
   adminFunction(event);
+  const { body } = event.context.validated;
 
-  const formData = await readValidatedBody(event, (body) =>
-    bodySchema.parse(body)
-  );
+  const [err, user] = await tryCatch(getUserByUsername(body.username));
+  if (err) {
+    console.error("GETUSER_FAILED", err);
+    throw createError("Internal Server Error");
+  }
 
-  const exist = await getUserByUsername(formData.username);
-  if (formData.id) {
-    if (exist && exist.id !== formData.id) {
+  if (body.id) {
+    if (user && user.id !== body.id) {
       throw createError({
         statusCode: 400,
         message: "Username sudah ada",
@@ -28,24 +30,40 @@ export default defineEventHandler(async (event) => {
     }
 
     const itemData = {
-      id: formData.id,
-      username: formData.username,
-      isActive: formData.isActive,
+      id: body.id,
+      username: body.username,
+      isActive: body.isActive,
     };
 
-    await updateUser(formData.id, itemData);
+    const [err] = await tryCatch(updateUser(body.id, itemData));
+    if (err) {
+      console.error("UPDATEUSER_FAILED", err);
+      throw createError("Internal Server Error");
+    }
   } else {
-    if (exist) {
+    if (user) {
       throw createError({
         statusCode: 400,
         message: "Username sudah ada",
       });
     }
+
+    const [err1, newPassword] = await tryCatch(hash(body.password));
+    if (err1) {
+      console.error("HASH_FAILED", err1);
+      throw createError("Internal Server Error");
+    }
+
     const newData = {
-      ...formData,
-      password: await hash(formData.password),
+      ...body,
+      password: newPassword,
     };
-    await createUser(newData);
+
+    const [err2] = await tryCatch(createUser(newData));
+    if (err2) {
+      console.error("CREATEUSER_FAILED", err2);
+      throw createError("Internal Server Error");
+    }
   }
 
   return;

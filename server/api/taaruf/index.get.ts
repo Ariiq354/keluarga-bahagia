@@ -1,9 +1,13 @@
 export default defineEventHandler(async (event) => {
   adminFunction(event);
 
-  const res = await getAllTaaruf();
+  const [err, taaruf] = await tryCatch(getAllTaaruf());
+  if (err) {
+    console.error("GETTAARUF_FAILED", err);
+    throw createError("Internal Server Error");
+  }
 
-  const data = res.map((item) => {
+  const data = taaruf.map((item) => {
     return {
       id: item.id,
       pemohonId: item.pemohonId,

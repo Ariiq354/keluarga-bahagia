@@ -37,20 +37,20 @@
 </script>
 
 <template>
+  <Title>Pencarian Member</Title>
   <main>
-    <Title>Pencarian Member</Title>
-    <UModal v-model="modalOpen" :ui="{ width: 'sm:max-w-xl' }" prevent-close>
+    <UModal v-model:open="modalOpen">
       <div class="px-4 py-5">
         <div
           class="mb-4 flex items-center justify-between border-b-2 border-gray-200 pb-4 dark:border-gray-700"
         >
           <h3
-            class="text-base font-semibold leading-6 text-gray-900 dark:text-white"
+            class="text-base leading-6 font-semibold text-gray-900 dark:text-white"
           >
             Detail Member
           </h3>
           <UButton
-            color="gray"
+            color="neutral"
             variant="ghost"
             icon="i-heroicons-x-mark-20-solid"
             class="-my-1 rounded-full"
@@ -99,7 +99,7 @@
           <table class="mt-12 w-full text-sm">
             <tbody>
               <tr>
-                <td class="whitespace-nowrap py-2 font-bold">Nama Ayah:</td>
+                <td class="py-2 font-bold whitespace-nowrap">Nama Ayah:</td>
                 <td class="text-primary text-right capitalize">
                   {{ modalState?.detail.namaAyah }}
                 </td>
@@ -178,7 +178,7 @@
                 <NuxtImg :src="item.detail.foto" />
               </div>
               <p
-                class="mt-4 rounded-md bg-eastern-blue-100 p-2 text-center text-lg font-bold shadow-lg"
+                class="bg-eastern-blue-100 mt-4 rounded-md p-2 text-center text-lg font-bold shadow-lg"
               >
                 {{ item.detail.kodeUser }}
               </p>

@@ -1,9 +1,13 @@
 export default defineEventHandler(async (event) => {
   adminFunction(event);
 
-  const res = await getAllUser();
+  const [err, user] = await tryCatch(getAllUser());
+  if (err) {
+    console.error("GETUSER_FAILED", err);
+    throw createError("Internal Server Error");
+  }
 
-  const data = res.map((item) => {
+  const data = user.map((item) => {
     let detail;
     if (item.detail) {
       detail = {
@@ -34,6 +38,7 @@ export default defineEventHandler(async (event) => {
       namaLengkap: item.namaLengkap,
       email: item.email,
       isActive: item.isActive,
+      gender: item.detail.gender,
 
       detail,
     };

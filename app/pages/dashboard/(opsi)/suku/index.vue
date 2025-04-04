@@ -62,42 +62,43 @@
 </script>
 
 <template>
+  <Title>User</Title>
   <main>
-    <Title>User</Title>
-    <AppModal
-      v-model="modalOpen"
+    <UModal
+      v-model:open="modalOpen"
       :title="state.id ? 'Edit User' : 'Tambah User'"
-      :pending="status === 'pending'"
     >
-      <UForm
-        :schema="schema"
-        :state="state"
-        class="space-y-4"
-        @submit="onSubmit"
-      >
-        <UFormGroup label="Nama Suku" name="name">
-          <UInput v-model="state.name" :disabled="modalLoading" />
-        </UFormGroup>
+      <template #body>
+        <UForm
+          :schema="schema"
+          :state="state"
+          class="space-y-4"
+          @submit="onSubmit"
+        >
+          <UFormField label="Nama Suku" name="name">
+            <UInput v-model="state.name" :disabled="modalLoading" />
+          </UFormField>
 
-        <div class="flex w-full justify-end gap-2">
-          <UButton
-            icon="i-heroicons-x-mark-16-solid"
-            variant="ghost"
-            :disabled="modalLoading"
-            @click="modalOpen = false"
-          >
-            Batal
-          </UButton>
-          <UButton
-            type="submit"
-            icon="i-heroicons-check-16-solid"
-            :loading="modalLoading"
-          >
-            Simpan
-          </UButton>
-        </div>
-      </UForm>
-    </AppModal>
+          <div class="flex w-full justify-end gap-2">
+            <UButton
+              icon="i-heroicons-x-mark-16-solid"
+              variant="ghost"
+              :disabled="modalLoading"
+              @click="modalOpen = false"
+            >
+              Batal
+            </UButton>
+            <UButton
+              type="submit"
+              icon="i-heroicons-check-16-solid"
+              :loading="modalLoading"
+            >
+              Simpan
+            </UButton>
+          </div>
+        </UForm>
+      </template>
+    </UModal>
     <UCard>
       <CrudCard
         :data="data"
@@ -107,7 +108,6 @@
       />
       <AppTable
         v-model="tableSelected"
-        label="Kelola Suku"
         :loading="status === 'pending'"
         :data="data"
         :columns="columns"

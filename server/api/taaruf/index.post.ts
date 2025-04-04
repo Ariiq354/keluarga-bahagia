@@ -1,18 +1,19 @@
-import { z } from "zod";
+import * as v from "valibot";
 
-const bodySchema = z.object({
-  pemohonId: z.number(),
-  tujuanId: z.number(),
+const bodySchema = v.object({
+  pemohonId: v.number(),
+  tujuanId: v.number(),
 });
 
-export default defineEventHandler(async (event) => {
+export default defineValidatedEventHandler({ bodySchema }, async (event) => {
   protectFunction(event);
+  const { body } = event.context.validated;
 
-  const formData = await readValidatedBody(event, (body) =>
-    bodySchema.parse(body)
-  );
-
-  await createTaaruf(formData);
+  const [err] = await tryCatch(createTaaruf(body));
+  if (err) {
+    console.error("CREATETAARUF_FAILED", err);
+    throw createError("Internal Server Error");
+  }
 
   return;
 });

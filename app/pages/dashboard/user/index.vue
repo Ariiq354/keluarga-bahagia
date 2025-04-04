@@ -63,97 +63,101 @@
     modalOpen.value = true;
     const { detail, ...rest } = itemData;
     userDetail.value = detail;
-    state.value = rest;
-    state.value.password = "";
+    state.value = {
+      ...rest,
+      password: "",
+    };
   }
 </script>
 
 <template>
+  <Title>User</Title>
   <main>
-    <Title>User</Title>
-    <AppModal
-      v-model="modalOpen"
+    <UModal
+      v-model:open="modalOpen"
       :title="state.id ? 'Edit User' : 'Tambah User'"
-      :pending="status === 'pending'"
     >
-      <UForm
-        :schema="schema"
-        :state="state"
-        class="space-y-4"
-        @submit="onSubmit"
-      >
-        <UFormGroup label="Username" name="username">
-          <UInput v-model="state.username" :disabled="modalLoading" />
-        </UFormGroup>
+      <template #body>
+        <UForm
+          :schema="schema"
+          :state="state"
+          class="space-y-4"
+          @submit="onSubmit"
+        >
+          <UFormField label="Username" name="username">
+            <UInput v-model="state.username" :disabled="modalLoading" />
+          </UFormField>
 
-        <UFormGroup v-if="!state.id" label="Password" name="password">
-          <UInput
-            v-model="state.password"
-            type="password"
-            :disabled="modalLoading"
-          />
-        </UFormGroup>
+          <UFormField v-if="!state.id" label="Password" name="password">
+            <UInput
+              v-model="state.password"
+              type="password"
+              :disabled="modalLoading"
+            />
+          </UFormField>
 
-        <UFormGroup label="Nama Lengkap" name="namaLengkap">
-          <UInput v-model="state.namaLengkap" :disabled="modalLoading" />
-        </UFormGroup>
+          <UFormField label="Nama Lengkap" name="namaLengkap">
+            <UInput v-model="state.namaLengkap" :disabled="modalLoading" />
+          </UFormField>
 
-        <UFormGroup label="Jenis Kelamin" name="gender">
-          <USelectMenu
-            v-model="state.gender"
-            :options="genderOptions"
-            option-attribute="name"
-            value-attribute="value"
-            placeholder="Masukkan Jenis Kelamin Anda"
-          />
-        </UFormGroup>
+          <UFormField label="Jenis Kelamin" name="gender">
+            <USelectMenu
+              v-model="state.gender"
+              :items="genderOptions"
+              label-key="name"
+              value-key="value"
+              placeholder="Masukkan Jenis Kelamin Anda"
+            />
+          </UFormField>
 
-        <UFormGroup label="No. Telepon" name="noTelepon">
-          <UInput v-model="state.noTelepon" :disabled="modalLoading" />
-        </UFormGroup>
+          <UFormField label="No. Telepon" name="noTelepon">
+            <UInput v-model="state.noTelepon" :disabled="modalLoading" />
+          </UFormField>
 
-        <UFormGroup label="Status" name="isActive">
-          <UToggle v-model="state.isActive" :disabled="modalLoading" />
-        </UFormGroup>
+          <UFormField label="Status" name="isActive">
+            <UToggle v-model="state.isActive" :disabled="modalLoading" />
+          </UFormField>
 
-        <hr />
+          <!-- prettier-ignore -->
+          <hr>
 
-        <div>
-          Detail User
-          <table v-if="userDetail" class="mt-2 w-full text-sm">
-            <tbody>
-              <tr
-                v-for="(item, index) in Object.entries(userDetail)"
-                :key="index"
-              >
-                <td class="font-bold capitalize">
-                  {{ camelToCamelCase(item[0]) }}
-                </td>
-                <td class="text-right">{{ item[1] }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+          <div>
+            Detail User
+            <table v-if="userDetail" class="mt-2 w-full text-sm">
+              <tbody>
+                <tr
+                  v-for="(item, index) in Object.entries(userDetail)"
+                  :key="index"
+                >
+                  <td class="font-bold capitalize">
+                    {{ camelToCamelCase(item[0]) }}
+                  </td>
+                  <td class="text-right">{{ item[1] }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-        <div class="flex w-full justify-end gap-2">
-          <UButton
-            icon="i-heroicons-x-mark-16-solid"
-            variant="ghost"
-            :disabled="modalLoading"
-            @click="modalOpen = false"
-          >
-            Batal
-          </UButton>
-          <UButton
-            type="submit"
-            icon="i-heroicons-check-16-solid"
-            :loading="modalLoading"
-          >
-            Simpan
-          </UButton>
-        </div>
-      </UForm>
-    </AppModal>
+          <div class="flex w-full justify-end gap-2">
+            <UButton
+              icon="i-heroicons-x-mark-16-solid"
+              variant="ghost"
+              :disabled="modalLoading"
+              @click="modalOpen = false"
+            >
+              Batal
+            </UButton>
+            <UButton
+              type="submit"
+              icon="i-heroicons-check-16-solid"
+              :loading="modalLoading"
+            >
+              Simpan
+            </UButton>
+          </div>
+        </UForm>
+      </template>
+    </UModal>
     <UCard>
       <CrudCard
         :data="data"
@@ -174,7 +178,7 @@
             <UBadge
               size="xs"
               :label="row.isActive ? 'Aktif' : 'Tidak Aktif'"
-              :color="row.isActive ? 'emerald' : 'orange'"
+              :color="row.isActive ? 'success' : 'error'"
               variant="solid"
               class="rounded-full"
             />
@@ -190,7 +194,7 @@
             <UBadge
               size="xs"
               :label="row.gender == 'laki' ? 'Laki - Laki' : 'Perempuan'"
-              color="blue"
+              color="info"
               variant="solid"
               class="rounded-full"
             />

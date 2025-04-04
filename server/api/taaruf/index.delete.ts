@@ -1,28 +1,43 @@
-import { z } from "zod";
+import * as v from "valibot";
 
-const bodySchema = z
-  .object({
-    id: z.number(),
-    pemohonId: z.number(),
-    tujuanId: z.number(),
+const bodySchema = v.array(
+  v.object({
+    id: v.number(),
+    pemohonId: v.number(),
+    tujuanId: v.number(),
   })
-  .array();
+);
 
-export default defineEventHandler(async (event) => {
+export default defineValidatedEventHandler({ bodySchema }, async (event) => {
   protectFunction(event);
+  const { body } = event.context.validated;
 
-  const formData = await readValidatedBody(event, (body) =>
-    bodySchema.parse(body)
-  );
+  for (const item of body) {
+    const [err] = await tryCatch(
+      updateUser(item.pemohonId, {
+        isAvailable: true,
+      })
+    );
+    if (err) {
+      console.error("UPDATEUSERPEMOHON_FAILED", err);
+      throw createError("Internal Server Error");
+    }
 
-  for (const item of formData) {
-    await updateUser(item.pemohonId, {
-      isAvailable: true,
-    });
-    await updateUser(item.tujuanId, {
-      isAvailable: true,
-    });
-    await deleteTaaruf([item.id]);
+    const [err2] = await tryCatch(
+      updateUser(item.tujuanId, {
+        isAvailable: true,
+      })
+    );
+    if (err2) {
+      console.error("UPDATEUSERTUJUAN_FAILED", err2);
+      throw createError("Internal Server Error");
+    }
+
+    const [err3] = await tryCatch(deleteTaaruf([item.id]));
+    if (err3) {
+      console.error("DELETETAARUF_FAILED", err3);
+      throw createError("Internal Server Error");
+    }
   }
 
   return;

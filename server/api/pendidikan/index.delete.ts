@@ -1,17 +1,18 @@
-import { z } from "zod";
+import * as v from "valibot";
 
-const bodySchema = z.object({
-  id: z.array(z.number()),
+const bodySchema = v.object({
+  id: v.array(v.number()),
 });
 
-export default defineEventHandler(async (event) => {
+export default defineValidatedEventHandler({ bodySchema }, async (event) => {
   adminFunction(event);
+  const { body } = event.context.validated;
 
-  const formData = await readValidatedBody(event, (body) =>
-    bodySchema.parse(body)
-  );
-
-  await deletePendidikan(formData.id);
+  const [err] = await tryCatch(deletePendidikan(body.id));
+  if (err) {
+    console.error("DELETEPENDIDIKAN_FAILED", err);
+    throw createError("Internal Server Error");
+  }
 
   return;
 });

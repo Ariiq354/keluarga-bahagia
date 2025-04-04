@@ -1,20 +1,29 @@
 import { hash } from "@node-rs/argon2";
-import { z } from "zod";
+import * as v from "valibot";
 
-const bodySchema = z.object({
-  password: z.string().min(8),
+const bodySchema = v.object({
+  password: v.pipe(v.string(), v.minLength(8)),
 });
 
-export default defineEventHandler(async (event) => {
+export default defineValidatedEventHandler({ bodySchema }, async (event) => {
   protectFunction(event);
+  const { body } = event.context.validated;
 
-  const formData = await readValidatedBody(event, (body) =>
-    bodySchema.parse(body)
+  const [err1, newPassword] = await tryCatch(hash(body.password));
+  if (err1) {
+    console.error("HASH_FAILED", err1);
+    throw createError("Internal Server Error");
+  }
+
+  const [err2] = await tryCatch(
+    updateUser(event.context.user!.id, {
+      password: newPassword,
+    })
   );
-
-  await updateUser(event.context.user!.id, {
-    password: await hash(formData.password),
-  });
+  if (err2) {
+    console.error("HASH_FAILED", err2);
+    throw createError("Internal Server Error");
+  }
 
   return;
 });

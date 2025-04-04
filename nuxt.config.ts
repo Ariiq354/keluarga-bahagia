@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     "nuxt-security",
     "@nuxt/eslint",
     "@nuxtjs/cloudinary",
+    "@vueuse/nuxt",
   ],
   future: {
     compatibilityVersion: 4,
@@ -36,10 +37,9 @@ export default defineNuxtConfig({
     },
   },
 
-  routeRules: {
-    "/": { prerender: true },
-    "/contact": { prerender: true },
-    "/product": { prerender: true },
-    "/about": { prerender: true },
+  nitro: {
+    prerender: {
+      routes: ["/", "/contact", "/product", "/about"],
+    },
   },
 });

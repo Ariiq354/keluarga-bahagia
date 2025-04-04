@@ -36,8 +36,8 @@
 </script>
 
 <template>
+  <Title>Pengajuan Taaruf</Title>
   <main>
-    <Title>Pengajuan Taaruf</Title>
     <UCard>
       <div
         class="mb-6 flex items-center justify-between gap-2 rounded-lg border border-gray-200 p-3 dark:border-gray-700"
@@ -63,13 +63,11 @@
       </div>
       <AppTable
         v-model="tableSelected"
-        label="Daftar Taaruf"
         :loading="status === 'pending'"
         :data="data"
         :columns="columns"
         :action="false"
-      >
-      </AppTable>
+      />
     </UCard>
   </main>
 </template>

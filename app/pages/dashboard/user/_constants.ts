@@ -1,25 +1,25 @@
-import { z } from "zod";
+import * as v from "valibot";
 
 export const columns = [
   {
-    key: "namaLengkap",
-    label: "Nama Lengkap",
+    accessorKey: "namaLengkap",
+    header: "Nama Lengkap",
   },
   {
-    key: "detail.kodeUser",
-    label: "Kode",
+    accessorKey: "detail.kodeUser",
+    header: "Kode",
   },
   {
-    key: "gender",
-    label: "Jenis Kelamin",
+    accessorKey: "gender",
+    header: "Jenis Kelamin",
   },
   {
-    key: "noTelepon",
-    label: "No. Telepon",
+    accessorKey: "noTelepon",
+    header: "No. Telepon",
   },
   {
-    key: "isActive",
-    label: "Status",
+    accessorKey: "isActive",
+    header: "Status",
   },
 ];
 
@@ -34,29 +34,34 @@ export const genderOptions = [
   },
 ];
 
-export const schema = z
-  .object({
-    id: z.number().optional(),
-    username: z.string(),
-    password: z.string(),
-    namaLengkap: z.string(),
-    noTelepon: z.string(),
-    gender: z.string(),
-    isActive: z.boolean(),
-  })
-  .refine((data) => (data.id ? true : data.password.length < 8), {
-    message: "Karakter harus 8 atau lebih",
-    path: ["password"],
-  });
+export const schema = v.pipe(
+  v.object({
+    id: v.optional(v.number()),
+    username: v.pipe(v.string(), v.minLength(1, "Required")),
+    password: v.string(),
+    namaLengkap: v.pipe(v.string(), v.minLength(1, "Required")),
+    noTelepon: v.pipe(v.string(), v.minLength(1, "Required")),
+    gender: v.pipe(v.string(), v.minLength(1, "Required")),
+    isActive: v.boolean(),
+  }),
+  v.forward(
+    v.partialCheck(
+      [["password"], ["id"]],
+      (input) => (input.id ? true : input.password.length < 8),
+      "Karakter harus 8 atau lebih"
+    ),
+    ["password"]
+  )
+);
 
-export type Schema = z.output<typeof schema>;
+export type Schema = v.InferOutput<typeof schema>;
 
-export const getInitialFormData = (): Partial<Schema> => ({
+export const getInitialFormData = (): Schema => ({
   id: undefined,
-  username: undefined,
-  password: undefined,
-  namaLengkap: undefined,
-  noTelepon: undefined,
-  gender: undefined,
+  username: "",
+  password: "",
+  namaLengkap: "",
+  noTelepon: "",
+  gender: "",
   isActive: false,
 });

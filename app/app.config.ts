@@ -1,49 +1,46 @@
 export default defineAppConfig({
   ui: {
-    primary: "eastern-blue",
     card: {
-      ring: "dark:ring-gray-700",
-      body: {
-        padding: "sm:p-8",
+      slots: {
+        root: "shadow-lg",
+      },
+    },
+    colors: {
+      primary: "eastern-blue",
+    },
+    input: {
+      defaultVariants: {
+        size: "lg",
+      },
+      slots: {
+        root: "w-full",
+      },
+    },
+    textarea: {
+      defaultVariants: {
+        size: "lg",
+      },
+      slots: {
+        root: "w-full",
       },
     },
     button: {
-      default: {
+      defaultVariants: {
         size: "lg",
       },
     },
-    input: {
-      default: {
+    selectMenu: {
+      defaultVariants: {
         size: "lg",
       },
-    },
-    select: {
-      default: {
-        size: "lg",
+      slots: {
+        base: "w-full",
       },
     },
     table: {
-      td: {
-        size: "text-base",
-      },
-      th: {
-        size: "text-base",
-        font: "font-medium",
-      },
-      default: {
-        sortButton: {
-          class: "text-base p-0",
-        },
-      },
-    },
-    pagination: {
-      wrapper: "flex items-center gap-1",
-      base: "w-8 h-8 justify-center",
-      rounded: "!rounded-full",
-      default: {
-        activeButton: {
-          variant: "outline",
-        },
+      slots: {
+        th: "text-base",
+        td: "text-base",
       },
     },
   },

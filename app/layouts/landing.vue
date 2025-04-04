@@ -7,7 +7,9 @@
 </script>
 
 <template>
-  <LandingNavbar />
-  <slot />
-  <LandingFooter />
+  <div id="landingWrapper">
+    <LandingNavbar />
+    <slot />
+    <LandingFooter />
+  </div>
 </template>

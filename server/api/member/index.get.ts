@@ -1,12 +1,23 @@
 export default defineEventHandler(async (event) => {
   protectFunction(event);
 
-  const res = await getAllMember();
-  const user = await getUserByUsername(event.context.user!.username);
+  const [err, member] = await tryCatch(getAllMember());
+  if (err) {
+    console.error("GETMEMBER_FAILED", err);
+    throw createError("Internal Server Error");
+  }
+
+  const [err1, user] = await tryCatch(
+    getUserByUsername(event.context.user!.username)
+  );
+  if (err1) {
+    console.error("GETUSER_FAILED", err1);
+    throw createError("Internal Server Error");
+  }
 
   const filterRes = user?.detail
-    ? res.filter((item) => item.detail.gender !== user.detail.gender)
-    : res;
+    ? member.filter((item) => item.detail.gender !== user.detail.gender)
+    : member;
 
   const data = filterRes.map((item) => {
     return {

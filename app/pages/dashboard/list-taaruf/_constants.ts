@@ -1,41 +1,38 @@
-import { z } from "zod";
+import * as v from "valibot";
 
 export const columns = [
   {
-    key: "namaLengkapPemohon",
-    label: "Nama Lengkap Pemohon",
-    sortable: true,
+    accessorKey: "namaLengkapPemohon",
+    header: "Nama Lengkap Pemohon",
   },
   {
-    key: "namaLengkapTujuan",
-    label: "Nama Lengkap Tujuan",
-    sortable: true,
+    accessorKey: "namaLengkapTujuan",
+    header: "Nama Lengkap Tujuan",
   },
   {
-    key: "tanggal",
-    label: "Tanggal Permintaan",
-    sortable: true,
+    accessorKey: "tanggal",
+    header: "Tanggal Permintaan",
   },
   {
-    key: "status",
-    label: "Status",
+    accessorKey: "status",
+    header: "Status",
   },
 ];
 
 export const statusOptions = ["Belum diproses", "Ditolak", "Disetujui"];
 
-export const schema = z.object({
-  id: z.number(),
-  pemohonId: z.number(),
-  tujuanId: z.number(),
-  statusPersetujuan: z.string(),
+export const schema = v.object({
+  id: v.pipe(v.number(), v.minValue(1, "Required")),
+  pemohonId: v.pipe(v.number(), v.minValue(1, "Required")),
+  tujuanId: v.pipe(v.number(), v.minValue(1, "Required")),
+  statusPersetujuan: v.pipe(v.string(), v.minLength(1, "Required")),
 });
 
-export type Schema = z.output<typeof schema>;
+export type Schema = v.InferOutput<typeof schema>;
 
-export const getInitialFormData = (): Partial<Schema> => ({
-  id: undefined,
-  statusPersetujuan: undefined,
-  pemohonId: undefined,
-  tujuanId: undefined,
+export const getInitialFormData = (): Schema => ({
+  id: 0,
+  statusPersetujuan: "",
+  pemohonId: 0,
+  tujuanId: 0,
 });

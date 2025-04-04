@@ -72,9 +72,8 @@ export type NewUser = InferInsertModel<typeof userTable>;
 export type UserDtl = InferSelectModel<typeof userDtlTable>;
 export type NewUserDtl = InferInsertModel<typeof userDtlTable>;
 
-export type UserLucia = Omit<User, "createdAt" | "updatedAt" | "password"> & {
-  foto: string | null;
-};
+export type UserRole = User["role"];
+export type UserLucia = Omit<User, "createdAt" | "updatedAt" | "password">;
 
 export type Session = InferSelectModel<typeof sessionTable>;
 export type NewSession = InferInsertModel<typeof sessionTable>;

@@ -14,10 +14,16 @@
       useToastError(String(error.statusCode), error.data.message);
     }
   }
+
+  useHead({
+    htmlAttrs: {
+      class: "layout-default",
+    },
+  });
 </script>
 
 <template>
-  <div class="flex">
+  <div id="defaultWrapper" class="flex">
     <AppSidebar />
     <div
       class="flex flex-1 flex-col overflow-auto p-4 transition-all duration-200 md:p-8"

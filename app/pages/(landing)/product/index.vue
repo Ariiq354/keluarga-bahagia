@@ -33,7 +33,7 @@
 
 <template>
   <div
-    class="container my-12 flex flex-col items-center justify-center gap-4 rounded-xl bg-eastern-blue-900 px-20 py-8 text-white shadow-2xl"
+    class="bg-eastern-blue-900 container my-12 flex flex-col items-center justify-center gap-4 rounded-xl px-20 py-8 text-white shadow-2xl"
   >
     <h1 class="my-4 w-full border-b-2 py-4 text-center text-4xl font-semibold">
       Daftar Bootcamp
@@ -44,11 +44,9 @@
         v-for="(item, index) in carouselItem"
         :key="index"
         :ui="{
-          body: {
-            padding: 'sm:p-1',
-          },
+          body: 'sm:p-1',
         }"
-        class="mx-2 w-full rounded-lg bg-eastern-blue-100 text-black"
+        class="bg-eastern-blue-100 mx-2 w-full rounded-lg text-black"
       >
         <div class="flex flex-col items-center justify-center gap-4 p-2">
           <NuxtImg :src="item.image" alt="produk" class="rounded-md" />
