@@ -7,18 +7,18 @@
 <template>
   <main>
     <div
-      class="bg-eastern-blue-500 flex h-96 w-full flex-col items-center justify-center gap-4 px-96 text-center text-white"
+      class="bg-eastern-blue-500 flex min-h-96 w-full flex-col items-center justify-center gap-4 px-4 text-center text-white md:px-96"
     >
       <h1 class="text-5xl font-bold">Kontak Kami</h1>
       <p class="text-xl leading-9">
         Jika Anda memiliki pertanyaan atau mengalami berbagai kendala perihal
-        penggunaan di website Udivise, silahkan hubungi kami melalui pilihan
-        dibawah ini.
+        penggunaan di website Keluarga Bahagia, silahkan hubungi kami melalui
+        pilihan dibawah ini.
       </p>
     </div>
-    <div class="flex w-full items-center justify-center">
+    <div class="flex w-full items-center justify-center px-4">
       <div
-        class="flex -translate-y-20 flex-col items-center gap-8 rounded-lg bg-white p-8 shadow-xl"
+        class="mt-12 flex flex-col items-center gap-8 rounded-lg bg-white p-8 shadow-xl md:mt-0 md:-translate-y-20"
       >
         <svg
           role="img"
@@ -43,21 +43,23 @@
         </UButton>
       </div>
     </div>
-    <div
-      class="bg-eastern-blue-100 container my-12 flex max-w-[1000px] flex-col gap-4 rounded-lg p-12 shadow-xl"
-    >
-      <h1 class="text-center text-4xl font-semibold">Email</h1>
-      <p class="text-center text-lg">
-        Anda bisa menghubungi kami melalui layanan email melalui kolom dibawah
-        ini.
-      </p>
-      <div class="flex gap-4">
-        <UInput placeholder="Nama" />
-        <UInput placeholder="Alamat Email" />
-      </div>
-      <UTextarea placeholder="Pesan" :rows="10" />
-      <div class="flex justify-end">
-        <UButton>Kirim</UButton>
+    <div class="px-4">
+      <div
+        class="bg-eastern-blue-100 mx container my-12 flex max-w-[1000px] flex-col gap-4 rounded-lg p-4 shadow-xl md:p-12"
+      >
+        <h1 class="text-center text-4xl font-semibold">Email</h1>
+        <p class="text-center text-lg">
+          Anda bisa menghubungi kami melalui layanan email melalui kolom dibawah
+          ini.
+        </p>
+        <div class="flex gap-4">
+          <UInput placeholder="Nama" />
+          <UInput placeholder="Alamat Email" />
+        </div>
+        <UTextarea placeholder="Pesan" :rows="10" />
+        <div class="flex justify-end">
+          <UButton>Kirim</UButton>
+        </div>
       </div>
     </div>
   </main>

@@ -7,7 +7,7 @@
 <template>
   <main>
     <!-- Section1 -->
-    <div class="bg-[url('/tentangbg1.webp')] bg-cover bg-bottom py-12">
+    <div class="bg-[url('/tentangbg1.webp')] bg-cover bg-center py-12">
       <div
         class="container grid h-full items-center justify-center gap-12 md:grid-cols-2"
       >
