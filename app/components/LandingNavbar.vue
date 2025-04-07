@@ -109,7 +109,7 @@
               class="border-b border-black/20 pb-2"
               @click="open = false"
             >
-              Daftar
+              Dashboard
             </NuxtLink>
           </nav>
         </template>
