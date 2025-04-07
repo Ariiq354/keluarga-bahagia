@@ -115,7 +115,7 @@
           </UFormField>
 
           <UFormField label="Status" name="isActive">
-            <UToggle v-model="state.isActive" :disabled="modalLoading" />
+            <USwitch v-model="state.isActive" :disabled="modalLoading" />
           </UFormField>
 
           <!-- prettier-ignore -->

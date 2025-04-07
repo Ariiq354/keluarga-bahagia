@@ -8,11 +8,13 @@
   <Title>Keluarga Bahagia</Title>
   <main class="font-sans">
     <!-- Section 1 -->
-    <div class="h-screen bg-[url('/landingbg1.webp')] bg-cover">
+    <div class="bg-[url('/landingbg1.webp')] bg-cover bg-bottom">
       <div
         class="container grid h-full items-center justify-center md:grid-cols-2"
       >
-        <div class="flex h-full w-full flex-col justify-center gap-8 p-16">
+        <div
+          class="flex h-full w-full flex-col justify-center gap-8 py-12 md:px-16"
+        >
           <h1
             class="text-center text-4xl font-bold text-black md:text-left md:text-6xl"
           >
@@ -21,7 +23,7 @@
           </h1>
           <NuxtImg src="/landingimg1.webp" class="block w-full md:hidden" />
           <p
-            class="text-center text-xl font-semibold text-eastern-blue-700 md:mt-0 md:text-left"
+            class="text-eastern-blue-700 text-center text-xl font-semibold md:mt-0 md:text-left"
           >
             Bergabunglah dengan seminar kami dan jelajahi buku-buku unggulan
             kami untuk mempelajari cara menciptakan keluarga yang kuat dan penuh
@@ -46,9 +48,9 @@
         <h1 class="text-center text-4xl font-bold md:mb-12 md:text-left">
           Kami Menyediakan Beberapa Jasa
         </h1>
-        <div class="flex flex-col gap-12 md:flex-row">
+        <div class="flex flex-col gap-12 px-4 md:flex-row">
           <div
-            class="flex h-[25rem] w-[25rem] flex-col justify-end rounded-2xl bg-[url('/square1.webp')] bg-[length:42rem] bg-[center_calc(50%+50px)] p-12 shadow-xl"
+            class="flex h-[25rem] max-w-[25rem] flex-col justify-end rounded-2xl bg-[url('/square1.webp')] bg-[length:42rem] bg-[center_calc(50%+3rem)] p-4 shadow-xl md:p-12"
           >
             <h1 class="mb-2 text-center text-2xl font-bold">Bootcamp</h1>
             <p class="text-center">
@@ -58,7 +60,7 @@
             </p>
           </div>
           <div
-            class="flex h-[25rem] w-[25rem] flex-col justify-end rounded-2xl bg-[url('/square2.webp')] bg-[length:42rem] bg-[center_calc(50%+50px)] p-12 shadow-xl"
+            class="flex h-[25rem] max-w-[25rem] flex-col justify-end rounded-2xl bg-[url('/square2.webp')] bg-[length:42rem] bg-[center_calc(50%+3rem)] p-4 shadow-xl md:p-12"
           >
             <h1 class="mb-2 text-center text-2xl font-bold">Jodoh</h1>
             <p class="text-center">
@@ -81,7 +83,7 @@
           <h1 class="text-center text-5xl font-bold md:text-left md:text-6xl">
             Seminar Pranikah
           </h1>
-          <ul class="flex list-disc flex-col gap-4 p-4 text-xl">
+          <ul class="ml-2 flex list-disc flex-col gap-4 p-4 text-xl">
             <li>
               Membantu Anda memahami esensi pernikahan sebagai ibadah dan
               separuh agama yang sempurna
@@ -108,7 +110,7 @@
       </div>
     </div>
     <div
-      class="w-full bg-eastern-blue-200 py-12 text-eastern-blue-700 md:px-12"
+      class="bg-eastern-blue-200 text-eastern-blue-700 w-full py-12 md:px-12"
     >
       <p class="container text-center text-2xl leading-loose md:w-2/3">
         "Menikah adalah perjalanan yang indah, namun membutuhkan persiapan yang

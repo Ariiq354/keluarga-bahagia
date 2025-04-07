@@ -1,5 +1,6 @@
 <script lang="ts" setup>
   const user = useUser();
+  const open = ref(false);
 </script>
 
 <template>
@@ -8,9 +9,9 @@
   >
     <div class="container flex items-center justify-between">
       <div
-        class="flex items-center gap-4 text-xl font-bold tracking-wider text-black md:text-2xl"
+        class="flex items-center gap-4 font-bold tracking-wider text-black md:text-2xl"
       >
-        <NuxtImg src="/logo.webp" alt="logo" class="h-14" />
+        <NuxtImg src="/logo.webp" alt="logo" class="h-10 md:h-14" />
         <p class="text-eastern-blue-700">KELUARGA BAHAGIA</p>
       </div>
       <nav class="hidden gap-12 text-lg font-semibold md:flex">
@@ -39,12 +40,64 @@
           Kontak
         </NuxtLink>
       </nav>
-      <UButton v-if="!user" to="/login" class="hidden text-white md:block"
-        >Daftar</UButton
-      >
-      <UButton v-else to="/dashboard" class="hidden text-white md:block"
-        >Dashboard</UButton
-      >
+      <UButton v-if="!user" to="/login" class="hidden text-white md:block">
+        Daftar
+      </UButton>
+      <UButton v-else to="/dashboard" class="hidden text-white md:block">
+        Dashboard
+      </UButton>
+      <USlideover v-model:open="open" class="md:hidden" title="Menu">
+        <div role="button" aria-label="Open Menu">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M4 12h16M4 6h16M4 18h16"
+            />
+          </svg>
+        </div>
+
+        <template #body>
+          <nav class="flex flex-col gap-4">
+            <NuxtLink
+              href="/"
+              class="border-b border-black/20 pb-2"
+              @click="open = false"
+            >
+              Beranda
+            </NuxtLink>
+            <NuxtLink
+              href="/about"
+              class="border-b border-black/20 pb-2"
+              @click="open = false"
+            >
+              Tentang Kami
+            </NuxtLink>
+            <NuxtLink
+              href="/product"
+              class="border-b border-black/20 pb-2"
+              @click="open = false"
+            >
+              Produk
+            </NuxtLink>
+            <NuxtLink
+              href="/contact"
+              class="border-b border-black/20 pb-2"
+              @click="open = false"
+            >
+              Kontak
+            </NuxtLink>
+          </nav>
+        </template>
+      </USlideover>
     </div>
   </header>
 </template>

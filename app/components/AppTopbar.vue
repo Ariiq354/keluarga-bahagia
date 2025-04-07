@@ -4,19 +4,10 @@
   }>();
 
   const sidebarState = useSidebarToggle();
-
   const topbarTitle = useTopbarTitle();
-  const modalOpen = ref(false);
 
   const items = [
     [
-      {
-        label: "Profil",
-        icon: "i-heroicons-user",
-        onSelect: () => {
-          modalOpen.value = true;
-        },
-      },
       {
         label: "Keluar",
         icon: "i-heroicons-arrow-left-on-rectangle",
@@ -39,7 +30,6 @@
 </script>
 
 <template>
-  <ModalProfile v-model:open="modalOpen" />
   <header class="mb-8 flex justify-between">
     <div class="flex items-center gap-8">
       <UButton

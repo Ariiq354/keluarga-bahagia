@@ -7,7 +7,7 @@
 <template>
   <main>
     <!-- Section1 -->
-    <div class="min-h-screen bg-[url('/tentangbg1.webp')] bg-cover bg-center">
+    <div class="bg-[url('/tentangbg1.webp')] bg-cover bg-bottom py-12">
       <div
         class="container grid h-full items-center justify-center gap-12 md:grid-cols-2"
       >
@@ -36,9 +36,9 @@
 
     <!-- Section 2 -->
     <div
-      class="flex min-h-screen items-center bg-[url('/tentangbg2.webp')] bg-cover bg-center py-12"
+      class="flex items-center bg-[url('/tentangbg2.webp')] bg-cover bg-center py-12"
     >
-      <div class="container flex flex-col gap-12 px-40">
+      <div class="container flex flex-col gap-12 md:px-40">
         <h1 class="text-center text-5xl font-bold">Diajarkan Praktisi</h1>
         <div class="grid gap-12 md:grid-cols-3">
           <NuxtImg src="/foto1.webp" />

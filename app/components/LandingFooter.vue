@@ -1,13 +1,13 @@
 <template>
-  <footer class="landing w-full bg-eastern-blue-100 font-sans">
+  <footer class="landing bg-eastern-blue-100 w-full font-sans">
     <div
-      class="container flex flex-col items-center justify-between p-12 md:flex-row"
+      class="container flex flex-col items-center justify-between gap-4 p-12 md:flex-row"
     >
       <div class="flex flex-shrink-0 flex-col items-center gap-4">
         <NuxtImg src="/logo.webp" alt="logo" class="w-24" />
         <h1 class="text-xl font-bold">Keluarga Bahagia</h1>
       </div>
-      <div class="flex flex-col gap-24 md:flex-row">
+      <div class="flex flex-col gap-4 md:flex-row md:gap-24">
         <div class="flex flex-col gap-4">
           <h1 class="border-b-2 border-b-black text-xl font-bold">
             Info Kontak
