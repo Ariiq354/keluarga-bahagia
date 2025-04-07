@@ -95,6 +95,22 @@
             >
               Kontak
             </NuxtLink>
+            <NuxtLink
+              v-if="!user"
+              href="/login"
+              class="border-b border-black/20 pb-2"
+              @click="open = false"
+            >
+              Daftar
+            </NuxtLink>
+            <NuxtLink
+              v-else
+              href="/dashboard"
+              class="border-b border-black/20 pb-2"
+              @click="open = false"
+            >
+              Daftar
+            </NuxtLink>
           </nav>
         </template>
       </USlideover>
