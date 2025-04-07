@@ -150,9 +150,8 @@
     <div class="flex items-center justify-center pt-8 pb-6 text-(--ui-primary)">
       <div class="flex items-center text-2xl tracking-widest">
         <NuxtImg src="/logo.webp" class="h-14 w-14" />
-        <!-- prettier-ignore -->
         <span>
-          Keluarga <br>
+          Keluarga <br />
           Bahagia
         </span>
       </div>

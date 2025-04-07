@@ -34,8 +34,8 @@
 </script>
 
 <template>
-  <div class="my-12 flex flex-col gap-4">
-    <div class="container w-full rounded-lg bg-eastern-blue-300 p-3">
+  <div class="my-8 flex flex-col gap-4 p-4">
+    <div class="bg-eastern-blue-300 container w-full rounded-lg p-3">
       <div class="flex w-full gap-12 rounded-md bg-white p-4">
         <NuxtImg
           :src="carouselItem[id]!.image"
@@ -60,15 +60,15 @@
         </div>
       </div>
     </div>
-    <div class="container rounded-lg bg-eastern-blue-300 p-4">
-      <h1 class="mb-2 text-2xl font-bold text-eastern-blue-700">Tempat</h1>
+    <div class="bg-eastern-blue-300 container rounded-lg p-4">
+      <h1 class="text-eastern-blue-700 mb-2 text-2xl font-bold">Tempat</h1>
       <p class="text-lg">
         Lorem ipsum dolor sit, amet consectetur adipisicing elit
       </p>
     </div>
-    <div class="container flex flex-col gap-4 text-lg">
+    <div class="flex flex-col gap-4 text-lg md:container">
       <h1>Bootcamp Bogor</h1>
-      <div class="w-[50%]">
+      <div class="md:w-[50%]">
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officia harum
         dolorem cum veritatis. Fugiat aliquid eum voluptates eaque laboriosam
         laudantium ab nemo, perferendis impedit possimus exercitationem

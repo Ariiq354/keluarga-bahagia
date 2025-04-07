@@ -118,8 +118,7 @@
             <USwitch v-model="state.isActive" :disabled="modalLoading" />
           </UFormField>
 
-          <!-- prettier-ignore -->
-          <hr>
+          <hr />
 
           <div>
             Detail User
