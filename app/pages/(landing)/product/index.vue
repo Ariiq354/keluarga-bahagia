@@ -7,24 +7,28 @@
     {
       image: "/1.webp",
       title: "lorem ipsum",
+      harga: "Rp. 200000",
       waktu: "30 Juni 2024",
       tempat: "bogor",
     },
     {
       image: "/2.webp",
       title: "lorem ipsum",
+      harga: "Rp. 200000",
       waktu: "30 Juni 2024",
       tempat: "bogor",
     },
     {
       image: "/3.webp",
       title: "lorem ipsum",
+      harga: "Rp. 200000",
       waktu: "30 Juni 2024",
       tempat: "bogor",
     },
     {
       image: "/4.webp",
       title: "lorem ipsum",
+      harga: "Rp. 200000",
       waktu: "30 Juni 2024",
       tempat: "bogor",
     },
@@ -32,46 +36,40 @@
 </script>
 
 <template>
-  <main class="px-4">
-    <div
-      class="bg-eastern-blue-200 container my-12 flex flex-col items-center justify-center gap-4 rounded-xl p-4 shadow-2xl md:px-20 md:py-8"
+  <div class="bg-eastern-blue-200 bg-cover px-12 py-12">
+    <div class="px-8 text-4xl font-semibold">Daftar Bootcamp</div>
+  </div>
+  <main class="mb-8 px-12">
+    <div class="mt-8 mb-4 px-8">Menampilkan 1-4 dari 4 hasil</div>
+    <!-- UCarousel wrapper -->
+    <UCarousel
+      class="px-4"
+      :items="carouselItem"
+      :ui="{ item: 'basis-full md:basis-1/2 lg:basis-1/4 px-2' }"
     >
-      <h1
-        class="my-4 w-full border-b-2 py-4 text-center text-4xl font-semibold"
-      >
-        Daftar Bootcamp
-      </h1>
-
-      <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <template #default="{ item, index }">
         <UCard
-          v-for="(item, index) in carouselItem"
           :key="index"
-          class="bg-eastern-blue-100 w-full rounded-lg text-black md:mx-2"
+          class="flex h-full flex-col rounded-none p-0 text-black"
         >
-          <div class="flex flex-col items-center justify-center gap-4 p-2">
-            <NuxtImg :src="item.image" alt="produk" class="rounded-md" />
-            <UButton
-              class="bg-primary flex w-full justify-center py-2 text-black"
+          <div class="flex h-full flex-col justify-between gap-4">
+            <NuxtLink
               :to="`/product/${index}`"
+              class="flex flex-col gap-4 transition hover:opacity-80"
             >
-              Klik Untuk Pesan Event ini
+              <NuxtImg :src="item.image" alt="produk" class="max-h-128" />
+              <h1 class="text-lg font-bold">
+                Rahasia Keluarga Bahagia: Keluarga, Anak
+              </h1>
+              <h3 class="font-semibold">{{ item.harga }}</h3>
+            </NuxtLink>
+
+            <UButton class="bg-primary w-max px-4 py-2 text-black">
+              Tambahkan ke keranjang
             </UButton>
-            <h1 class="text-lg font-bold">
-              Rahasia Keluarga Bahagia: Keluarga, Anak
-            </h1>
-            <div class="mb-2 flex w-full justify-between gap-4 text-sm">
-              <div class="flex flex-col gap-2">
-                <h1 class="text-primary font-serif font-light">Waktu</h1>
-                <p class="font-bold">30 Juni 2024</p>
-              </div>
-              <div class="flex flex-col gap-2">
-                <h1 class="text-primary font-serif font-light">Tempat</h1>
-                <p class="font-bold">Bogor</p>
-              </div>
-            </div>
           </div>
         </UCard>
-      </div>
-    </div>
+      </template>
+    </UCarousel>
   </main>
 </template>

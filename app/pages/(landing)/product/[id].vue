@@ -9,24 +9,28 @@
     {
       image: "/1.webp",
       title: "lorem ipsum",
+      harga: "Rp. 200000",
       waktu: "30 Juni 2024",
       tempat: "bogor",
     },
     {
       image: "/2.webp",
       title: "lorem ipsum",
+      harga: "Rp. 200000",
       waktu: "30 Juni 2024",
       tempat: "bogor",
     },
     {
       image: "/3.webp",
       title: "lorem ipsum",
+      harga: "Rp. 200000",
       waktu: "30 Juni 2024",
       tempat: "bogor",
     },
     {
       image: "/4.webp",
       title: "lorem ipsum",
+      harga: "Rp. 200000",
       waktu: "30 Juni 2024",
       tempat: "bogor",
     },
@@ -34,56 +38,54 @@
 </script>
 
 <template>
-  <div class="my-8 flex flex-col gap-4 p-4">
-    <div class="bg-eastern-blue-300 container w-full rounded-lg p-3">
-      <div class="flex w-full gap-12 rounded-md bg-white p-4">
-        <NuxtImg
-          :src="carouselItem[id]!.image"
-          alt="produk"
-          width="300"
-          class="rounded-md"
-        />
-        <div class="mt-auto flex flex-col gap-4 text-4xl">
-          <h1 class="mb-4 font-bold">
-            Rahasia Keluarga Bahagia: Keluarga, Anak
-          </h1>
-          <div class="mb-2 flex w-full justify-between gap-4">
-            <div class="flex flex-col gap-2">
-              <h1 class="text-primary font-serif font-light">Waktu</h1>
-              <p class="font-bold">30 Juni 2024</p>
-            </div>
-            <div class="flex flex-col gap-2">
-              <h1 class="text-primary font-serif font-light">Tempat</h1>
-              <p class="font-bold">Bogor</p>
-            </div>
-          </div>
-        </div>
+  <div
+    class="container my-8 grid h-full items-center justify-center gap-12 md:grid-cols-2"
+  >
+    <NuxtImg
+      :src="carouselItem[id]!.image"
+      alt="produk"
+      class="max-h-[640px] rounded-md"
+    />
+    <div class="flex h-full flex-col gap-6">
+      <div>
+        <h1 class="text-center text-left text-5xl font-bold md:text-6xl">
+          Seminar Pranikah
+        </h1>
+        <h2 class="mt-4 text-3xl font-semibold text-amber-500">
+          {{ carouselItem[id]!.harga }}
+        </h2>
       </div>
-    </div>
-    <div class="bg-eastern-blue-300 container rounded-lg p-4">
-      <h1 class="text-eastern-blue-700 mb-2 text-2xl font-bold">Tempat</h1>
-      <p class="text-lg">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit
-      </p>
-    </div>
-    <div class="flex flex-col gap-4 text-lg md:container">
-      <h1>Bootcamp Bogor</h1>
-      <div class="md:w-[50%]">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officia harum
-        dolorem cum veritatis. Fugiat aliquid eum voluptates eaque laboriosam
-        laudantium ab nemo, perferendis impedit possimus exercitationem
-        blanditiis, earum fugit molestiae.
-        <br />
-        <br />
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-        Exercitationem, magnam placeat, reiciendis ea alias, accusantium
-        similique eaque quidem quisquam cum quae autem dolorum quia repellendus
-        earum doloremque animi? Sit, perspiciatis.
-        <br />
-        <br />
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui impedit
-        molestiae iusto, quasi velit enim, autem ad alias ratione illum, amet
-        ipsum ut laborum mollitia et ea. Dolor, magni impedit?
+      <div>
+        <h2 class="mt-2 text-2xl font-semibold">Deskripsi</h2>
+        <ul class="ml-2 flex list-disc flex-col gap-4 px-4 text-xl">
+          <li>
+            Membantu Anda memahami esensi pernikahan sebagai ibadah dan separuh
+            agama yang sempurna
+          </li>
+          <li>
+            Mempersiapkan Anda untuk membangun rumah tangga yang kokoh dan
+            bahagia
+          </li>
+          <li>
+            Memberikan bekal ilmu dan keterampilan praktis untuk menghadapi
+            berbagai tantangan dalam pernikahan
+          </li>
+          <li>Memperkuat komitmen dan komunikasi dengan pasangan</li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="mt-2 text-2xl font-semibold">Waktu & Tempat</h2>
+        <ul class="ml-2 flex list-disc flex-col gap-4 px-4 text-xl">
+          <li>Kecamatan Kebun Kacang, Kota Bogor</li>
+          <li>28 Oktober 2024: 22.00 - 02.00</li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="mt-2 text-2xl font-semibold">Pemateri</h2>
+        <ul class="ml-2 flex list-disc flex-col gap-4 px-4 text-xl">
+          <li>- [ Rino Amri, SE, M.Pd, chc] Konsultan Jelajah Diri</li>
+          <li>- [ Andri setiawan ] Guru Besar ponpes Dahlan ikhsan</li>
+        </ul>
       </div>
     </div>
   </div>
