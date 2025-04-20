@@ -10,7 +10,7 @@
       <div class="flex flex-col gap-4 md:flex-row md:gap-24">
         <div class="flex flex-col gap-4">
           <h1 class="border-b-2 border-b-black text-xl font-bold">
-            Info Kontak
+            Hubungi Kami
           </h1>
           <ul class="flex flex-col gap-2">
             <li class="flex w-44 items-center gap-2">

@@ -31,7 +31,7 @@
           href="/product"
           class="transition-all duration-300 hover:-translate-y-1 hover:opacity-70"
         >
-          Produk
+          Layanan
         </NuxtLink>
         <NuxtLink
           href="/contact"

@@ -18,16 +18,14 @@
           <h1
             class="text-center text-4xl font-bold text-black md:text-left md:text-6xl"
           >
-            Temukan Rahasia
+            Welcome To
             <span class="text-eastern-blue-500">Keluarga </span>Bahagia
           </h1>
           <NuxtImg src="/landingimg1.webp" class="block w-full md:hidden" />
           <p
             class="text-eastern-blue-700 text-center text-xl font-semibold md:mt-0 md:text-left"
           >
-            Bergabunglah dengan seminar kami dan jelajahi buku-buku unggulan
-            kami untuk mempelajari cara menciptakan keluarga yang kuat dan penuh
-            kasih sayang.
+            Make your self a good quality person
           </p>
           <div class="flex justify-center gap-4 md:justify-normal">
             <UButton class="shadow-lg" href="/about">Learn More</UButton>
@@ -46,7 +44,7 @@
         class="container flex h-full flex-col items-center justify-center gap-12 py-12"
       >
         <h1 class="text-center text-4xl font-bold md:mb-12 md:text-left">
-          Kami Menyediakan Beberapa Jasa
+          Kami Menyediakan Beberapa Layanan
         </h1>
         <div class="flex flex-col gap-12 px-4 md:flex-row">
           <div
@@ -98,14 +96,6 @@
             </li>
             <li>Memperkuat komitmen dan komunikasi dengan pasangan</li>
           </ul>
-          <div class="mb-12 flex flex-col gap-4 md:mb-0">
-            <div class="flex items-center gap-2">
-              - [ Rino Amri, SE, M.Pd, chc] Konsultan Jelajah Diri
-            </div>
-            <div class="flex items-center gap-2">
-              - [ Andri setiawan ] Guru Besar ponpes Dahlan ikhsan
-            </div>
-          </div>
         </div>
       </div>
     </div>
