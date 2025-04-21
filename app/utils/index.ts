@@ -27,6 +27,13 @@ export function json2Csv(data: { [key: string]: unknown }[]) {
   URL.revokeObjectURL(url);
 }
 
+export const formatRupiah = (value) => {
+  return new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+  }).format(value);
+};
+
 export function getCurrentDate() {
   const currentDate = new Date();
   const year = currentDate.getFullYear();

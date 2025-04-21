@@ -1,7 +1,7 @@
 <script setup lang="ts">
-  definePageMeta({
-    layout: "landing",
-  });
+definePageMeta({
+  layout: "landing",
+});
 </script>
 
 <template>
@@ -9,25 +9,16 @@
   <main class="font-sans">
     <!-- Section 1 -->
     <div class="bg-[url('/landingbg1.webp')] bg-cover bg-bottom">
-      <div
-        class="container grid h-full items-center justify-center md:grid-cols-2"
-      >
-        <div
-          class="flex h-full w-full flex-col justify-center gap-8 py-12 md:px-16"
-        >
-          <h1
-            class="text-center text-4xl font-bold text-black md:text-left md:text-6xl"
-          >
+      <div class="container grid h-full items-center justify-center md:grid-cols-2">
+        <div class="flex h-full w-full flex-col justify-center gap-8 py-12 md:px-16">
+          <h1 class="text-center text-4xl font-bold text-black md:text-left md:text-6xl">
             Temukan Rahasia
             <span class="text-eastern-blue-500">Keluarga </span>Bahagia
           </h1>
           <NuxtImg src="/landingimg1.webp" class="block w-full md:hidden" />
-          <p
-            class="text-eastern-blue-700 text-center text-xl font-semibold md:mt-0 md:text-left"
-          >
-            Bergabunglah dengan seminar kami dan jelajahi buku-buku unggulan
-            kami untuk mempelajari cara menciptakan keluarga yang kuat dan penuh
-            kasih sayang.
+          <p class="text-eastern-blue-700 text-center text-xl font-semibold md:mt-0 md:text-left">
+            اْلأَرْوَاحُ جُنُوْدٌ مُجَنَّدَةٌ فَمَا تَعَارَفَ مِنْهَا اىٔتَلَفَ وَمَا تَنَاكَرَ مِنْهَا اخْتَلَفَ #
+            رواه البخاري
           </p>
           <div class="flex justify-center gap-4 md:justify-normal">
             <UButton class="shadow-lg" href="/about">Learn More</UButton>
@@ -42,26 +33,24 @@
 
     <!-- Section 2 -->
     <div class="w-full bg-white pb-12">
-      <div
-        class="container flex h-full flex-col items-center justify-center gap-12 py-12"
-      >
+      <div class="container flex h-full flex-col items-center justify-center gap-12 py-12">
         <h1 class="text-center text-4xl font-bold md:mb-12 md:text-left">
           Kami Menyediakan Beberapa Jasa
         </h1>
         <div class="flex flex-col gap-12 px-4 md:flex-row">
+          <NuxtLink to="/product" class=" block">
+            <div
+              class="flex h-[25rem] max-w-[25rem] flex-col justify-end rounded-2xl bg-[url('/square1.webp')] bg-[length:42rem] bg-[center_calc(50%+3rem)] p-4 shadow-xl md:p-12">
+              <h1 class="mb-2 text-center text-2xl font-bold">Bootcamp</h1>
+              <p class="text-center">
+                Program ini bertujuan untuk memberikan bekal pengetahuan &
+                keterampilan yang di perlukan dalam membangun kehidupan rumah
+                tangga yang bahagia & harmonis.
+              </p>
+            </div>
+          </NuxtLink>
           <div
-            class="flex h-[25rem] max-w-[25rem] flex-col justify-end rounded-2xl bg-[url('/square1.webp')] bg-[length:42rem] bg-[center_calc(50%+3rem)] p-4 shadow-xl md:p-12"
-          >
-            <h1 class="mb-2 text-center text-2xl font-bold">Bootcamp</h1>
-            <p class="text-center">
-              Program ini bertujuan untuk memberikan bekal pengetahuan &
-              keterampilan yang di perlukan dalam membangun kehidupan rumah
-              tangga yang bahagia & harmonis.
-            </p>
-          </div>
-          <div
-            class="flex h-[25rem] max-w-[25rem] flex-col justify-end rounded-2xl bg-[url('/square2.webp')] bg-[length:42rem] bg-[center_calc(50%+3rem)] p-4 shadow-xl md:p-12"
-          >
+            class="flex h-[25rem] max-w-[25rem] flex-col justify-end rounded-2xl bg-[url('/square2.webp')] bg-[length:42rem] bg-[center_calc(50%+3rem)] p-4 shadow-xl md:p-12">
             <h1 class="mb-2 text-center text-2xl font-bold">Jodoh</h1>
             <p class="text-center">
               Banyak yang percaya bahwa jodoh adalah cerminan dari diri kita
@@ -75,9 +64,7 @@
 
     <!-- Section 3 -->
     <div class="bg-[url('/landingbg2.webp')] bg-cover py-12">
-      <div
-        class="container grid h-full items-center justify-center md:grid-cols-2"
-      >
+      <div class="container grid h-full items-center justify-center md:grid-cols-2">
         <NuxtImg src="/landingimg2.webp" class="w-full" />
         <div class="flex h-full flex-col justify-center gap-12">
           <h1 class="text-center text-5xl font-bold md:text-left md:text-6xl">
@@ -109,14 +96,14 @@
         </div>
       </div>
     </div>
-    <div
-      class="bg-eastern-blue-200 text-eastern-blue-700 w-full py-12 md:px-12"
-    >
+    <div class="bg-eastern-blue-200 flex flex-col text-eastern-blue-700 w-full py-12 md:px-12">
       <p class="container text-center text-2xl leading-loose md:w-2/3">
-        "Menikah adalah perjalanan yang indah, namun membutuhkan persiapan yang
-        matang. Bangunlah fondasi pernikahan yang kokoh dan bahagia. Jangan ragu
-        untuk mendaftar dan persiapkan diri Anda untuk menyambut masa depan yang
-        indah bersama pasangan tercinta."
+        "اَلْخَبِيْثٰتُ لِلْخَبِيْثِيْنَ وَالْخَبِيْثُوْنَ لِلْخَبِيْثٰتِۚ وَالطَّيِّبٰتُ لِلطَّيِّبِيْنَ
+        وَالطَّيِّبُوْنَ لِلطَّيِّبٰتِۚ اُولٰۤىِٕكَ مُبَرَّءُوْنَ مِمَّا يَقُوْلُوْنَۗ لَهُمْ مَّغْفِرَةٌ وَّرِزْقٌ
+        كَرِيْمٌ ࣖ"
+      </p>
+      <p class="container text-center text-2xl leading-loose md:w-2/3">
+        "An Nur: 26"
       </p>
     </div>
   </main>
