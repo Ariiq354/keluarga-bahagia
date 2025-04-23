@@ -14,6 +14,10 @@ export const columns = [
     header: "Tempat",
   },
   {
+    accessorKey: "description",
+    header: "Deskripsi",
+  },
+  {
     accessorKey: "time",
     header: "Jadwal",
   },
@@ -33,7 +37,7 @@ export const schema = v.pipe(
     place: v.pipe(v.string(), v.minLength(1, "Required")),
     time: v.pipe(v.string(), v.minLength(1, "Required")),
     speaker: v.pipe(v.string(), v.minLength(1, "Required")),
-  }),
+  })
 );
 
 export type Schema = v.InferOutput<typeof schema>;

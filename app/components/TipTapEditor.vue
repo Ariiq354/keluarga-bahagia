@@ -5,6 +5,7 @@
   import TextAlign from "@tiptap/extension-text-align";
   import Underline from "@tiptap/extension-underline";
   import StarterKit from "@tiptap/starter-kit";
+  import Heading from "@tiptap/extension-heading";
   import { EditorContent, useEditor } from "@tiptap/vue-3";
 
   const editorData = defineModel<string>();
@@ -15,6 +16,9 @@
       Highlight,
       Subscript,
       Superscript,
+      Heading.configure({
+        levels: [1, 2, 3],
+      }),
       TextAlign.configure({
         types: ["heading", "paragraph"],
       }),
@@ -25,7 +29,7 @@
           "border h-48 p-4 overflow-y-auto prose max-w-none prose-base outline-none rounded-md",
       },
     },
-    content: editorData,
+    content: editorData.value,
     onUpdate: () => {
       editorData.value = editor.value!.getHTML();
     },
@@ -256,7 +260,7 @@
         </UTooltip>
       </div>
     </div>
-    <editor-content v-model="editorData" :editor="editor" />
+    <editor-content :editor="editor" />
   </ClientOnly>
 </template>
 

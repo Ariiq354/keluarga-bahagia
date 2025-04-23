@@ -1,16 +1,19 @@
 <script setup lang="ts">
   import type { FormSubmitEvent } from "#ui/types";
-  import { columns,
+  import {
+    columns,
     getInitialFormData,
     schema,
-    type Schema, } from "./_constants";
+    type Schema,
+  } from "./_constants";
 
   onMounted(() => {
     defineTopbarTitle("Daftar Bootcamp");
   });
 
+  const { data, status, refresh } = await useLazyFetch(`/api/bootcamp`);
 
-  const { data, status, refresh} = await useLazyFetch(`/api/bootcamp`);
+  console.log(data);
 
   const state = ref(getInitialFormData());
 
@@ -70,21 +73,25 @@
 <template>
   <Title>Daftar Bootcamp</Title>
   <main>
-     <div
-        v-if="modalOpen"
-        class="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm flex items-center justify-center"
+    <div
+      v-if="modalOpen"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm"
+    >
+      <div
+        class="relative max-h-[90vh] w-full max-w-2xl overflow-auto rounded-xl bg-white p-6 shadow-lg dark:bg-gray-900"
       >
-        <div
-          class="relative bg-white dark:bg-gray-900 rounded-xl shadow-lg max-w-2xl w-full p-6 overflow-auto max-h-[90vh]"
-        >
-          <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-bold">
-              {{ state.id ? 'Edit Bootcamp' : 'Tambah Bootcamp' }}
-            </h2>
-            <UButton icon="i-heroicons-x-mark" variant="ghost" @click="modalOpen = false" />
-          </div>
+        <div class="mb-4 flex items-center justify-between">
+          <h2 class="text-xl font-bold">
+            {{ state.id ? "Edit Bootcamp" : "Tambah Bootcamp" }}
+          </h2>
+          <UButton
+            icon="i-heroicons-x-mark"
+            variant="ghost"
+            @click="modalOpen = false"
+          />
+        </div>
 
-          <UForm
+        <UForm
           :schema="schema"
           :state="state"
           class="space-y-4"
@@ -95,7 +102,10 @@
           </UFormField>
 
           <UFormField label="Deskripsi" name="deskripsi">
-            <TipTapEditor v-model="state.description" :disabled="modalLoading" />
+            <TipTapEditor
+              v-model="state.description"
+              :disabled="modalLoading"
+            />
           </UFormField>
 
           <UFormField label="Harga" name="price">
@@ -106,17 +116,16 @@
             <UInput v-model="state.place" :disabled="modalLoading" />
           </UFormField>
 
-
           <UFormField label="Sampai" name="timeTo">
             <UInput v-model="state.time" :disabled="modalLoading" />
           </UFormField>
 
           <UFormField label="Upload Foto diri" name="foto">
             <ImageUpload
-                :disabled="false"
-                :url="state.foto ? state.foto : ''"
-                @change="(url) => (state.foto = url)"
-                @remove="() => (state.foto = '')"
+              :disabled="false"
+              :url="state.foto ? state.foto : ''"
+              @change="(url) => (state.foto = url)"
+              @remove="() => (state.foto = '')"
             />
           </UFormField>
 
@@ -161,10 +170,10 @@
             </UButton>
           </div>
         </UForm>
-        </div>
       </div>
+    </div>
     <UCard>
-        <CrudCard
+      <CrudCard
         :data="data"
         :add-function="clickAdd"
         :delete-function="clickDelete"
