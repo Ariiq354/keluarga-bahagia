@@ -18,14 +18,15 @@
           <h1
             class="text-center text-4xl font-bold text-black md:text-left md:text-6xl"
           >
-            Welcome To
+            Temukan Rahasia
             <span class="text-eastern-blue-500">Keluarga </span>Bahagia
           </h1>
           <NuxtImg src="/landingimg1.webp" class="block w-full md:hidden" />
           <p
             class="text-eastern-blue-700 text-center text-xl font-semibold md:mt-0 md:text-left"
           >
-            Make your self a good quality person
+            اْلأَرْوَاحُ جُنُوْدٌ مُجَنَّدَةٌ فَمَا تَعَارَفَ مِنْهَا اىٔتَلَفَ
+            وَمَا تَنَاكَرَ مِنْهَا اخْتَلَفَ # رواه البخاري
           </p>
           <div class="flex justify-center gap-4 md:justify-normal">
             <UButton class="shadow-lg" href="/about">Learn More</UButton>
@@ -47,16 +48,18 @@
           Kami Menyediakan Beberapa Layanan
         </h1>
         <div class="flex flex-col gap-12 px-4 md:flex-row">
-          <div
-            class="flex h-[25rem] max-w-[25rem] flex-col justify-end rounded-2xl bg-[url('/square1.webp')] bg-[length:42rem] bg-[center_calc(50%+3rem)] p-4 shadow-xl md:p-12"
-          >
-            <h1 class="mb-2 text-center text-2xl font-bold">Bootcamp</h1>
-            <p class="text-center">
-              Program ini bertujuan untuk memberikan bekal pengetahuan &
-              keterampilan yang di perlukan dalam membangun kehidupan rumah
-              tangga yang bahagia & harmonis.
-            </p>
-          </div>
+          <NuxtLink to="/product" class="block">
+            <div
+              class="flex h-[25rem] max-w-[25rem] flex-col justify-end rounded-2xl bg-[url('/square1.webp')] bg-[length:42rem] bg-[center_calc(50%+3rem)] p-4 shadow-xl md:p-12"
+            >
+              <h1 class="mb-2 text-center text-2xl font-bold">Bootcamp</h1>
+              <p class="text-center">
+                Program ini bertujuan untuk memberikan bekal pengetahuan &
+                keterampilan yang di perlukan dalam membangun kehidupan rumah
+                tangga yang bahagia & harmonis.
+              </p>
+            </div>
+          </NuxtLink>
           <div
             class="flex h-[25rem] max-w-[25rem] flex-col justify-end rounded-2xl bg-[url('/square2.webp')] bg-[length:42rem] bg-[center_calc(50%+3rem)] p-4 shadow-xl md:p-12"
           >
@@ -100,13 +103,16 @@
       </div>
     </div>
     <div
-      class="bg-eastern-blue-200 text-eastern-blue-700 w-full py-12 md:px-12"
+      class="bg-eastern-blue-200 text-eastern-blue-700 flex w-full flex-col py-12 md:px-12"
     >
       <p class="container text-center text-2xl leading-loose md:w-2/3">
-        "Menikah adalah perjalanan yang indah, namun membutuhkan persiapan yang
-        matang. Bangunlah fondasi pernikahan yang kokoh dan bahagia. Jangan ragu
-        untuk mendaftar dan persiapkan diri Anda untuk menyambut masa depan yang
-        indah bersama pasangan tercinta."
+        "اَلْخَبِيْثٰتُ لِلْخَبِيْثِيْنَ وَالْخَبِيْثُوْنَ لِلْخَبِيْثٰتِۚ
+        وَالطَّيِّبٰتُ لِلطَّيِّبِيْنَ وَالطَّيِّبُوْنَ لِلطَّيِّبٰتِۚ
+        اُولٰۤىِٕكَ مُبَرَّءُوْنَ مِمَّا يَقُوْلُوْنَۗ لَهُمْ مَّغْفِرَةٌ
+        وَّرِزْقٌ كَرِيْمٌ ࣖ"
+      </p>
+      <p class="container text-center text-2xl leading-loose md:w-2/3">
+        "An Nur: 26"
       </p>
     </div>
   </main>

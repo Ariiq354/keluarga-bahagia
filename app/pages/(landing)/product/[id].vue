@@ -1,58 +1,52 @@
 <script setup lang="ts">
-  definePageMeta({
-    layout: "landing",
-  });
-  const route = useRoute();
-  const id = Number(route.params.id);
+definePageMeta({
+  layout: "landing",
+});
+const route = useRoute();
+const id = Number(route.params.id);
 
-  const carouselItem = [
-    {
-      image: "/1.webp",
-      title: "lorem ipsum",
-      harga: "Rp. 200000",
-      waktu: "30 Juni 2024",
-      tempat: "bogor",
-    },
-    {
-      image: "/2.webp",
-      title: "lorem ipsum",
-      harga: "Rp. 200000",
-      waktu: "30 Juni 2024",
-      tempat: "bogor",
-    },
-    {
-      image: "/3.webp",
-      title: "lorem ipsum",
-      harga: "Rp. 200000",
-      waktu: "30 Juni 2024",
-      tempat: "bogor",
-    },
-    {
-      image: "/4.webp",
-      title: "lorem ipsum",
-      harga: "Rp. 200000",
-      waktu: "30 Juni 2024",
-      tempat: "bogor",
-    },
-  ];
+const carouselItem = [
+  {
+    image: "/1.webp",
+    title: "lorem ipsum",
+    harga: "200000",
+    waktu: "30 Juni 2024",
+    tempat: "bogor",
+  },
+  {
+    image: "/2.webp",
+    title: "lorem ipsum",
+    harga: "200000",
+    waktu: "30 Juni 2024",
+    tempat: "bogor",
+  },
+  {
+    image: "/3.webp",
+    title: "lorem ipsum",
+    harga: "200000",
+    waktu: "30 Juni 2024",
+    tempat: "bogor",
+  },
+  {
+    image: "/4.webp",
+    title: "lorem ipsum",
+    harga: "200000",
+    waktu: "30 Juni 2024",
+    tempat: "bogor",
+  },
+];
 </script>
 
 <template>
-  <div
-    class="container my-8 grid h-full items-center justify-center gap-12 md:grid-cols-2"
-  >
-    <NuxtImg
-      :src="carouselItem[id]!.image"
-      alt="produk"
-      class="max-h-[640px] rounded-md"
-    />
+  <div class="container my-8 grid h-full items-center justify-center gap-12 md:grid-cols-2">
+    <NuxtImg :src="carouselItem[id]!.image" alt="produk" class="max-h-[640px] rounded-md" />
     <div class="flex h-full flex-col gap-6">
       <div>
         <h1 class="text-center text-left text-5xl font-bold md:text-6xl">
           Seminar Pranikah
         </h1>
         <h2 class="mt-4 text-3xl font-semibold text-amber-500">
-          {{ carouselItem[id]!.harga }}
+          {{ formatRupiah(carouselItem[id]!.harga) }}
         </h2>
       </div>
       <div>

@@ -31,6 +31,16 @@
             },
           },
           {
+            label: "Bootcamp",
+            to: "/dashboard/bootcamp",
+            icon: "i-heroicons-computer-desktop",
+            onSelect: () => {
+              if (!isDesktop.value) {
+                sidebarState.value = true;
+              }
+            },
+          },
+          {
             label: "Pengajuan Taaruf",
             to: "/dashboard/list-taaruf",
             icon: "i-heroicons-users",
