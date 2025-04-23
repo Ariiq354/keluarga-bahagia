@@ -58,26 +58,33 @@
     openConfirmModal(onDelete);
   }
 
-//   function clickUpdate(itemData: ExtractObjectType<typeof data.value>) {
-//     modalOpen.value = true;
-//     const { detail, ...rest } = itemData;
-//     bootcampDetail.value = detail;
-//     state.value = {
-//       ...rest,
-//       password: "",
-//     };
-//   }
+  function clickUpdate(itemData: ExtractObjectType<typeof data.value>) {
+    modalOpen.value = true;
+    const { ...rest } = itemData;
+    state.value = {
+      ...rest,
+    };
+  }
 </script>
 
 <template>
   <Title>Daftar Bootcamp</Title>
   <main>
-    <UModal
-      v-model:open="modalOpen"
-      :title="state.id ? 'Edit User' : 'Tambah User'"
-    >
-      <template #body>
-        <UForm
+     <div
+        v-if="modalOpen"
+        class="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm flex items-center justify-center"
+      >
+        <div
+          class="relative bg-white dark:bg-gray-900 rounded-xl shadow-lg max-w-2xl w-full p-6 overflow-auto max-h-[90vh]"
+        >
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-bold">
+              {{ state.id ? 'Edit Bootcamp' : 'Tambah Bootcamp' }}
+            </h2>
+            <UButton icon="i-heroicons-x-mark" variant="ghost" @click="modalOpen = false" />
+          </div>
+
+          <UForm
           :schema="schema"
           :state="state"
           class="space-y-4"
@@ -88,19 +95,20 @@
           </UFormField>
 
           <UFormField label="Deskripsi" name="deskripsi">
-            <UInput v-model="state.description" :disabled="modalLoading" />
+            <TipTapEditor v-model="state.description" :disabled="modalLoading" />
+          </UFormField>
+
+          <UFormField label="Harga" name="price">
+            <UInput v-model.number="state.price" :disabled="modalLoading" />
           </UFormField>
 
           <UFormField label="Tempat" name="place">
             <UInput v-model="state.place" :disabled="modalLoading" />
           </UFormField>
 
-          <UFormField label="Dari" name="timeFrom">
-            <UInput v-model="state.timeFrom" :disabled="modalLoading" />
-          </UFormField>
 
           <UFormField label="Sampai" name="timeTo">
-            <UInput v-model="state.timeTo" :disabled="modalLoading" />
+            <UInput v-model="state.time" :disabled="modalLoading" />
           </UFormField>
 
           <UFormField label="Upload Foto diri" name="foto">
@@ -119,7 +127,7 @@
           <hr />
 
           <div>
-            Detail User
+            Detail Bootcamp
             <table v-if="bootcampDetail" class="mt-2 w-full text-sm">
               <tbody>
                 <tr
@@ -153,8 +161,8 @@
             </UButton>
           </div>
         </UForm>
-      </template>
-    </UModal>
+        </div>
+      </div>
     <UCard>
         <CrudCard
         :data="data"
@@ -167,7 +175,7 @@
         :loading="status === 'pending'"
         :data="data"
         :columns="columns"
-        :action="false"
+        @edit-click="(e) => clickUpdate(e)"
       />
     </UCard>
   </main>

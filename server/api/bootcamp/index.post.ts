@@ -8,8 +8,7 @@ const bodySchema = v.object({
   description: v.string(),
   place: v.string(),
   foto: v.string(),
-  timeFrom: v.string(),
-  timeTo: v.string(),
+  time: v.string(),
   speaker: v.string(),
 
 });

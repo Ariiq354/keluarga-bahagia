@@ -15,8 +15,7 @@ export default defineEventHandler(async (event) => {
       description: item.description,
       foto: item.foto,
       place: item.place,
-      timeFrom: item.timeFrom,
-      timeTo: item.timeTo,
+      time: item.time,
       speaker: item.speaker,
       tanggal: item.createdAt.slice(0, 10),
     };

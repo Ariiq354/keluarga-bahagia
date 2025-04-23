@@ -9,8 +9,7 @@ export const bootcampTable = sqliteTable("bootcamp", {
   description: text().notNull(),
   place: text().notNull(),
   foto: text().notNull(),
-  timeFrom: text().notNull(),
-  timeTo: text().notNull(),
+  time: text().notNull(),
   speaker: text().notNull(),
   ...timestamp,
 });
