@@ -78,7 +78,7 @@
       class="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm"
     >
       <div
-        class="relative max-h-[90vh] w-full max-w-2xl overflow-auto rounded-xl bg-white p-6 shadow-lg dark:bg-gray-900"
+        class="relative max-h-[90vh] w-full max-w-4xl overflow-auto rounded-xl bg-white p-6 shadow-lg dark:bg-gray-900"
       >
         <div class="mb-4 flex items-center justify-between">
           <h2 class="text-xl font-bold">
