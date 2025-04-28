@@ -14,10 +14,6 @@ export const columns = [
     header: "Tempat",
   },
   {
-    accessorKey: "description",
-    header: "Deskripsi",
-  },
-  {
     accessorKey: "time",
     header: "Jadwal",
   },

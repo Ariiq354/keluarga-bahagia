@@ -17,7 +17,7 @@
 
   const state = ref(getInitialFormData());
 
-  const bootcampDetail = ref();
+  // const bootcampDetail = ref();
 
   const modalOpen = ref(false);
   const modalLoading = ref(false);
@@ -116,7 +116,7 @@
             <UInput v-model="state.place" :disabled="modalLoading" />
           </UFormField>
 
-          <UFormField label="Sampai" name="timeTo">
+          <UFormField label="Waktu" name="time">
             <UInput v-model="state.time" :disabled="modalLoading" />
           </UFormField>
 
@@ -134,23 +134,6 @@
           </UFormField>
 
           <hr />
-
-          <div>
-            Detail Bootcamp
-            <table v-if="bootcampDetail" class="mt-2 w-full text-sm">
-              <tbody>
-                <tr
-                  v-for="(item, index) in Object.entries(bootcampDetail)"
-                  :key="index"
-                >
-                  <td class="font-bold capitalize">
-                    {{ camelToCamelCase(item[0]) }}
-                  </td>
-                  <td class="text-right">{{ item[1] }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
 
           <div class="flex w-full justify-end gap-2">
             <UButton
