@@ -7,10 +7,12 @@ const bodySchema = v.object({
   price: v.number(),
   description: v.string(),
   place: v.string(),
+  quota: v.number(),
+  gmaps: v.string(),
   foto: v.string(),
   time: v.string(),
+  isActive: v.number(),
   speaker: v.string(),
-
 });
 
 export default defineValidatedEventHandler({ bodySchema }, async (event) => {
@@ -33,4 +35,3 @@ export default defineValidatedEventHandler({ bodySchema }, async (event) => {
 
   return;
 });
-

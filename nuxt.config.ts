@@ -19,6 +19,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     databaseUrl: process.env.DATABASE_URL,
     databaseAuthToken: process.env.DATABASE_AUTH_TOKEN,
+    googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
   },
 
   $production: {
@@ -32,7 +33,13 @@ export default defineNuxtConfig({
       },
       crossOriginEmbedderPolicy: false,
       contentSecurityPolicy: {
-        "img-src": ["'self'", "data:", "https://res.cloudinary.com"],
+        "img-src": [
+          "'self'",
+          "data:",
+          "https://res.cloudinary.com",
+          "https://maps.googleapis.com",
+          "https://maps.gstatic.com",
+        ],
       },
     },
   },

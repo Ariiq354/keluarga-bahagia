@@ -17,10 +17,14 @@
 
   const state = ref(getInitialFormData());
 
-  const bootcampDetail = ref();
-
   const modalOpen = ref(false);
   const modalLoading = ref(false);
+  const mapModal = ref(false);
+
+  function onMapPicked(link: string) {
+    state.value.gmaps = link;
+    mapModal.value = false;
+  }
   async function onSubmit(event: FormSubmitEvent<Schema>) {
     modalLoading.value = true;
     try {
@@ -46,7 +50,7 @@
   function clickDelete() {
     async function onDelete() {
       const idArray = tableSelected.value!.map((item) => item.id);
-      await $fetch("/api/taaruf", {
+      await $fetch("/api/bootcamp", {
         method: "DELETE",
         body: {
           id: idArray,
@@ -66,6 +70,7 @@
     const { ...rest } = itemData;
     state.value = {
       ...rest,
+      gmaps: rest.gmaps ?? "",
     };
   }
 </script>
@@ -78,7 +83,7 @@
       class="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm"
     >
       <div
-        class="relative max-h-[90vh] w-full max-w-2xl overflow-auto rounded-xl bg-white p-6 shadow-lg dark:bg-gray-900"
+        class="relative max-h-[90vh] w-full max-w-5xl overflow-auto rounded-xl bg-white p-6 shadow-lg dark:bg-gray-900"
       >
         <div class="mb-4 flex items-center justify-between">
           <h2 class="text-xl font-bold">
@@ -108,6 +113,17 @@
             />
           </UFormField>
 
+          <UFormField label="Status Aktif" name="isActive">
+            <USelect
+              v-model="state.isActive"
+              :items="[
+                { label: 'Aktif', value: 1 },
+                { label: 'Nonaktif', value: 0 },
+              ]"
+              :disabled="modalLoading"
+            />
+          </UFormField>
+
           <UFormField label="Harga" name="price">
             <UInput v-model.number="state.price" :disabled="modalLoading" />
           </UFormField>
@@ -116,11 +132,22 @@
             <UInput v-model="state.place" :disabled="modalLoading" />
           </UFormField>
 
-          <UFormField label="Sampai" name="timeTo">
+          <UFormField label="Gmaps" name="gmaps">
+            <div class="flex items-center gap-2">
+              <UInput
+                v-model="state.gmaps"
+                :disabled="modalLoading"
+                class="flex-1"
+              />
+              <UButton @click="mapModal = true">Pilih Lokasi</UButton>
+            </div>
+          </UFormField>
+
+          <UFormField label="Waktu" name="time">
             <UInput v-model="state.time" :disabled="modalLoading" />
           </UFormField>
 
-          <UFormField label="Upload Foto diri" name="foto">
+          <UFormField label="Upload Foto Bootcamp" name="foto">
             <ImageUpload
               :disabled="false"
               :url="state.foto ? state.foto : ''"
@@ -132,25 +159,6 @@
           <UFormField label="Pembicara" name="speaker">
             <UInput v-model="state.speaker" :disabled="modalLoading" />
           </UFormField>
-
-          <hr />
-
-          <div>
-            Detail Bootcamp
-            <table v-if="bootcampDetail" class="mt-2 w-full text-sm">
-              <tbody>
-                <tr
-                  v-for="(item, index) in Object.entries(bootcampDetail)"
-                  :key="index"
-                >
-                  <td class="font-bold capitalize">
-                    {{ camelToCamelCase(item[0]) }}
-                  </td>
-                  <td class="text-right">{{ item[1] }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
 
           <div class="flex w-full justify-end gap-2">
             <UButton
@@ -170,6 +178,16 @@
             </UButton>
           </div>
         </UForm>
+      </div>
+    </div>
+    <div
+      v-if="mapModal"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm"
+    >
+      <div
+        class="relative max-h-[90vh] w-full max-w-5xl overflow-auto rounded-xl bg-white p-6 shadow-lg dark:bg-gray-900"
+      >
+        <MapPicker @picked="onMapPicked" />
       </div>
     </div>
     <UCard>
