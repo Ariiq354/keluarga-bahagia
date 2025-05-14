@@ -17,6 +17,8 @@
 
   const state = ref(getInitialFormData());
 
+  // const bootcampDetail = ref();
+
   const modalOpen = ref(false);
   const modalLoading = ref(false);
   const mapModal = ref(false);

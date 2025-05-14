@@ -8,6 +8,12 @@ export async function getAllBootcamp() {
   });
 }
 
+export async function getBootcampById(id: number) {
+  return await db.query.bootcampTable.findFirst({
+    where: eq(bootcampTable.id, id),
+  });
+}
+
 export async function createBootcamp(data: NewBootcamp) {
   return await db.insert(bootcampTable).values(data);
 }
