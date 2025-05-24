@@ -53,7 +53,10 @@
   },
   "trustedDependencies": [
     "@parcel/watcher",
+    "@tailwindcss/oxide",
     "esbuild",
-    "sharp"
+    "sharp",
+    "unrs-resolver",
+    "vue-demi"
   ]
 }
